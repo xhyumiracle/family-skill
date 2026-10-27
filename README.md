@@ -18,16 +18,17 @@ flowchart LR
   B --> C["get the family together"]
   subgraph crew ["the family: each researches alone, blind to the others"]
     direction TB
-    S1["a practitioner who has<br/>done this for years"]
-    S2["a researcher who reads<br/>the ablation tables"]
-    S4["a smart, sharp skeptic<br/>(the only one told your opinion)"]
+    S1["someone who uses it"]
+    S2["someone who builds it"]
+    S3["someone who bets on it"]
+    S4["the one who picks it apart<br/>(the only one told your opinion)"]
   end
-  O["one odd specialist pulled<br/>from an unrelated trade"]:::far
-  C --> S1 & S2 & S4
+  O["one specialist pulled<br/>from an unrelated trade"]:::far
+  C --> S1 & S2 & S3 & S4
   C -. "who has solved the same shape of problem?" .-> O
-  S1 & S2 & S4 & O --> G{"gaps?<br/>send one back out"}
-  G --> V["verifier<br/>opens every cited source"]
-  V --> R["report<br/>bottom line · key judgments<br/>cruxes · blind spots"]
+  S1 & S2 & S3 & S4 & O --> V["verifier<br/>opens every cited source"]
+  V --> E{"evidence rounds<br/>until the cruxes stop moving"}
+  E --> R["report<br/>bottom line · key judgments<br/>cruxes · blind spots"]
   classDef far fill:#fff3cd,stroke:#d4a017,stroke-width:2px
 ```
 

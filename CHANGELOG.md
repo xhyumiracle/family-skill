@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.2 — 2026-10-28
+
+- Docs only: the skill description, both README diagrams and the usage lines now describe the 0.4 family (uses it, builds it, bets on it, picks it apart, one outsider; evidence rounds).
+
 ## 0.4.1 — 2026-10-28
 
 - Headcount capped at five in every tier: the four fixed seats plus the outsider. A territory found in Move 1 replaces the fixed seat whose material overlaps most on the question instead of adding a sixth. Basis: three independent inputs capture most of the aggregation gain, Delphi panels of 3-11 show no accuracy difference, nothing shows six beats five, and each seat costs 70-110K tokens.

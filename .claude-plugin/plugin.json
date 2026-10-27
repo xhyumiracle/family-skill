@@ -1,7 +1,7 @@
 {
   "name": "family",
   "displayName": "family",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Assemble a crew of independent research seats on one question, then send a fact-checker to open every load-bearing source. STORM-style multi-perspective research for Claude Code.",
   "author": {
     "name": "Xinhao Yu",
