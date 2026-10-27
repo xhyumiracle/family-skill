@@ -14,11 +14,19 @@ English · [中文](README.zh-CN.md)
 
 ```mermaid
 flowchart LR
-  B[brief] --> C[cast 3-5 seats]
-  C --> S1[seat] & S2[seat] & S3[outsider] & S4[skeptic]
-  S1 & S2 & S3 & S4 --> G{gap round}
-  G --> V[verifier opens every source]
-  V --> R[report]
+  Q([your question]) --> B["brief<br/>facts and constraints,<br/>none of your opinions"]
+  B --> C["cast 3-5 seats<br/>each owns one<br/>evidence territory"]
+  subgraph crew ["crew: parallel, blind to each other"]
+    direction TB
+    S1["practitioner"]
+    S2["researcher"]
+    S3["outsider from<br/>an unrelated trade"]
+    S4["skeptic: hunts<br/>published dissent"]
+  end
+  C --> S1 & S2 & S3 & S4
+  S1 & S2 & S3 & S4 --> G{"gaps?<br/>send a seat<br/>back out"}
+  G --> V["verifier<br/>opens every cited source,<br/>4 verdicts"]
+  V --> R["report<br/>bottom line · 7 key judgments<br/>cruxes · blind spots"]
 ```
 
 ## Install
@@ -51,22 +59,17 @@ First screen for a ten-minute reader, appendix for audit.
 | Blind spots | what nobody looked at |
 | Source summary | what the evidence is made of, and the rows the verifier downgraded |
 
-## Rules, and why
+## Highlights
 
-| Rule | Because | |
-|---|---|---|
-| Seats write blind; one writer after | debate adds little beyond voting; peers flip right answers | [1] [2] |
-| Seats are search territories, not personas | personas do not raise accuracy; different sources do | [3] [4] [5] |
-| Your own opinion goes only to the skeptic | a stated belief pulls answers toward it | [6] |
-| The skeptic hunts published dissent | assigned devil's advocates lose to real ones | [7] |
-| One verifier, four verdicts | 40-80% citation accuracy in production; fine-grained labels do not reproduce | [8] [9] [10] |
-| The bottom line is checked word by word | most final-report errors start at the orchestrator | [11] |
-| ≤7 judgments, likelihood scale, audit below the fold | what intelligence and systematic-review standards converged on | [12] [13] [14] |
-| Searches per seat before more seats | token budget explains 80% of the variance | [15] |
-| Outsider seat and gap rounds: on, marked experimental | no controlled study yet | |
-| Seats never argue with each other | agreement among seats of one model is conformity, not evidence | [1] [2] |
+- **A fact-checker opens every source the conclusion rests on.** Four verdicts, two flags, and a quote inverted by truncation counts as misquoted. The best-evidenced part of the pipeline.
+- **One seat comes from an unrelated trade.** Cast by structural analogy (CI engineers for bots and humans on one repo; intelligence tradecraft for independent estimators). Marked experimental, kept because it keeps finding the blind spot.
+- **The skeptic is the only seat that knows what you believe**, and it goes looking for published dissent, not for objections of its own.
+- **Seats work blind and never argue.** Agreement between seats of one model is conformity, not evidence.
+- **The orchestrator's own bottom line is checked word by word** against the verification table before you see it.
+- **First screen in ten minutes, audit below the fold.** Three-slot bottom line on a seven-level likelihood scale, at most seven key judgments, cruxes with what would settle them.
+- **It audited itself twice**, and v0.3 is what the audits produced.
 
-Sources and the full argument: [docs/DESIGN.md](docs/DESIGN.md).
+Design rationale and the evidence behind each choice: [docs/DESIGN.md](docs/DESIGN.md).
 
 ## It audited itself
 
@@ -76,4 +79,24 @@ Sources and the full argument: [docs/DESIGN.md](docs/DESIGN.md).
 
 Picking A or B for you (it lays out the evidence; the choice is yours) · single facts · long articles · cheap research.
 
-MIT · STORM is Shao et al., NAACL 2024 · prior art read first: claude-storm, storm-research, panel-skill, perspectives-skill, dotclaude · stills from *Fast Five*, Universal Pictures
+## References
+
+The ones the design leans on most; the full list with page-level notes is in [docs/DESIGN.md](docs/DESIGN.md).
+
+- Shao et al. *Assisting in Writing Wikipedia-like Articles From Scratch with LLMs* (STORM). NAACL 2024. [arxiv.org/abs/2402.14207](https://arxiv.org/abs/2402.14207)
+- Jiang et al. *Into the Unknown Unknowns* (Co-STORM). EMNLP 2024. [arxiv.org/abs/2408.15232](https://arxiv.org/abs/2408.15232)
+- Choi, Zhu, Li. *Debate or Vote: Which Yields Better Decisions in Multi-Agent LLMs?* NeurIPS 2025. [arxiv.org/abs/2508.17536](https://arxiv.org/abs/2508.17536)
+- Zheng et al. *When "A Helpful Assistant" Is Not Really Helpful.* EMNLP Findings 2024. [arxiv.org/abs/2311.10054](https://arxiv.org/abs/2311.10054)
+- Venkit et al. *DeepTRACE.* ICLR 2026. [arxiv.org/abs/2509.04499](https://arxiv.org/abs/2509.04499)
+- Kim et al. *Towards a Science of Scaling Agent Systems.* 2025. [arxiv.org/abs/2512.08296](https://arxiv.org/abs/2512.08296)
+- *Who is the Agent to Blame? Localizing Faithfulness and Citation Mistakes in Agentic Deep Research.* 2026. [arxiv.org/abs/2608.24306](https://arxiv.org/abs/2608.24306)
+- Sharma et al. *Towards Understanding Sycophancy in Language Models.* ICLR 2024. [arxiv.org/abs/2310.13548](https://arxiv.org/abs/2310.13548)
+- Nemeth, Brown, Rogers. *Devil's advocate versus authentic dissent.* Eur. J. Soc. Psychol. 2001.
+- Lee et al. *"Fact-checking" fact checkers.* HKS Misinformation Review 2023.
+- Mandel, Karvetski, Dhami. *Boosting intelligence analysts' judgment accuracy.* Judgment and Decision Making 2018.
+- Intelligence Community Directive 203, *Analytic Standards.* 2015, rev. 2023.
+- Rosenbaum, Glenton, Oxman. *Summary-of-findings tables in Cochrane reviews improved understanding and rapid retrieval of key information.* J Clin Epidemiol 2010.
+- Miller. *Adding Error Bars to Evals.* 2024. [arxiv.org/abs/2411.00640](https://arxiv.org/abs/2411.00640)
+- Anthropic. *How we built our multi-agent research system.* 2025. [anthropic.com/engineering/multi-agent-research-system](https://www.anthropic.com/engineering/multi-agent-research-system)
+
+MIT · prior art read first: claude-storm, storm-research, panel-skill, perspectives-skill, dotclaude · stills from *Fast Five*, Universal Pictures

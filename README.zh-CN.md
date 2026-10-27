@@ -14,11 +14,19 @@
 
 ```mermaid
 flowchart LR
-  B[brief] --> C[选角 3-5 席]
-  C --> S1[席位] & S2[席位] & S3[跨行业席] & S4[怀疑论者]
-  S1 & S2 & S3 & S4 --> G{gap round}
-  G --> V[核查员逐个打开来源]
-  V --> R[报告]
+  Q([你的问题]) --> B["brief<br/>事实和约束，<br/>不带你的观点"]
+  B --> C["选角 3-5 席<br/>每席负责一块<br/>证据领地"]
+  subgraph crew ["席位：并行、互相看不到"]
+    direction TB
+    S1["从业者"]
+    S2["研究者"]
+    S3["来自无关行业<br/>的 outsider"]
+    S4["怀疑论者：<br/>找已发表的异见"]
+  end
+  C --> S1 & S2 & S3 & S4
+  S1 & S2 & S3 & S4 --> G{"有缺口？<br/>把一席<br/>再派出去"}
+  G --> V["核查员<br/>逐个打开引用来源，<br/>四种判定"]
+  V --> R["报告<br/>bottom line · 7 条关键判断<br/>分歧 · 盲区"]
 ```
 
 ## 安装
@@ -51,22 +59,17 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 | 盲区 | 没人查的 |
 | 来源总评 | 证据由什么构成，核查员降级了哪些行 |
 
-## 规则，以及为什么
+## 亮点
 
-| 规则 | 因为 | |
-|---|---|---|
-| 席位盲写，之后一个人写 | 辩论的收益不比投票多；同伴意见会把对的翻错 | [1] [2] |
-| 席位是搜索领地，不是人设 | 人设不提高准确率；不同来源才会 | [3] [4] [5] |
-| 你的观点只给怀疑论者 | 写进提示的信念会把答案拉过去 | [6] |
-| 怀疑论者去找已发表的异见 | 指派的 devil's advocate 不如真实异见 | [7] |
-| 一名核查员，四种判定 | 生产系统引用准确率 40-80%；细标签不可复现 | [8] [9] [10] |
-| bottom line 逐字核对 | 最终报告的错误大多出在编排者 | [11] |
-| 关键判断 ≤7 条、可能性刻度、审计放折叠线下 | 情报产品和系统综述面对同一类读者收敛出的形状 | [12] [13] [14] |
-| 先加每席搜索次数，再加席位 | token 预算解释 80% 的方差 | [15] |
-| 跨行业席和 gap round：默认开，标注实验 | 还没有对照研究 | |
-| 席位之间从不互相辩论 | 同一个模型的席位达成一致是从众，不是证据 | [1] [2] |
+- **一名核查员把结论依赖的每个来源都打开。** 四种判定、两个旗标；截断后意思反转的引文算 MISQUOTED。整条流水线里证据最硬的一步。
+- **有一席来自无关行业。** 按问题结构找类比（机器人和人往同一个 repo 提交的 CI 工程师；做独立估计的情报分析）。标注实验，留着是因为它总能找到盲区。
+- **怀疑论者是唯一知道你怎么想的席位**，它去找已发表的反方，不自己编反驳。
+- **席位盲写，从不互相辩论。** 同一个模型的席位达成一致是从众，不是证据。
+- **编排者自己写的 bottom line 逐字对照核查表**，再给你看。
+- **十分钟能读完的首屏，审计材料在折叠线下。** 三格结论、七级可能性刻度、最多七条关键判断、每个分歧写明什么能解决它。
+- **它审计了自己两次**，v0.3 就是审出来的。
 
-出处和完整论证：[docs/DESIGN.md](docs/DESIGN.md)。
+设计依据和每条选择背后的证据：[docs/DESIGN.md](docs/DESIGN.md)。
 
 ## 它审计了自己
 
@@ -76,4 +79,24 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 
 替你选 A 还是 B（它把证据摆出来，选是你的事）· 查单个事实 · 写长文 · 想省钱的调研。
 
-MIT · STORM：Shao et al., NAACL 2024 · 动手前读过：claude-storm、storm-research、panel-skill、perspectives-skill、dotclaude · 剧照来自《速度与激情5》，Universal Pictures
+## 参考文献
+
+设计最依赖的几篇；完整清单和逐页说明在 [docs/DESIGN.md](docs/DESIGN.md)。
+
+- Shao et al. *Assisting in Writing Wikipedia-like Articles From Scratch with LLMs*（STORM）. NAACL 2024. [arxiv.org/abs/2402.14207](https://arxiv.org/abs/2402.14207)
+- Jiang et al. *Into the Unknown Unknowns*（Co-STORM）. EMNLP 2024. [arxiv.org/abs/2408.15232](https://arxiv.org/abs/2408.15232)
+- Choi, Zhu, Li. *Debate or Vote: Which Yields Better Decisions in Multi-Agent LLMs?* NeurIPS 2025. [arxiv.org/abs/2508.17536](https://arxiv.org/abs/2508.17536)
+- Zheng et al. *When "A Helpful Assistant" Is Not Really Helpful.* EMNLP Findings 2024. [arxiv.org/abs/2311.10054](https://arxiv.org/abs/2311.10054)
+- Venkit et al. *DeepTRACE.* ICLR 2026. [arxiv.org/abs/2509.04499](https://arxiv.org/abs/2509.04499)
+- Kim et al. *Towards a Science of Scaling Agent Systems.* 2025. [arxiv.org/abs/2512.08296](https://arxiv.org/abs/2512.08296)
+- *Who is the Agent to Blame? Localizing Faithfulness and Citation Mistakes in Agentic Deep Research.* 2026. [arxiv.org/abs/2608.24306](https://arxiv.org/abs/2608.24306)
+- Sharma et al. *Towards Understanding Sycophancy in Language Models.* ICLR 2024. [arxiv.org/abs/2310.13548](https://arxiv.org/abs/2310.13548)
+- Nemeth, Brown, Rogers. *Devil's advocate versus authentic dissent.* Eur. J. Soc. Psychol. 2001.
+- Lee et al. *"Fact-checking" fact checkers.* HKS Misinformation Review 2023.
+- Mandel, Karvetski, Dhami. *Boosting intelligence analysts' judgment accuracy.* Judgment and Decision Making 2018.
+- Intelligence Community Directive 203, *Analytic Standards.* 2015，2023 修订.
+- Rosenbaum, Glenton, Oxman. *Summary-of-findings tables in Cochrane reviews improved understanding and rapid retrieval of key information.* J Clin Epidemiol 2010.
+- Miller. *Adding Error Bars to Evals.* 2024. [arxiv.org/abs/2411.00640](https://arxiv.org/abs/2411.00640)
+- Anthropic. *How we built our multi-agent research system.* 2025. [anthropic.com/engineering/multi-agent-research-system](https://www.anthropic.com/engineering/multi-agent-research-system)
+
+MIT · 动手前读过：claude-storm、storm-research、panel-skill、perspectives-skill、dotclaude · 剧照来自《速度与激情5》，Universal Pictures
