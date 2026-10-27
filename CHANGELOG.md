@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 — 2026-10-28
+
+- Headcount capped at five in every tier: the four fixed seats plus the outsider. A territory found in Move 1 replaces the fixed seat whose material overlaps most on the question instead of adding a sixth. Basis: three independent inputs capture most of the aggregation gain, Delphi panels of 3-11 show no accuracy difference, nothing shows six beats five, and each seat costs 70-110K tokens.
+
 ## 0.4.0 — 2026-10-28
 
 - `deep` is the same family taken through evidence rounds, not a bigger family. A round is a Delphi round over verified evidence: anonymised cruxes with each side's verified claims, plus gap questions; a seat may hold with a new source, concede by naming the claim that changed its mind, or reframe; the verifier is resumed for new claims; another round only if the last one moved a crux, three at most. Replaces the separate gap round and the sixth seat.

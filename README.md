@@ -42,7 +42,7 @@ Claude Code with subagents and web search. Start a new session after installing.
 ## Use
 
 ```
-/family <question>          5-6 family members + verifier · ~30 min · ~700K tokens
+/family <question>          5 family members + verifier · ~30 min · ~650K tokens
 /family quick <question>    no crew: the orchestrator searches alone, a small verifier checks it
 /family deep <question>     same family · bigger verifier · evidence rounds until the cruxes stop moving (max 3)
 ```

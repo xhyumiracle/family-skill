@@ -44,7 +44,7 @@ Read `references/casting.md`. Three moves, in order:
 2. **Pull one outsider from an unrelated trade.** State the problem's structure with the nouns removed, name a trade that has lived with that structure for decades, and cast a seat from it, defined by the analogy. Cast it only if the analogy points at a searchable corpus of that trade's rules and post-mortems. On by default and marked "experimental" in the roster: no controlled study has tested it, and single-run seat counts cannot (they depend on which claims the orchestrator chose to verify).
 3. **Add the four fixed seats, named as real jobs.** On every question: someone who uses it, someone who builds or runs it, someone who bets on it (an industry VC, a buyer, or the manager with the budget, whichever the question turns on), and the skeptic, named after the real dissenting group in this field (the researcher who criticised it in print, the journalist who investigated it, the analyst who is short on it). Four territories whose material does not overlap and that no discovery search will surface. Jobs someone actually holds, two to five words, no invented colour: persona detail beyond the job title does not change what a seat finds. The skeptic's job is to find the strongest *published* opposing case, not to invent objections: in Nemeth, Brown and Rogers (2001) authentic dissent beat every form of assigned devil's advocate.
 
-Four fixed, plus the outsider, plus the discovered seat when Move 1 found a territory not already covered: five or six, in every tier. Run the diversity test (first three planned queries and source types must differ). Print the roster as one table (seat code S1..Sn, job title plus at most one clause, how cast), the tier, and the agent count, then continue; the territory lines belong on the cards, not in the table. Wait for approval only if the user asked to approve casts, or if the tier is `deep`.
+Four fixed plus the outsider: five, the cap in every tier (three independent inputs capture most of the aggregation gain, and each seat costs 70-110K tokens). A territory found in Move 1 replaces the fixed seat whose material overlaps most on this question; it never adds a sixth. Run the diversity test (first three planned queries and source types must differ). Print the roster as one table (seat code S1..Sn, job title plus at most one clause, how cast), the tier, and the agent count, then continue; the territory lines belong on the cards, not in the table. Wait for approval only if the user asked to approve casts, or if the tier is `deep`.
 
 ### 2. Fieldwork (parallel agents)
 
@@ -79,8 +79,8 @@ Reply with the three bottom-line slots copied from the report, at most three cru
 | Tier | Seats | Searches / seat | Evidence rounds | Verifier claims | Agents spawned | Rough cost |
 |---|---|---|---|---|---|---|
 | `quick` | none: the orchestrator searches alone, 8 searches | n/a | no | 6-8 | 1 (the verifier) | ~80K tokens |
-| `standard` (default) | 5-6 (4 fixed + outsider + discovered when found) | 12 | at most 1, rule-triggered | 20 | seats + 1 | ~600-800K tokens, ~30 min wall (measured: seats 65-110K each with the stop rule, verifier 135K, one round 26K + re-verification) |
-| `deep` | same family | 12 | up to 3, until the evidence stops moving | 30 | seats + 1 | ~1M tokens; confirm with the user first |
+| `standard` (default) | 5 (4 fixed + outsider; a discovered territory replaces an overlapping fixed seat) | 12 | at most 1, rule-triggered | 20 | seats + 1 | ~600-800K tokens, ~30 min wall (measured: seats 65-110K each with the stop rule, verifier 135K, one round 26K + re-verification) |
+| `deep` | the same five | 12 | up to 3, until the evidence stops moving | 30 | seats + 1 | ~1M tokens; confirm with the user first |
 
 Pick `standard` unless the user names a tier or the question is clearly small. `deep` is the same family taken through evidence rounds until the cruxes stop moving; it never adds seats.
 

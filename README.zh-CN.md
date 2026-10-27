@@ -42,7 +42,7 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 ## 用法
 
 ```
-/family <问题>          5-6 个家人 + 核查员 · 约 30 分钟 · 约 70 万 token
+/family <问题>          5 个家人 + 核查员 · 约 30 分钟 · 约 65 万 token
 /family quick <问题>    不组队，编排者自己查一遍，小核查员再核一遍
 /family deep <问题>     同一批家人 · 更大的核查预算 · 证据轮直到分歧不再移动（最多 3 轮）
 ```
