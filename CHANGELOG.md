@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.4 — 2026-10-28
+
+- The three fixed seats are defined by evidence territory (practice, money, dissent) with the job as the per-topic instantiation (engineer or operator; buyer, budget-holding manager or VC; skeptic). Rationale and its limits written into casting.md and docs/DESIGN.md: no fixed list has experimental support; runs.log plus leave-one-seat-out is how it gets tested.
+
 ## 0.3.3 — 2026-10-28
 
 - The crew is three fixed seats (someone who does this for a living, someone who pays for it or bets on it, the skeptic) plus two dynamic ones (discovered territory, outsider). Fixed seats keep rosters comparable across runs; the dynamic two are where the unique findings came from in every run so far.

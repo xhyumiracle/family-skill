@@ -20,7 +20,9 @@ The skill has audited itself twice. Round 1 (on v0.1.0) produced v0.2.0: seats a
 
 **Evidence.** A stated belief pulls answers toward it: up to 27% on 2023 models [6], and a 2026 frontier model still changed right answers to wrong ones in 23.8% of objective scenarios to please the user [6]. Authentic dissent beat every form of assigned devil's advocate [7]. Delphi panels of 3 to 11 showed no accuracy difference, and averaging three independent analysts captured most of the gain of averaging fifty [17] [18]. No controlled study has tested a cross-trade "outsider" seat on LLM research; single-run seat counts cannot judge it because they depend on which claims the orchestrator verified (round 2, evaluator and skeptic seats).
 
-**What we did.** The belief goes only to the skeptic's card. The skeptic's job is to find published dissent. The outsider is on by default, marked experimental, and judged by the eval design in `references/eval.md`, not by run counts. Default headcount is four; an eval of twenty questions detects only large effects [19], so headcount is not tuned from runs.
+**What we did.** The belief goes only to the skeptic's card. The skeptic's job is to find published dissent. The outsider is on by default, marked experimental, and judged by the eval design in `references/eval.md`, not by run counts. Headcount is five by construction (three fixed, two dynamic); an eval of twenty questions detects only large effects [19], so headcount is not tuned from runs.
+
+**Which seats are fixed, and why those.** The fixed three are defined by evidence territory, not by job: practice (who does it), money (who pays or bets), dissent (who argues against). The grounding is the evidence that seat value comes from reading different material [5] [4] and, more loosely, the diversity-prediction argument that a collective's error falls with the diversity of its independent inputs [31]. Study, rules and precedent are common territories too, but a discovery search finds them when they matter, so they take the dynamic seat. No particular fixed list has experimental support, including this one; `family/runs.log` records per-seat unique confirmed claims across runs so that fixed-set variants can be compared offline with leave-one-seat-out (§9) instead of argued. Early readings over four runs (selection-biased, direction only): discovered and practice seats produced the most unique confirmed claims; money seats and the skeptic the fewest, though the skeptic's job is to attack, not to add.
 
 ## 4. The verifier
 
@@ -97,6 +99,7 @@ The outsider seat, the discovered seat, the gap round, the default headcount, st
 24. ResearchRubrics. ICLR 2026. arxiv.org/abs/2511.07685; github.com/scaleapi/researchrubrics
 25. LiveResearchBench. ICLR 2026. arxiv.org/abs/2510.14240
 26. Lu et al. Agents that Matter. ICLR 2026. arxiv.org/abs/2605.27621
+31. Page. The Difference. Princeton 2007 (diversity prediction theorem); Hong, Page. Groups of diverse problem solvers can outperform groups of high-ability problem solvers. PNAS 2004 (contested: Thompson, Notices of the AMS 2014)
 27. Cemri et al. Why Do Multi-Agent LLM Systems Fail? (MAST). 2025. arxiv.org/abs/2503.13657
 28. Kelly, Budescu, Dhami, Mandel. Source reliability and information credibility in intelligence analysis. Judgment and Decision Making 2025.
 29. Dhuliawala et al. Chain-of-Verification. 2023. arxiv.org/abs/2309.11495
