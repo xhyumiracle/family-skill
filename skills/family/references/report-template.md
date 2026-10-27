@@ -64,7 +64,7 @@ Full table: verification.md
 
 ## Appendix (for the maintainer)
 Seats: <code · name · how cast · core position · what the verifier downgraded, one line each>
-Gap round: <none, or the trigger, the questions, the seats resumed, what came back>
+Evidence rounds: <none, or per round: the trigger, cruxes sent, seats resumed, what moved (lean changed / side filled / concession), what came back>
 Cost: seats N · searches N (seats) + N (verifier) · fetches N · claims checked N / N listed · agents spawned N · tokens <per seat and verifier> · wall time
 Seat metrics (scripts/metrics.py): <per seat code: claims contributed · CONFIRMED only this seat · PARTIAL · MISQUOTED>
 Lint: <score>/6

@@ -44,17 +44,19 @@ Read `references/casting.md`. Three moves, in order:
 2. **Pull one outsider from an unrelated trade.** State the problem's structure with the nouns removed, name a trade that has lived with that structure for decades, and cast a seat from it, defined by the analogy. Cast it only if the analogy points at a searchable corpus of that trade's rules and post-mortems. On by default and marked "experimental" in the roster: no controlled study has tested it, and single-run seat counts cannot (they depend on which claims the orchestrator chose to verify).
 3. **Add the four fixed seats, named as real jobs.** On every question: someone who uses it, someone who builds or runs it, someone who bets on it (an industry VC, a buyer, or the manager with the budget, whichever the question turns on), and the skeptic, named after the real dissenting group in this field (the researcher who criticised it in print, the journalist who investigated it, the analyst who is short on it). Four territories whose material does not overlap and that no discovery search will surface. Jobs someone actually holds, two to five words, no invented colour: persona detail beyond the job title does not change what a seat finds. The skeptic's job is to find the strongest *published* opposing case, not to invent objections: in Nemeth, Brown and Rogers (2001) authentic dissent beat every form of assigned devil's advocate.
 
-Four fixed, plus the outsider, plus the discovered seat when Move 1 found a territory not already covered: five or six. Run the diversity test (first three planned queries and source types must differ). Print the roster as one table (seat code S1..Sn, job title plus at most one clause, how cast), the tier, and the agent count, then continue; the territory lines belong on the cards, not in the table. Wait for approval only if the user asked to approve casts, or if the tier is `deep`.
+Four fixed, plus the outsider, plus the discovered seat when Move 1 found a territory not already covered: five or six, in every tier. Run the diversity test (first three planned queries and source types must differ). Print the roster as one table (seat code S1..Sn, job title plus at most one clause, how cast), the tier, and the agent count, then continue; the territory lines belong on the cards, not in the table. Wait for approval only if the user asked to approve casts, or if the tier is `deep`.
 
 ### 2. Fieldwork (parallel agents)
 
 Write one card per seat to `cards/<seat>.md` (template in `references/seat-protocol.md`), then spawn one `family-member` per seat, all in a single turn, each with the two-line spawn prompt that names only the card path. Long spawn prompts have stalled the harness's permission classifier, and the card on disk is the audit trail. Members return a short summary; read their files, not their transcripts. A seat that stops at its turn cap is resumed with "stop searching, write the note now", never re-run. Nobody messages a seat before it has finished.
 
-### 2.5 Gap rounds (at most 1 in `standard`, at most 3 in `deep`)
+### 2.5 Evidence rounds (at most 1 in `standard`, rule-triggered; up to 3 in `deep`, by default)
 
-After every seat has finished, read each note's "Read but not cited" and "Deliberately not examined" sections; after verification, read the verifier's "Found but not cited" as well. A round fires only on a rule written in the brief: a sub-question with no direct evidence from any seat, a crux with one side unsourced, or a gap that would change the bottom line if filled. A round that fires after verification resumes the verifier for the new claims, by message, with a budget of a few fetches; it does not spawn a second verifier. Write at most two gap questions, each naming the territory and the budget (4 searches), with no seat's findings and no lean of your own, and resume the one or two seats whose territory fits, by message. Record the trigger, the questions and the seats in `amendments.md`. Resumed seats append a "## Post-gap" section to their notes; those claims enter `claims.md` like any other.
+This is the only form of "discuss it further" the evidence supports, and it is not a debate. Free debate between agents adds little beyond voting over their independent answers, and exposure to peers flips right answers; what did improve accuracy in human panels was anonymous, reasons-carrying feedback over a few rounds (Delphi), and in LLM debate, updates that are allowed only in the direction of correction. So a round is built as a Delphi round over verified evidence.
 
-In `deep`, repeat while the evidence is still moving: after each round, if the new claims would change a crux's lean or fill an empty side, run another; if a round brings back nothing that touches a crux, or three rounds have run, stop. The stopping rule is about evidence, never about agreement: seats are not asked to respond to each other, and convergence between seats of one model is what conformity produces, not what truth produces. This is Co-STORM's moderator move (questions from retrieved-but-uncited material) applied after fieldwork instead of during it, and it replaces any feedback or debate round.
+After verification, write `cruxes.md`: each crux as "Side A claims X (verified evidence, verdicts) / Side B claims Y (verified evidence, verdicts)", with no seat names, plus at most two gap questions drawn from the seats' "Read but not cited" and "Deliberately not examined" sections and the verifier's "Found but not cited". Resume the seats that are party to a crux or own a gap's territory (budget 4 searches each, message template in `references/seat-protocol.md`). Each may do three things only: hold with a new source (URL required), concede by naming the verified claim that changed its mind, or reframe (the disagreement is definitional). A reply with no new source is recorded as "hold, no new evidence". Resumed seats append "## Post-round N" to their notes; the new claims are added to `claims.md` and the verifier is resumed for them. Record the trigger, the cruxes sent and the seats in `amendments.md`.
+
+In `standard` the round fires only on the rule in the brief: a sub-question with no direct evidence, a crux with one side unsourced, or a gap that would change the bottom line. In `deep` it runs by default and repeats while the evidence is still moving: another round only if the last one changed a crux's lean, filled an empty side, or produced a concession; stop when a round changes nothing, or after three. The stopping rule is about evidence, never agreement: convergence between seats of one model is what conformity produces.
 
 ### 3. Verify (one agent)
 
@@ -74,13 +76,13 @@ Reply with the three bottom-line slots copied from the report, at most three cru
 
 ## Depth tiers
 
-| Tier | Seats | Searches / seat | Gap round | Verifier claims | Agents spawned | Rough cost |
+| Tier | Seats | Searches / seat | Evidence rounds | Verifier claims | Agents spawned | Rough cost |
 |---|---|---|---|---|---|---|
 | `quick` | none: the orchestrator searches alone, 8 searches | n/a | no | 6-8 | 1 (the verifier) | ~80K tokens |
-| `standard` (default) | 5-6 (4 fixed + outsider + discovered when found) | 12 | at most 1, rule-triggered | 20 | seats + 1 | ~600-800K tokens, ~30 min wall (measured: seats 65-110K each with the stop rule, verifier 135K, one gap round 26K) |
-| `deep` | 6 | 18 | up to 3, until the cruxes stop moving | 30 | seats + 1 | ~1M+ tokens; confirm with the user first |
+| `standard` (default) | 5-6 (4 fixed + outsider + discovered when found) | 12 | at most 1, rule-triggered | 20 | seats + 1 | ~600-800K tokens, ~30 min wall (measured: seats 65-110K each with the stop rule, verifier 135K, one round 26K + re-verification) |
+| `deep` | same family | 12 | up to 3, until the evidence stops moving | 30 | seats + 1 | ~1M tokens; confirm with the user first |
 
-Pick `standard` unless the user names a tier or the question is clearly small. When a run needs more, raise searches per seat before adding seats.
+Pick `standard` unless the user names a tier or the question is clearly small. `deep` is the same family taken through evidence rounds until the cruxes stop moving; it never adds seats.
 
 ## Keeping the bill honest
 
@@ -98,8 +100,8 @@ Pick `standard` unless the user names a tier or the question is clearly small. W
 
 ## Files this skill reads
 
-- `references/casting.md` — the three casting moves, archetype cards, bench, diversity test, the gap round
-- `references/seat-protocol.md` — what a seat does, its note schema, the seat card file, the spawn prompt, the gap-round message
+- `references/casting.md` — the three casting moves, archetype cards, bench, diversity test, the evidence round
+- `references/seat-protocol.md` — what a seat does, its note schema, the seat card file, the spawn prompt, the evidence-round message
 - `references/verifier-protocol.md` — verdicts, flags, directness, the spawn prompt
 - `references/report-template.md` — report structure, the likelihood scale, the lint
 - `references/eval.md` — how to evaluate a configuration change without fooling yourself

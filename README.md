@@ -44,7 +44,7 @@ Claude Code with subagents and web search. Start a new session after installing.
 ```
 /family <question>          5-6 family members + verifier · ~30 min · ~700K tokens
 /family quick <question>    no crew: the orchestrator searches alone, a small verifier checks it
-/family deep <question>     6 family members · bigger verifier · evidence rounds until the cruxes stop moving (max 3)
+/family deep <question>     same family · bigger verifier · evidence rounds until the cruxes stop moving (max 3)
 ```
 
 Or just ask: "what am I missing about X", "从0到1了解 X". Output lands in `family/<slug>/report.md`.
