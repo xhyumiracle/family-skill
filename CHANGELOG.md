@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.5 — 2026-10-28
+
+- Four fixed seats instead of three: uses it, builds it, bets on it, picks it apart. Users and builders read different material, so they are two territories, not one. Plus the outsider, plus a discovered seat when Move 1 finds one: five or six.
+
 ## 0.3.4 — 2026-10-28
 
 - The three fixed seats are defined by evidence territory (practice, money, dissent) with the job as the per-topic instantiation (engineer or operator; buyer, budget-holding manager or VC; skeptic). Rationale and its limits written into casting.md and docs/DESIGN.md: no fixed list has experimental support; runs.log plus leave-one-seat-out is how it gets tested.
