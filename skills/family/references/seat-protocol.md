@@ -112,7 +112,7 @@ You cannot spawn subagents; do not use the Agent tool."
 )
 ```
 
-Long spawn prompts (the full card inline) have stalled the harness's permission classifier; the card on disk avoids that and doubles as the record of what the seat was told.
+Long spawn prompts (the full card inline) have stalled Claude Code's permission classifier; the card on disk avoids that and doubles as the record of what the seat was told. Other runtimes: their general subagent, the same prompt, with the no-spawn line first.
 
 ## Evidence-round message (orchestrator resumes a finished seat)
 
@@ -120,4 +120,4 @@ Long spawn prompts (the full card inline) have stalled the harness's permission 
 SendMessage(to=<seat agent>, message="Evidence round <N> for the seat '<seat>'. Read <abs path>/cruxes.md: anonymised cruxes with the verified evidence on each side, and up to two gap questions. For each crux you are party to, do exactly one of: hold with a new source (URL required); concede, naming the verified claim ID that changed your mind; or reframe, if the disagreement is about definitions. For a gap question in your territory, search for it. Budget: 4 searches, at most 2 fetches each. Append a section '## Post-round <N>' to your note at <abs path>/seats/<seat>.md with any new claims in the claims-table format (continue your row numbering), then reply in at most 100 words.")
 ```
 
-The message carries no seat names and no lean of the orchestrator's; a reply with no new source is recorded as "hold, no new evidence". It is sent only to a seat that has already finished.
+The message carries no seat names and no lean of the orchestrator's; a reply with no new source is recorded as "hold, no new evidence". It is sent only to a seat that has already finished. Where the runtime cannot message a finished subagent, spawn a fresh one on the same card with this message and the line "Your note so far is at <abs path>/seats/<seat>.md; append to it."

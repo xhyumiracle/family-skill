@@ -1,14 +1,22 @@
 {
   "name": "family-skill",
   "description": "The family research-crew skill",
-  "owner": { "name": "Xinhao Yu", "url": "https://github.com/xhyumiracle" },
+  "owner": {
+    "name": "Xinhao Yu",
+    "url": "https://github.com/xhyumiracle"
+  },
   "plugins": [
     {
       "name": "family",
       "source": "./",
-      "description": "Assemble a crew of independent research seats on one question, then send a fact-checker to open every load-bearing source.",
+      "description": "Five researchers from five trades take one question, each on their own; then a fact-checker opens every source they cite.",
       "category": "productivity",
-      "tags": ["research", "storm", "multi-agent", "fact-checking"]
+      "tags": [
+        "research",
+        "storm",
+        "multi-agent",
+        "fact-checking"
+      ]
     }
   ]
 }

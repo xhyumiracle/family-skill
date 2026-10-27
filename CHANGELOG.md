@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0 — 2026-10-28
+
+- Runs outside Claude Code. The skill follows the Agent Skills spec: description trimmed to 1,024 characters, `license` and `compatibility` added, and `metrics.py` moved into the skill (`skills/family/scripts/`) so installers that copy only the skill directory still ship it. Fallbacks cover runtimes without the two agent definitions (general subagent plus a prompt guard), runtimes that cannot message a finished subagent (fresh subagent on the same card, pointed at its note) and runtimes without subagents (`quick` only). Tested on Claude Code only.
+- Install three ways: tell your agent the repo URL, `npx skills add xhyumiracle/family-skill`, or `install.sh` for the full Claude Code install with the two agents.
+- README rewritten in both languages: language switch first, an animated walkthrough (`assets/hero-en.gif`, `assets/hero-zh.gif`), the problem with its numbers, then real output only: a casting result, a verifier catch from a real run, the self-audit.
+
 ## 0.4.2 — 2026-10-28
 
 - Docs only: the skill description, both README diagrams and the usage lines now describe the 0.4 family (uses it, builds it, bets on it, picks it apart, one outsider; evidence rounds).

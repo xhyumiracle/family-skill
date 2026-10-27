@@ -1,16 +1,93 @@
+<p align="center"><b>English</b> · <a href="README.zh-CN.md">简体中文</a></p>
+
+<div align="center">
+
 # family
 
-> "I don't have friends. I got family." — Dominic Toretto
+<sub>"I don't have friends. I got family." · Dominic Toretto</sub>
 
-<img src="assets/banner.jpg" alt="" width="100%">
+<img src="assets/hero-en.gif" alt="family: five researchers from five trades search alone, then a fact-checker opens every link they cite" width="100%">
 
-Get the family together before the job. A Claude Code skill: pull in family from different trades to research one question, each on their own, then send a fact-checker to open every source they leaned on.
+**Five people from five trades research your question, each on their own.<br>Then a fact-checker opens every link they cite.**
 
-English · [中文](README.zh-CN.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
+[![Version](https://img.shields.io/badge/version-0.5.0-blue)](CHANGELOG.md)
+[![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#install)
+
+[See it work](#see-it-work) · [Install](#install) · [How it works](#how-it-works) · [Why it's built this way](docs/DESIGN.md)
+
+</div>
+
+## Why bother
+
+- **One point of view finds about half the sources.** In STORM's ablation, research guided by several perspectives found 99.83 distinct sources per topic; without them, 54.36.
+- **AI research citations hold up 40–80% of the time.** That is what DeepTRACE (ICLR 2026) measured across deep-research agents.
+- **family keeps its own score.** Across four real runs the fact-checker opened 78 cited claims. 17 of them did not fully say what the agent claimed, and were downgraded before they reached the report.
+
+## See it work
+
+### Who it calls
+
+The casting step's actual output for *"Is a CGM worth wearing if you're not diabetic?"*:
+
+| | Family member | Why this one |
+|---|---|---|
+| Uses it | A healthy user, three months on a Stelo or Lingo | fixed seat |
+| Builds it | An endocrinologist who runs a metabolic-health clinic | fixed seat |
+| Bets on it | A VC in consumer medical devices | fixed seat |
+| Picks it apart | An evidence-based-medicine researcher of the kind who wrote [JAMA Internal Medicine's "no evidence" review](https://doi.org/10.1001/jamainternmed.2026.2772) | fixed seat, cast from real published dissent |
+| Outsider | An epidemiologist who studies overdiagnosis | same shape as PSA screening: a medical sensor sold to healthy people, noisy readings taken as diagnoses |
+
+### What the fact-checker catches
+
+From a real run ([verification.md](examples/family-skill-design/verification.md), row 14):
+
+> **A family member wrote:** "When two models are both wrong, they give the same wrong answer about 60% of the time."
+>
+> **The source** ([arxiv.org/abs/2506.07962](https://arxiv.org/abs/2506.07962)): "*on one leaderboard dataset*, models agree 60% of the time when both models err."
+>
+> **PARTIAL ↓** One dataset, not a general rate. Downgraded before it reached the report.
+
+### It audited itself
+
+[`examples/family-skill-v03/`](examples/family-skill-v03/) is the skill run on its own design. The verifier opened 20 sources and found three things: structure that had never actually run, per-member counts with a selection bias, and a number in the orchestrator's own bottom line stitched together from two different tests. v0.3 is what came out of it.
+
+## Install
+
+**Tell your agent**, in any runtime:
+
+```text
+Install this skill: https://github.com/xhyumiracle/family-skill
+```
+
+**Or use the Agent Skills installer:**
+
+```bash
+npx skills add xhyumiracle/family-skill -g
+```
+
+**Or, on Claude Code, the full install:**
+
+```bash
+git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.sh
+```
+
+The full install also adds two agent definitions, `family-member` and `family-verifier`, which have no tool for spawning helpers, so the headcount you approve is the headcount you pay for. Start a new session afterwards. (Agents installing this for someone: use the full install on Claude Code, the `npx` line anywhere else.)
+
+It needs subagents and web search. Tested on Claude Code. Codex, Cursor, Gemini CLI and OpenCode all have subagents and should run it; that is untested. Without subagents only `quick` runs. No model is named anywhere: every family member runs on your default.
+
+## Use
 
 ```
-/family  Which parts of family's own research design have evidence behind them, and which are folklore?
+/family <question>          5 family members + fact-checker · ~30 min · ~650K tokens
+/family quick <question>    no family: one search pass, a small fact-checker checks it
+/family deep <question>     same five · more claims checked · evidence rounds until the cruxes stop moving (max 3)
 ```
+
+Or just ask: "what am I missing about X", "is the hype about X real", "help me understand X from zero". The report lands in `family/<slug>/report.md`.
+
+## How it works
 
 ```mermaid
 flowchart LR
@@ -26,33 +103,23 @@ flowchart LR
   O["one specialist pulled<br/>from an unrelated trade"]:::far
   C --> S1 & S2 & S3 & S4
   C -. "who has solved the same shape of problem?" .-> O
-  S1 & S2 & S3 & S4 & O --> V["verifier<br/>opens every cited source"]
+  S1 & S2 & S3 & S4 & O --> V["fact-checker<br/>opens every cited source"]
   V --> E{"evidence rounds<br/>until the cruxes stop moving"}
   E --> R["report<br/>bottom line · key judgments<br/>cruxes · blind spots"]
   classDef far fill:#fff3cd,stroke:#d4a017,stroke-width:2px
 ```
 
-## Install
+- **Nobody talks during fieldwork.** Agreement between several copies of one model is conformity, not evidence, so each family member works blind.
+- **The skeptic is the only one told what you believe**, and goes looking for published dissent instead of inventing objections.
+- **The outsider is cast by the shape of the problem**: bots and humans committing to one repo gets a CI engineer; many estimates to combine gets an intelligence analyst. Marked experimental.
+- **"Discuss it further" means evidence rounds, not debate.** Each side of a disagreement gets the other's verified evidence anonymously; a member can hold with a new source, concede, or reframe. It stops when the evidence stops moving, not when they agree.
+- **The orchestrator's own bottom line is checked word by word** against the fact-checker's table before you see it.
 
-```bash
-git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.sh
-```
-
-Claude Code with subagents and web search. Start a new session after installing. No model is named anywhere; every family member runs on your subagent default.
-
-## Use
-
-```
-/family <question>          5 family members + verifier · ~30 min · ~650K tokens
-/family quick <question>    no crew: the orchestrator searches alone, a small verifier checks it
-/family deep <question>     same family · bigger verifier · evidence rounds until the cruxes stop moving (max 3)
-```
-
-Or just ask: "what am I missing about X", "从0到1了解 X". Output lands in `family/<slug>/report.md`.
+Every choice, with the paper behind it: [docs/DESIGN.md](docs/DESIGN.md).
 
 ## What you get
 
-First screen for a ten-minute reader, appendix for audit.
+The first screen is for a reader with ten minutes; the audit trail sits below it.
 
 | | |
 |---|---|
@@ -60,23 +127,7 @@ First screen for a ten-minute reader, appendix for audit.
 | Key judgments | at most seven, each with its strongest confirmed source and what would change it |
 | Cruxes | where family members disagree, both sides sourced, what would settle it |
 | Blind spots | what nobody looked at |
-| Source summary | what the evidence is made of, and the rows the verifier downgraded |
-
-## Highlights
-
-- **A fact-checker opens every source the conclusion rests on.** Four verdicts, two flags, and a quote inverted by truncation counts as misquoted. The best-evidenced part of the pipeline.
-- **One family member is pulled from an unrelated trade.** Cast by the shape of the problem: bots and humans committing to one repo gets a CI engineer; many independent estimates to combine gets an intelligence analyst. Marked experimental, kept because it keeps finding the corner nobody looked at.
-- **The skeptic is the only family member who knows what you believe**, and it goes looking for published dissent, not for objections of its own.
-- **Family members work blind and never argue.** Agreement between several of them on one model is conformity, not evidence.
-- **The orchestrator's own bottom line is checked word by word** against the verification table before you see it.
-- **First screen in ten minutes, audit below the fold.** Three-slot bottom line on a seven-level likelihood scale, at most seven key judgments, cruxes with what would settle them.
-- **It audited itself twice**, and v0.3 is what the audits produced.
-
-Design rationale and the evidence behind each choice: [docs/DESIGN.md](docs/DESIGN.md).
-
-## It audited itself
-
-[`examples/family-skill-v03/`](examples/family-skill-v03/): the skill run on itself. Five family members: someone who writes deep-research benchmarks, a reader with ten minutes and a decision to make, a GRADE methodologist pulled in from medical evidence grading, a researcher who only reads ablation tables, and a skeptic. The verifier opened 20 sources. They found structure that had never run, per-member counts with a selection bias, and a stitched number in the orchestrator's own bottom line. v0.3.0 is the result.
+| Source summary | what the evidence is made of, and which claims the fact-checker downgraded |
 
 ## Not for
 
@@ -102,4 +153,4 @@ The ones the design leans on most; the full list with page-level notes is in [do
 - Miller. *Adding Error Bars to Evals.* 2024. [arxiv.org/abs/2411.00640](https://arxiv.org/abs/2411.00640)
 - Anthropic. *How we built our multi-agent research system.* 2025. [anthropic.com/engineering/multi-agent-research-system](https://www.anthropic.com/engineering/multi-agent-research-system)
 
-MIT · prior art read first: claude-storm, storm-research, panel-skill, perspectives-skill, dotclaude · stills from *Fast Five*, Universal Pictures
+<sub>MIT · prior art read first: claude-storm, storm-research, panel-skill, perspectives-skill, dotclaude · stills from *Fast Five*, Universal Pictures</sub>

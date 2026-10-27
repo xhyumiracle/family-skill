@@ -1,16 +1,93 @@
+<p align="center"><a href="README.md">English</a> · <b>简体中文</b></p>
+
+<div align="center">
+
 # family
 
-> "I don't have friends. I got family." — Dominic Toretto
+<sub>「我没有朋友，我只有家人。」· 唐老大，《速度与激情》</sub>
 
-<img src="assets/banner.jpg" alt="" width="100%">
+<img src="assets/hero-zh.gif" alt="family：五个不同行当的人各查各的，再由核查员点开他们引用的每个链接" width="100%">
 
-先有 family，后有天。一个 Claude Code skill：一个问题，先从各行各业拉一帮家人各查各的，再派个核查员把他们引用的每个来源挨个打开。
+**一个问题，叫五个不同行当的人各查各的，<br>再派个核查员，把他们引用的链接挨个点开看。**
 
-[English](README.md) · 中文
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
+[![Version](https://img.shields.io/badge/version-0.5.0-blue)](CHANGELOG.md)
+[![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#安装)
+
+[看效果](#看效果) · [安装](#安装) · [怎么运作](#怎么运作) · [设计依据](docs/DESIGN.md)
+
+</div>
+
+## 为什么要这么折腾
+
+- **只从一个角度查，来源只找得到一半。** STORM 做过消融：从多个视角提问，每个主题平均找到 99.83 个不同来源；去掉多视角，只剩 54.36 个。
+- **AI 调研给的引用，只有 40% 到 80% 站得住。** 这是 DeepTRACE（ICLR 2026）测各家 deep research 得出的数。
+- **family 自己也记账。** 四次真实运行，核查员一共点开 78 条引用，有 17 条原文并没有完全说过那句话，进报告之前就被降了权。
+
+## 看效果
+
+### 它会叫来谁
+
+问「没有糖尿病，戴动态血糖仪有用吗？」，选角这一步的原样输出：
+
+| | 家人 | 为什么找这个人 |
+|---|---|---|
+| 用它的 | 戴过三个月 Stelo 或 Lingo 的健康用户 | 固定席 |
+| 做它的 | 做代谢健康门诊的内分泌科医生 | 固定席 |
+| 赌它的 | 投消费级医疗器械的 VC | 固定席 |
+| 挑刺儿的 | 写 [JAMA Internal Medicine 那篇「无证据」综述](https://doi.org/10.1001/jamainternmed.2026.2772)的那类循证医学研究者 | 固定席，找的是真发表过的反方 |
+| 外援 | 研究筛查过度诊断的流行病学家 | 跟 PSA 筛查是一个结构：把医疗传感器卖给健康人，噪声读数被当成诊断 |
+
+### 核查员抓到过什么
+
+一次真实运行里的一条（[verification.md](examples/family-skill-design/verification.md) 第 14 行）：
+
+> **家人写的：**「两个模型都答错时，约 60% 会给出同一个错误答案。」
+>
+> **原文**（[arxiv.org/abs/2506.07962](https://arxiv.org/abs/2506.07962)）："*on one leaderboard dataset*, models agree 60% of the time when both models err."
+>
+> **PARTIAL ↓** 原文说的是「在一个排行榜数据集上」，不是普遍规律。进报告之前就被降了权。
+
+### 拿它审它自己
+
+[`examples/family-skill-v03/`](examples/family-skill-v03/) 是拿这个 skill 去查它自己的设计。核查员点开了 20 个来源，查出三件事：上一版新加的结构压根没跑过；每个家人贡献多少的计数有选择偏差；编排者自己写的结论里，有个数字是从两个不同实验里拼出来的。v0.3 就是这么改出来的。
+
+## 安装
+
+**直接跟你的 agent 说**，哪个 runtime 都行：
+
+```text
+帮我安装这个 skill：https://github.com/xhyumiracle/family-skill
+```
+
+**或者用 Agent Skills 通用安装器：**
+
+```bash
+npx skills add xhyumiracle/family-skill -g
+```
+
+**或者在 Claude Code 里完整安装：**
+
+```bash
+git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.sh
+```
+
+完整安装会多装两个 agent 定义，`family-member` 和 `family-verifier`。它们手里没有开子代理的工具，所以你批准了几个人，就只花几个人的钱。装完开个新会话。（替人安装的 agent：Claude Code 上用完整安装，其他环境用 `npx` 那行。）
+
+需要能开子代理、能联网搜索。在 Claude Code 上测过。Codex、Cursor、Gemini CLI、OpenCode 都有子代理，按理能跑，但还没测。没有子代理的环境只能跑 `quick`。文件里没写任何模型名，每个家人都用你的默认模型。
+
+## 用法
 
 ```
-/family  family 这套多角色调研法，哪些设计有证据，哪些是 folklore？
+/family <问题>          5 个家人 + 核查员 · 约 30 分钟 · 约 65 万 token
+/family quick <问题>    不叫家人，自己查一遍，再让小核查员核一遍
+/family deep <问题>     还是这五个人 · 多核几条 · 证据轮一直跑到分歧不再变（最多 3 轮）
 ```
+
+不想记命令就直接说：「从 0 到 1 了解一下 X」「X 的 hype 是真的吗」「关于 X 我还漏了什么」。报告在 `family/<slug>/report.md`。
+
+## 怎么运作
 
 ```mermaid
 flowchart LR
@@ -32,51 +109,25 @@ flowchart LR
   classDef far fill:#fff3cd,stroke:#d4a017,stroke-width:2px
 ```
 
-## 安装
+- **干活的时候谁也不跟谁说话。** 同一个模型扮的几个人意见一致，那叫从众，不叫证据，所以每个家人都是闷头自己查。
+- **只有挑刺儿的知道你怎么想。** 它的活是去找已经发表的反方，不是自己编反驳。
+- **外援看问题的结构去找。** 机器人和人往同一个 repo 提交，就去找 CI 工程师；一群人各自估计再汇总，就去找情报分析员。这一条标了「实验性」。
+- **「再深入讨论一下」是证据轮，不是吵架。** 分歧双方匿名拿到对方核实过的证据，只能三选一：拿新来源坚持、点名哪条证据说服了自己而让步、或者指出其实是定义不同。证据不再变就停，不是等大家意见一致。
+- **编排者自己写的结论，要逐字对着核查表过一遍**，然后才给你看。
 
-```bash
-git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.sh
-```
-
-要能开子代理、能联网搜索的 Claude Code。装完重开一个会话。文件里没写任何模型名，每个家人都用你自己的子代理默认模型。
-
-## 用法
-
-```
-/family <问题>          5 个家人 + 核查员 · 约 30 分钟 · 约 65 万 token
-/family quick <问题>    不组队，编排者自己查一遍，小核查员再核一遍
-/family deep <问题>     同一批家人 · 更大的核查预算 · 证据轮直到分歧不再移动（最多 3 轮）
-```
-
-或者直接说人话：「从0到1了解一下 X」「X 的 hype 是真的吗」「我对 X 还漏了什么」。东西都在 `family/<slug>/report.md`。
+每条设计背后是哪篇论文：[docs/DESIGN.md](docs/DESIGN.md)。
 
 ## 报告长什么样
 
-前半页是给只有十分钟的人看的，后面是审计材料。
+第一屏给只有十分钟的人看，审计材料都在后面。
 
 | | |
 |---|---|
 | 结论 | 该做什么 · 有多大可能（七级刻度，带数字区间）· 哪个假设一倒结论就倒 |
 | 关键判断 | 最多七条，每条附最硬的来源，以及什么情况下它会变 |
-| 分歧 | 哪几个家人在哪儿不一致，各自的证据，什么能解决 |
-| 盲区 | 没人查的地方 |
+| 分歧 | 哪几个家人在哪儿不一致，两边都有出处，什么能解决 |
+| 盲区 | 没人查过的地方 |
 | 来源总评 | 证据是什么成色，核查员降了哪几条 |
-
-## 亮点
-
-- **有个核查员，结论依赖的每个来源它都会打开。** 只有四种判定、两个旗标；引文截一半把意思截反了，直接算 MISQUOTED。整条流水线里证据最硬的就是这一步。
-- **有个家人是从八竿子打不着的行业拉来的。** 看问题的结构去找人：机器人和人往同一个 repo 提交，去找 CI 工程师；一群人各自估计再汇总，去找情报分析员。标了「实验性」，但一直留着，因为它老能翻出别人没看的角落。
-- **怀疑论者是唯一知道你怎么想的人。** 它的活是去找已经发表的反方，而不是自己编反驳。
-- **家人各查各的，谁也不跟谁吵。** 同一个模型扮的几个人意见一致，那叫从众，不叫证据。
-- **编排者自己写的结论，逐字对着核查表过一遍**，然后才给你看。
-- **十分钟能看完的前半页，审计材料在后面。**
-- **它审过自己两回**，v0.3 就是审出来的。
-
-每条设计的依据和证据：[docs/DESIGN.md](docs/DESIGN.md)。
-
-## 拿它审它自己
-
-[`examples/family-skill-v03/`](examples/family-skill-v03/)：五个家人，一个写 deep-research 评测基准的，一个只有十分钟就得拍板的读者，一个从医学证据分级那边拉来的 GRADE 方法学家，一个只看消融表的研究员，一个怀疑论者。核查员打开了 20 个来源。查出来三件事：上一版新加的结构压根没跑过，每个家人贡献多少的计数有选择偏差，编排者自己写的结论里混进了一个拼接出来的数字。v0.3.0 就是这么来的。
 
 ## 它不干什么
 
@@ -102,4 +153,4 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 - Miller. *Adding Error Bars to Evals.* 2024. [arxiv.org/abs/2411.00640](https://arxiv.org/abs/2411.00640)
 - Anthropic. *How we built our multi-agent research system.* 2025. [anthropic.com/engineering/multi-agent-research-system](https://www.anthropic.com/engineering/multi-agent-research-system)
 
-MIT · 动手前读过：claude-storm、storm-research、panel-skill、perspectives-skill、dotclaude · 剧照来自《速度与激情5》，Universal Pictures
+<sub>MIT · 动手前读过：claude-storm、storm-research、panel-skill、perspectives-skill、dotclaude · 剧照来自《速度与激情5》，Universal Pictures</sub>

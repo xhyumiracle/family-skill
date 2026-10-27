@@ -1,6 +1,8 @@
 ---
 name: family
-description: "Assemble a family of five independent research seats (someone who uses it, someone who builds it, someone who bets on it, the one who picks it apart, and one specialist from an unrelated trade), each sent to a different evidence territory on the SAME framed question (its own context, web search, fixed-schema note), then map consensus, cruxes and blind spots, and send a fact-checker to open every load-bearing source and up/down-weight it. STORM-style multi-perspective research, built for going from 0 to 1 on a field you do not know yet. Use whenever the user wants to 'understand X properly', '从0到1了解', '全面调研', '多角度看看', '帮我研究一下这个领域', 'what am I missing about X', 'is the hype about X real', mentions STORM, a crew, a panel, '组个队', 'family', or '/family' — even if they only say 'research X' and X is a contested or unfamiliar field. NOT for: choosing between named options (that is decision-council), a single fact lookup, subtopic-coverage reports with no contested question (that is deep-research), code questions, or writing a long article."
+description: "Assemble a family of five independent researchers on one question: someone who uses it, someone who builds it, someone who bets on it, the one who picks it apart, and one specialist from an unrelated trade. Each searches a different evidence territory in its own context and writes a sourced note; then map consensus, cruxes and blind spots, and send a fact-checker to open every load-bearing source. STORM-style multi-perspective research for going from 0 to 1 on an unfamiliar or contested field. Use when the user wants to 'understand X properly', '从0到1了解', '全面调研', '多角度看看', '帮我研究一下这个领域', 'what am I missing about X', 'is the hype about X real', mentions STORM, a crew, a panel, '组个队', 'family' or '/family', even if they only say 'research X' and X is contested or unfamiliar. Not for: picking between named options, single fact lookups, uncontested topic overviews, code questions, long articles."
+license: MIT
+compatibility: "Needs parallel subagents, web search and file writes. Built and tested on Claude Code; other runtimes with subagents follow the Fallbacks section. Without subagents only the quick tier runs."
 ---
 
 # family — assemble the crew before the job
@@ -17,11 +19,11 @@ This is STORM's pre-writing stage (Shao et al., NAACL 2024) run as parallel suba
 4. **A claim without a source is an opinion.** Seats separate the two in their notes. The verifier only touches sourced claims.
 5. **Independent work pays only when something checks it, including the synthesis.** Parallel agents without a central check amplified errors 17x in a 260-configuration study; with a central check, 4x (Kim et al. 2025/26). Production deep-research systems cite correctly only 40-80% of the time (DeepTRACE), and in one 2026 error-localisation study 84.7% of final-report errors originated at the orchestrator, not the searchers. So the verifier checks the seats' claims, and the orchestrator's own bottom line is checked sentence by sentence against the verification table before delivery. In this skill's own runs the verifier downgraded 5 of 15 and 3 of 20 load-bearing claims, and the synthesizer once stitched two numbers from different tests into one sentence. Do not trade verifier budget for more seats.
 6. **Disagreement is the product, if it is sourced.** Do not average into beige. A crux counts only when each side rests on different sources; a disagreement manufactured by role instructions on one model is not a finding. Unanimity with heavily overlapping sources is a casting failure; unanimity with independent sources is convergence.
-7. **Fixed headcount, nobody hires.** The crew is cast once, the agent count is announced before spawning, and no seat may spawn helpers. This is structural: `family-member` and `family-verifier` (shipped in `agents/`) have no Agent tool. Budget per seat (searches) is the main quality knob; headcount is one way of spending budget, not a separate virtue, and cannot be tuned from single runs.
+7. **Fixed headcount, nobody hires.** The crew is cast once, the agent count is announced before spawning, and no seat may spawn helpers. In Claude Code this is structural: `family-member` and `family-verifier` (shipped in `agents/`) have no Agent tool. Elsewhere it is a prompt guard (see Fallbacks). Budget per seat (searches) is the main quality knob; headcount is one way of spending budget, not a separate virtue, and cannot be tuned from single runs.
 
 ## Protocol
 
-Work in `family/<slug>/` under the current directory (slug: short, lowercase, hyphenated, from the question). All paths given to seats are absolute. `<skill dir>` below means the base directory this SKILL.md was loaded from (the harness prints it when the skill loads); build the protocol paths on cards from it.
+Work in `family/<slug>/` under the current directory (slug: short, lowercase, hyphenated, from the question). All paths given to seats are absolute. `<skill dir>` below means the base directory this SKILL.md was loaded from (Claude Code prints it when the skill loads; elsewhere, the directory you read this file from); build the protocol paths on cards from it.
 
 ### 0. Frame (inline, no agents)
 
@@ -48,7 +50,7 @@ Four fixed plus the outsider: five, the cap in every tier (three independent inp
 
 ### 2. Fieldwork (parallel agents)
 
-Write one card per seat to `cards/<seat>.md` (template in `references/seat-protocol.md`), then spawn one `family-member` per seat, all in a single turn, each with the two-line spawn prompt that names only the card path. Long spawn prompts have stalled the harness's permission classifier, and the card on disk is the audit trail. Members return a short summary; read their files, not their transcripts. A seat that stops at its turn cap is resumed with "stop searching, write the note now", never re-run. Nobody messages a seat before it has finished.
+Write one card per seat to `cards/<seat>.md` (template in `references/seat-protocol.md`), then spawn one `family-member` per seat, all in a single turn, each with the two-line spawn prompt that names only the card path. Long spawn prompts have stalled permission checks, and the card on disk is the audit trail. Members return a short summary; read their files, not their transcripts. A seat that stops at its turn cap is resumed with "stop searching, write the note now", never re-run. Nobody messages a seat before it has finished.
 
 ### 2.5 Evidence rounds (at most 1 in `standard`, rule-triggered; up to 3 in `deep`, by default)
 
@@ -68,7 +70,7 @@ Read all seat files and `verification.md`. Write `report.md` per `references/rep
 
 - Every number and every quoted phrase in the bottom line and the key-judgments table must appear verbatim in `verification.md` (or in the brief's known facts). If it does not, rewrite the sentence or tag it [UNVERIFIED]. Two numbers from different tests never share a sentence.
 - A claim with verdict MISQUOTED, or flagged CIRCULAR without a second origin, cannot support a key judgment.
-- Run the six-item lint in the template and write the score in the appendix. Run `scripts/metrics.py` on `claims.md` and `verification.md` for the seat metrics; do not count by hand.
+- Run the six-item lint in the template and write the score in the appendix. Run `<skill dir>/scripts/metrics.py <run dir>` on `claims.md` and `verification.md` for the seat metrics; do not count by hand.
 
 ### 5. Deliver
 
@@ -95,8 +97,10 @@ Pick `standard` unless the user names a tier or the question is clearly small. `
 
 ## Fallbacks
 
-- `family-member` not resolvable in this session: spawn `general-purpose`, prepend "You have no permission to spawn subagents; do the work in this context" to the prompt, and keep everything else identical. This is a prompt guard, not a structural one (nested spawning is on by default up to three layers), so say so in the cost line.
-- No web search available: run `quick` only, and mark every claim UNGROUNDED. Do not pretend.
+- No `family-member` or `family-verifier` agent (a runtime other than Claude Code, or the skill installed without `agents/`): spawn the runtime's general-purpose subagent with the same two-line prompt, prefixed with "You have no permission to spawn subagents; do the work in this context." This is a prompt guard, not a structural one, so say so in the cost line.
+- The runtime cannot message a finished subagent: wherever this skill says "resume" (turn cap, evidence rounds, re-verification), spawn a fresh subagent on the same card and add one line pointing at its existing note. Everything it needs is on disk.
+- No subagents at all: run `quick` only, and say the family did not run.
+- No web search: run `quick` only, and mark every claim UNGROUNDED. Do not pretend.
 
 ## Files this skill reads
 
