@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.3 — 2026-10-28
+
+- The crew is three fixed seats (someone who does this for a living, someone who pays for it or bets on it, the skeptic) plus two dynamic ones (discovered territory, outsider). Fixed seats keep rosters comparable across runs; the dynamic two are where the unique findings came from in every run so far.
+- A gap round may also fire after verification, from the verifier's "Found but not cited"; the verifier is then resumed for the new claims. Came from a run where the verifier surfaced a product that changed the bottom line.
+- Tier costs updated from a run with the 0.3 cards: seats 65-110K tokens each, verifier 135K, gap round 26K.
+
 ## 0.3.2 — 2026-10-28
 
 - Seats are named after real jobs ("an industry VC", "a procurement security officer who writes the RFPs"), not archetype categories with qualifiers; the archetypes are an incentive checklist. The bench is a list of jobs. Invented colour beyond the job title is banned: persona detail does not change what a seat finds, the territory does.
