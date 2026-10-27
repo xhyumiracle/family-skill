@@ -4,19 +4,19 @@
 
 <img src="assets/banner.jpg" alt="" width="100%">
 
-Get the family together before the job. A Claude Code skill: pull in people from different trades to research one question, each on their own, then send a fact-checker to open every source they leaned on.
+Get the family together before the job. A Claude Code skill: pull in family from different trades to research one question, each on their own, then send a fact-checker to open every source they leaned on.
 
 English · [中文](README.zh-CN.md)
 
 ```
-/family  Which parts of family's own multi-seat research design have evidence behind them, and which are folklore?
+/family  Which parts of family's own research design have evidence behind them, and which are folklore?
 ```
 
 ```mermaid
 flowchart LR
   Q([your question]) --> B["brief<br/>facts and constraints,<br/>none of your opinions"]
-  B --> C["cast"]
-  subgraph crew ["each researches alone, blind to the others"]
+  B --> C["get the family together"]
+  subgraph crew ["the family: each researches alone, blind to the others"]
     direction TB
     S1["a practitioner who has<br/>done this for years"]
     S2["a researcher who reads<br/>the ablation tables"]
@@ -37,14 +37,14 @@ flowchart LR
 git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.sh
 ```
 
-Claude Code with subagents and web search. Start a new session after installing. No model is named anywhere; seats run on your subagent default.
+Claude Code with subagents and web search. Start a new session after installing. No model is named anywhere; every family member runs on your subagent default.
 
 ## Use
 
 ```
-/family <question>          3-5 seats + verifier · ~25 min · ~700K tokens
+/family <question>          3-5 family members + verifier · ~25 min · ~700K tokens
 /family quick <question>    no crew: the orchestrator searches alone, a small verifier checks it
-/family deep <question>     6 seats · bigger verifier · evidence rounds until the cruxes stop moving (max 3)
+/family deep <question>     6 family members · bigger verifier · evidence rounds until the cruxes stop moving (max 3)
 ```
 
 Or just ask: "what am I missing about X", "从0到1了解 X". Output lands in `family/<slug>/report.md`.
@@ -57,16 +57,16 @@ First screen for a ten-minute reader, appendix for audit.
 |---|---|
 | Bottom line | what to do · how likely, on a seven-level scale with a range · the assumption that would break it |
 | Key judgments | at most seven, each with its strongest confirmed source and what would change it |
-| Cruxes | where seats disagree, both sides sourced, what would settle it |
+| Cruxes | where family members disagree, both sides sourced, what would settle it |
 | Blind spots | what nobody looked at |
 | Source summary | what the evidence is made of, and the rows the verifier downgraded |
 
 ## Highlights
 
 - **A fact-checker opens every source the conclusion rests on.** Four verdicts, two flags, and a quote inverted by truncation counts as misquoted. The best-evidenced part of the pipeline.
-- **One seat is pulled from an unrelated trade.** Cast by the shape of the problem: bots and humans committing to one repo gets a CI engineer; many independent estimates to combine gets an intelligence analyst. Marked experimental, kept because it keeps finding the corner nobody looked at.
-- **The skeptic is the only seat that knows what you believe**, and it goes looking for published dissent, not for objections of its own.
-- **Seats work blind and never argue.** Agreement between seats of one model is conformity, not evidence.
+- **One family member is pulled from an unrelated trade.** Cast by the shape of the problem: bots and humans committing to one repo gets a CI engineer; many independent estimates to combine gets an intelligence analyst. Marked experimental, kept because it keeps finding the corner nobody looked at.
+- **The skeptic is the only family member who knows what you believe**, and it goes looking for published dissent, not for objections of its own.
+- **Family members work blind and never argue.** Agreement between several of them on one model is conformity, not evidence.
 - **The orchestrator's own bottom line is checked word by word** against the verification table before you see it.
 - **First screen in ten minutes, audit below the fold.** Three-slot bottom line on a seven-level likelihood scale, at most seven key judgments, cruxes with what would settle them.
 - **It audited itself twice**, and v0.3 is what the audits produced.
@@ -75,7 +75,7 @@ Design rationale and the evidence behind each choice: [docs/DESIGN.md](docs/DESI
 
 ## It audited itself
 
-[`examples/family-skill-v03/`](examples/family-skill-v03/): the skill run on itself. Five seats: someone who writes deep-research benchmarks, a reader with ten minutes and a decision to make, a GRADE methodologist pulled in from medical evidence grading, a researcher who only reads ablation tables, and a skeptic. The verifier opened 20 sources. They found structure that had never run, seat counts with a selection bias, and a stitched number in the orchestrator's own bottom line. v0.3.0 is the result.
+[`examples/family-skill-v03/`](examples/family-skill-v03/): the skill run on itself. Five family members: someone who writes deep-research benchmarks, a reader with ten minutes and a decision to make, a GRADE methodologist pulled in from medical evidence grading, a researcher who only reads ablation tables, and a skeptic. The verifier opened 20 sources. They found structure that had never run, per-member counts with a selection bias, and a stitched number in the orchestrator's own bottom line. v0.3.0 is the result.
 
 ## Not for
 
