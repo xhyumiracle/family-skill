@@ -4,29 +4,31 @@
 
 <img src="assets/banner.jpg" alt="" width="100%">
 
-Get the family together before the job. A Claude Code skill that researches one question with a crew of independent seats, then sends a fact-checker to open every source they leaned on.
+Get the family together before the job. A Claude Code skill: pull in people from different trades to research one question, each on their own, then send a fact-checker to open every source they leaned on.
 
 English · [中文](README.zh-CN.md)
 
 ```
-/family  What in this skill's own design has evidence behind it, and what is folklore?
+/family  Which parts of family's own multi-seat research design have evidence behind them, and which are folklore?
 ```
 
 ```mermaid
 flowchart LR
   Q([your question]) --> B["brief<br/>facts and constraints,<br/>none of your opinions"]
-  B --> C["cast 3-5 seats<br/>each owns one<br/>evidence territory"]
-  subgraph crew ["crew: parallel, blind to each other"]
+  B --> C["cast"]
+  subgraph crew ["each researches alone, blind to the others"]
     direction TB
-    S1["practitioner"]
-    S2["researcher"]
-    S3["outsider from<br/>an unrelated trade"]
-    S4["skeptic: hunts<br/>published dissent"]
+    S1["a practitioner who has<br/>done this for years"]
+    S2["a researcher who reads<br/>the ablation tables"]
+    S4["a smart, sharp skeptic<br/>(the only one told your opinion)"]
   end
-  C --> S1 & S2 & S3 & S4
-  S1 & S2 & S3 & S4 --> G{"gaps?<br/>send a seat<br/>back out"}
-  G --> V["verifier<br/>opens every cited source,<br/>4 verdicts"]
-  V --> R["report<br/>bottom line · 7 key judgments<br/>cruxes · blind spots"]
+  O["one odd specialist pulled<br/>from an unrelated trade"]:::far
+  C --> S1 & S2 & S4
+  C -. "who has solved the same shape of problem?" .-> O
+  S1 & S2 & S4 & O --> G{"gaps?<br/>send one back out"}
+  G --> V["verifier<br/>opens every cited source"]
+  V --> R["report<br/>bottom line · key judgments<br/>cruxes · blind spots"]
+  classDef far fill:#fff3cd,stroke:#d4a017,stroke-width:2px
 ```
 
 ## Install
@@ -62,7 +64,7 @@ First screen for a ten-minute reader, appendix for audit.
 ## Highlights
 
 - **A fact-checker opens every source the conclusion rests on.** Four verdicts, two flags, and a quote inverted by truncation counts as misquoted. The best-evidenced part of the pipeline.
-- **One seat comes from an unrelated trade.** Cast by structural analogy (CI engineers for bots and humans on one repo; intelligence tradecraft for independent estimators). Marked experimental, kept because it keeps finding the blind spot.
+- **One seat is pulled from an unrelated trade.** Cast by the shape of the problem: bots and humans committing to one repo gets a CI engineer; many independent estimates to combine gets an intelligence analyst. Marked experimental, kept because it keeps finding the corner nobody looked at.
 - **The skeptic is the only seat that knows what you believe**, and it goes looking for published dissent, not for objections of its own.
 - **Seats work blind and never argue.** Agreement between seats of one model is conformity, not evidence.
 - **The orchestrator's own bottom line is checked word by word** against the verification table before you see it.
@@ -73,7 +75,7 @@ Design rationale and the evidence behind each choice: [docs/DESIGN.md](docs/DESI
 
 ## It audited itself
 
-[`examples/family-skill-v03/`](examples/family-skill-v03/): five seats (a benchmark author, a ten-minute reader, a GRADE methodologist, a researcher, a skeptic) read v0.2.0 and the literature; the verifier opened 20 sources. They found structure that had never run, seat metrics with a selection bias, and a stitched number in the orchestrator's own bottom line. v0.3.0 is the result.
+[`examples/family-skill-v03/`](examples/family-skill-v03/): the skill run on itself. Five seats: someone who writes deep-research benchmarks, a reader with ten minutes and a decision to make, a GRADE methodologist pulled in from medical evidence grading, a researcher who only reads ablation tables, and a skeptic. The verifier opened 20 sources. They found structure that had never run, seat counts with a selection bias, and a stitched number in the orchestrator's own bottom line. v0.3.0 is the result.
 
 ## Not for
 
