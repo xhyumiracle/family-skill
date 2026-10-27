@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: new-field-zero-to-one
+expected_outcome: |
+  The run casts 4-6 seats renamed to the prediction-markets topic (keeping a skeptic who is
+  told the user's "liquidity / manipulation" belief and attacks it), spawns exactly the
+  announced number of agents (seats + one verifier, no helpers, no nested spawning), each
+  seat writes a note with sourced claims, the orchestrator writes claims.md and a verifier
+  opens the sources and labels them, and report.md contains a bottom line, at least one
+  crux with both sides' evidence, at least one blind spot, an evidence ledger with verdict
+  labels, and a cost footer with real counts. The chat reply is short and points to report.md.

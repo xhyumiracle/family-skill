@@ -1,0 +1,11 @@
+# Roster — standard tier, 5 seats + 1 verifier = 6 agents, sonnet, 10 searches/seat, 15 claims
+
+| Seat | Who, for this topic | Evidence trusted | First question | Paid by |
+|---|---|---|---|---|
+| operator | an Obsidian power user who has run self-hosted LiveSync (CouchDB) on a VPS for a year with laptop + phone | GitHub issues/discussions of obsidian-livesync, Obsidian forum and r/ObsidianMD threads with dates, LiveSync docs and changelogs | what breaks after month three with three devices and a non-Obsidian writer on the server | the vault working every morning |
+| sync-researcher | a distributed-systems engineer who works on CRDTs and sync conflict semantics | design docs, source code, CouchDB replication docs, papers on file sync and CRDTs | what is each system's conflict model when two writers touch the same file within the sync interval, and what does the loser see | correctness; being precise in print |
+| pricing-analyst | an analyst of indie-software pricing, lock-in and data portability | pricing pages, terms of service, changelogs, company statements, Wayback snapshots of old pricing | what does each option cost over five years including exit cost, and what has changed in pricing since 2023 | spotting the costs sellers do not advertise |
+| historian | someone who lived through Dropbox conflicted copies, Evernote lock-in, Notion export pain and Syncthing's long history | retrospectives, old forum threads, postmortems, project histories and abandoned-project obituaries | how did each previous generation of sync fail its users, and which of those failures do the current options actually fix | pattern and precedent |
+| skeptic | attacks the premise that the agent needs a live synced copy at all, and the premise that sync is the hard part | data-loss reports, bug trackers filtered to corruption/loss, negative long-term reviews, the simplest-alternative argument (git + cron, rsync, API) | what is the documented data-loss story for each option, and would git + a cron job do 80% of this with none of the risk | catching the error before the vault is corrupted |
+
+Diversity test: trusts (issues/forums · code/design docs · pricing/ToS · retrospectives · loss reports) all differ; first questions all differ; incentives all differ. Pass.

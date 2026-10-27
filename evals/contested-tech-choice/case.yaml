@@ -1,0 +1,9 @@
+schema_version: "1.1"
+name: contested-tech-choice
+expected_outcome: |
+  The run recognises this as a field-mapping question (not a pure A/B decision), casts seats
+  renamed to the Obsidian/sync topic (e.g. a LiveSync operator, a CRDT/sync-semantics
+  researcher, an indie-software pricing analyst, a historian of sync-conflict pain, a skeptic),
+  spawns only the announced agents, grounds claims in primary sources (docs, issue trackers,
+  pricing pages), verifies the load-bearing claims, and the report names concrete cruxes
+  (e.g. conflict handling under agent writes) and at least one blind spot, with a cost footer.

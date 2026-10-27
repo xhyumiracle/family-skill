@@ -1,0 +1,100 @@
+# Casting the crew
+
+A seat is a search territory with a point of view attached: **what evidence it trusts and where that evidence lives**, **what it asks first**, and **what it is paid by**. Two seats that would run the same first three queries are one seat wearing two hats. Cast for different queries.
+
+## How the crew gets cast: three moves, in order
+
+The fixed "practitioner / academic / trader / historian / skeptic" list is a community template, not a measured optimum. The two moves that give a crew its coverage come first; the template fills what is left.
+
+### Move 1 — Discover the territories (one or two searches)
+
+Search for how the field already carves itself up: an overview, a survey, a "state of X" piece, a conference programme, a well-sectioned Wikipedia article on the topic or a sibling topic. Write down two things:
+
+- **Territories**: the distinct places evidence lives (the issue tracker, the maintainer's release notes, the regulator's enforcement actions, the proceedings of one conference, the practitioners' forum, the filings). Each territory a generic template would not name is a candidate seat; keep one or two. Mark them "discovered" in the roster.
+- **Starting sources**: the two or three canonical primary pages you just found. They go into `brief.md` so that no seat spends budget rediscovering them (in the first run, five seats all re-fetched the same official doc).
+
+If the topic is too new or too private for overviews to exist, say so and skip. Do not invent a discovered seat from imagination.
+
+### Move 2 — Outsider from an unrelated trade (on by default, experimental)
+
+Write the problem's structure in one sentence with the nouns removed. "Two writers, one shared file, no lock, delayed visibility, deletions propagate." "One question, several independent estimators with different information, then aggregation." "A gatekeeper whose incentives differ from the people it screens." Then ask which trade has lived with exactly that structure for decades, and what rules it paid to learn.
+
+Cast the seat only if the analogy points at a **searchable corpus** of that trade's rules, standards or post-mortems (CI engineering for bots and humans on one repo; intelligence tradecraft for independent estimators and source grading; aviation checklists for medical error). The outsider brings those rules and the trade's accident record; it does not estimate quantities in the target field, and any claim it makes about the target field goes through the verifier like everyone else's.
+
+Mark it "experimental" in the roster. No controlled study has tested cross-trade seats in LLM research; human design studies find far analogies raise novelty and near ones raise quality. The report's seat metrics (unique verified claims per seat) are how this seat earns or loses its place over runs. If no analogy is credible, write "no credible outsider" and fill from the archetypes.
+
+### Move 3 — Fill from the archetypes
+
+Use the five cards below, each renamed to the topic. The skeptic is always cast. Among the other four, pick by what the question is about: a technology or practice question leans practitioner + researcher; a market, hype or adoption question leans market + historian; a policy question leans historian + regulator (bench).
+
+### Headcount
+
+Run the diversity test after the three moves. Headcount is what survives: three to five in `standard` (four is the usual outcome), six only in `deep`. The numbers people quote for "optimal" are narrow: ChatEval peaked at 3-4 roles on one evaluation benchmark with ChatGPT (60.0 → 62.5%); averaging three human analysts captured most of the gain of averaging fifty; Delphi panels of 3, 7 and 11 showed no accuracy difference. None of that says five is right. Searches per seat is the quality knob; add a seat only when its territory is one no other seat touches.
+
+## The five default archetypes
+
+Each card names where the seat looks. Rename it to the topic before spawning.
+
+### 1. Practitioner (从业者)
+- **Trusts:** what ships, what breaks, what people complain about after six months. Changelogs, issue trackers, postmortems, forum threads by people who have done it, job postings, support docs.
+- **Asks first:** who uses this every day, and what do they curse at?
+- **Paid by:** getting the thing to work.
+- **Edge:** tacit knowledge, failure modes nobody writes papers about, the gap between the demo and the Tuesday.
+- **Misses:** long cycles, theory, how their own trade's incentives bend what they see.
+
+### 2. Researcher (研究员)
+- **Trusts:** peer review, pre-registration, replication, effect sizes, ablation tables. Papers, surveys, meta-analyses, leaderboards, technical reports with methods sections.
+- **Asks first:** what does the best available evidence say, what was the baseline, and how big was the effect?
+- **Paid by:** being right in print.
+- **Edge:** grading evidence, separating mechanism from anecdote, knowing which results failed to replicate or reversed between versions.
+- **Misses:** anything too new or too commercial to be published; speed; what practitioners already know.
+
+### 3. Market / Incentives (交易员)
+- **Trusts:** prices, flows, who is paying whom. Filings, funding rounds, pricing pages, earnings calls, hiring data, prediction markets, contract terms.
+- **Asks first:** who has money at stake here, and what are they actually betting?
+- **Paid by:** being early and right; respects base rates because being wrong is expensive.
+- **Edge:** incentive mapping, timing, calibrated scepticism of hype, what the sellers need you to believe.
+- **Misses:** value that is not monetised, slow science, things with no market yet.
+- Rename to *Economist* or *Incentives analyst* for topics without a market.
+
+### 4. Historian (历史学家)
+- **Trusts:** primary documents and long time series. Archives, old papers, retrospectives, Wikipedia "History" sections and talk pages, obituaries of failed projects, previous waves of the same idea.
+- **Asks first:** when did this happen before, and how did it end?
+- **Paid by:** pattern and precedent; suspicious of "this time is different".
+- **Edge:** cycles, base rates, path dependence, the names of the last three things that promised this.
+- **Misses:** genuine novelty.
+
+### 5. Skeptic (怀疑论者) — the authentic-dissent seat
+- **Trusts:** the strongest version of the opposite case as it already exists in print: critics with a track record, retractions, failed replications, lawsuits, negative reviews, the communities that chose the other way.
+- **Asks first:** who has argued, with evidence, that the mainstream story is wrong, and what is their best case?
+- **Paid by:** catching the error before it costs something.
+- **Edge:** the skeptic is the only seat told the user's current belief (on its card, not in the brief) and attacks it by finding published dissent, not by inventing objections. In Nemeth, Brown and Rogers (2001) authentic dissent beat all three forms of assigned devil's advocate; their earlier work found assigned advocates mostly make people bolster the original view.
+- **Misses:** upside. A skeptic with vibes and no sources is useless; contrarian claims without evidence go under "Positions I hold without evidence".
+
+The skeptic is never dropped.
+
+## The bench (swap in when a default seat does not fit)
+
+- **Regulator / lawyer** — trusts statutes, enforcement actions, court filings. Asks: what is actually allowed, and who has been punished?
+- **End user / customer** — trusts their own time and money. Asks: would I keep paying for this in month four?
+- **Builder / engineer** — trusts what they could build themselves. Asks: what is the simplest thing that does 80% of this, and why did they not do that?
+- **Investor (long horizon)** — trusts moats, distribution, unit economics at scale. Asks: what does this look like in five years if it works?
+- **Journalist** — trusts documents and on-record sources, distrusts press releases. Asks: who benefits from me believing this?
+- **Insider who left** — trusts what they saw from inside. Asks: what does everyone inside know and nobody say?
+- **Localiser** — the China / EU / specific-jurisdiction version of the question.
+- **Future self** — the user five years on. Asks: which of today's concerns will have mattered?
+- **Safety / ethics** — trusts harm reports and incident databases. Asks: who gets hurt when this goes wrong at scale?
+
+## Fitting the cast to the topic (hypothetical rosters, not runs)
+
+**"Obsidian sync for an agent-written vault"** → Discovered: *the LiveSync maintainer's release notes and troubleshooting docs as a territory*. Outsider: *a CI engineer who runs bots and humans committing to one repo* (two writers, one shared tree, delayed visibility). Archetypes: a practitioner who ran LiveSync on a VPS for a year; a distributed-systems researcher on conflict semantics; the skeptic, whose card carries the user's belief "the VM must hold a live synced copy" and whose first job is to find people who run agents against vaults without live sync. Four or five seats. (The actual first run used the five renamed archetypes on this topic; this roster is what the three moves would produce.)
+
+**"Are prediction markets a usable information source for policy forecasting?"** → Discovered: *market makers and liquidity providers* (every overview has a section on liquidity). Outsider: *forecast verification in meteorology* (a thin market whose prices people want to read as probabilities; Brier scores are the trade's rule). Archetypes: a quant on manipulation; a historian of Iowa Electronic Markets; the skeptic, told the user's belief "liquidity is too thin to trust". Bench: swap the historian for a regulator if the question is about legality.
+
+## Diversity test (run before spawning)
+
+For each proposed seat write its first three planned queries and the source types it will open. If two seats would run the same first queries, they are one seat: merge them and fill the gap from the bench. If every seat's sources are web articles, you have five bloggers; push at least two seats toward primary material (papers, filings, repos, data). The "trusts / asks first / paid by" lines are the means of generating different queries, not the test.
+
+## Feedback round (deep tier only; after verification)
+
+Debate between agents adds little beyond voting and invites conformity, so this is not a debate. After `verification.md` exists, write `cruxes.md` with each crux as "Side A claims X (sources, verdicts) / Side B claims Y (sources, verdicts)", with no seat names (anonymised reasons-feedback is the Delphi condition that improved accuracy; named discussion over-weights the eloquent). Spawn one `family-member` per seat that is party to a crux, with its own note, `cruxes.md`, and a budget of 5 searches. Each writes `rebuttals/<seat>.md`: for each crux, *hold with new evidence* (URL required), *concede* (naming which verified claim changed its mind), or *reframe* (the disagreement is definitional). A reply with no new source is recorded as "hold, no new evidence". One pass; no re-rebuttal. The synthesizer uses rebuttals to shorten the crux list, never to settle a crux by majority.
