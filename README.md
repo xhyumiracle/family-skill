@@ -75,4 +75,4 @@ Sources and the full argument: [docs/DESIGN.md](docs/DESIGN.md).
 
 A-vs-B decisions · single facts · long articles · cheap research.
 
-MIT · STORM is Shao et al., NAACL 2024 · the crew idea came from a 小红书 post · prior art read first: claude-storm, storm-research, panel-skill, perspectives-skill, dotclaude · stills from *Fast Five*, Universal Pictures
+MIT · STORM is Shao et al., NAACL 2024 · prior art read first: claude-storm, storm-research, panel-skill, perspectives-skill, dotclaude · stills from *Fast Five*, Universal Pictures

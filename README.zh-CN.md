@@ -75,4 +75,4 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 
 A 还是 B 的决策 · 查单个事实 · 写长文 · 想省钱的调研。
 
-MIT · STORM：Shao et al., NAACL 2024 · 组队的想法来自一篇小红书帖子 · 动手前读过：claude-storm、storm-research、panel-skill、perspectives-skill、dotclaude · 剧照来自《速度与激情5》，Universal Pictures
+MIT · STORM：Shao et al., NAACL 2024 · 动手前读过：claude-storm、storm-research、panel-skill、perspectives-skill、dotclaude · 剧照来自《速度与激情5》，Universal Pictures
