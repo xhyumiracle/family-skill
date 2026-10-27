@@ -64,12 +64,12 @@ The skill has audited itself twice. Round 1 (on v0.1.0) produced v0.2.0: seats a
 
 - Codex "second model" seat (0.2.0): untested, harness-specific, and cross-provider errors are correlated [22].
 - The credibility axis, weight arrows, seat-estimates table and full ledger in the reader's path (0.3.0): never ran, or ran and carried no information (weight was "=" in 27 of 35 rows); fine labels do not reproduce [9] [10].
-- The anonymised feedback round (0.3.0): never ran; replaced by the gap round.
+- The anonymised feedback round (0.3.0) and the separate gap round (0.3.x): folded into the evidence round in 0.4.0.
 - Seat confidence column (0.3.0): no downstream consumer; the verifier's verdict is the confidence.
 
 ## Not yet tested
 
-The outsider seat, the discovered seat, the gap round, the default headcount, strongest-model-per-seat, and the verifier's re-run agreement. The eval design exists; nobody has run it.
+The outsider seat, the discovered seat, the evidence round, the default headcount, strongest-model-per-seat, and the verifier's re-run agreement. The eval design exists; nobody has run it.
 
 ## References
 
