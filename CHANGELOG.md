@@ -1,6 +1,23 @@
 # Changelog
 
+## 0.3.0 — 2026-10-28
+
+Rewritten after a second self-review run (5 seats on the v0.2.0 files, 20 claims checked; see `examples/family-skill-v03/`). The theme: v0.2.0 added structure that no run had validated, and the orchestrator was the least-checked part of the pipeline.
+
+- Verifier verdicts collapsed from eleven labels on two axes to four verdicts (CONFIRMED primary/secondary, PARTIAL, MISQUOTED inverted/stitched/absent, NOT-VERIFIED), two evidence-backed flags (CIRCULAR, CONTRADICTED), a direct/indirect mark with a reason, and a mechanically derived "eligible" column. Weight arrows removed. Every PARTIAL or MISQUOTED quotes the original and the adjacent sentence verbatim.
+- Post-synthesis check: every number and quoted phrase in the bottom line and key judgments must appear verbatim in the verification table; a six-item lint is scored in the appendix.
+- Report split into a reader layer (three-slot bottom line on a seven-level likelihood scale with confidence stated separately, a key-judgments table of at most seven rows, belief vs. finding, cruxes, blind spots, source summary, next step) and a maintainer appendix. The seat-estimates table and the full ledger left the reader's path.
+- Gap round: after fieldwork and before verification, the orchestrator may resume one or two finished seats with at most two questions drawn from what seats read but did not cite. Rule-triggered, logged, no findings passed along. Replaces the never-run deep-tier feedback round. Messaging a seat during fieldwork is now an explicit rule violation.
+- Seat notes gained "Read but not cited"; lost the confidence column (the verifier's verdict is the confidence). Estimates use the likelihood scale.
+- claims.md uses stable IDs and seat codes; selection floors per sub-question, per crux side and per seat come before diagnosticity ranking. `scripts/metrics.py` computes seat metrics; hand counts are banned (round 1's were wrong).
+- `references/eval.md`: how to evaluate a configuration change (arms from subsets of one blind run, paired statistics, binary rubrics, pre-registered stop rules). runs.log is a cost log, not an eval.
+- Brief now states the decision, the deadline, and what result would make the reader act; sub-questions say what "yes" means.
+- Agent turn caps raised to 60 (a seat hit 40 while reading files plus twelve searches).
+- Evidence refreshed to 2025-26 models for personas (still no gain) and sycophancy (23.8% right-to-wrong on a 2026 frontier model). Of the 20 claims this version rests on, the verifier confirmed 14 at the primary source, marked 5 partial and 1 contradicted (in a direction that strengthens the change); details in `examples/family-skill-v03/verification.md`.
+
 ## 0.2.0 — 2026-10-27
+
+Unvalidated by any run at the time of release: the credibility axis, the seat-estimates table, the seat metrics, the feedback round. 0.3.0 removed or reshaped all four.
 
 Rewritten after running the skill on itself (5 seats + verifier, 20 claims checked; see `examples/family-skill-design/`).
 

@@ -21,7 +21,7 @@ Write the problem's structure in one sentence with the nouns removed. "Two write
 
 Cast the seat only if the analogy points at a **searchable corpus** of that trade's rules, standards or post-mortems (CI engineering for bots and humans on one repo; intelligence tradecraft for independent estimators and source grading; aviation checklists for medical error). The outsider brings those rules and the trade's accident record; it does not estimate quantities in the target field, and any claim it makes about the target field goes through the verifier like everyone else's.
 
-Mark it "experimental" in the roster. No controlled study has tested cross-trade seats in LLM research; human design studies find far analogies raise novelty and near ones raise quality. The report's seat metrics (unique verified claims per seat) are how this seat earns or loses its place over runs. If no analogy is credible, write "no credible outsider" and fill from the archetypes.
+Mark it "experimental" in the roster. No controlled study has tested cross-trade seats in LLM research; human design studies find far analogies raise novelty and near ones raise quality. Single-run seat counts cannot judge it either (they depend on which claims the orchestrator chose to verify); the leave-one-seat-out arm in `references/eval.md` can. If no analogy is credible, write "no credible outsider" and fill from the archetypes.
 
 ### Move 3 — Fill from the archetypes
 
@@ -29,7 +29,7 @@ Use the five cards below, each renamed to the topic. The skeptic is always cast.
 
 ### Headcount
 
-Run the diversity test after the three moves. Headcount is what survives: three to five in `standard` (four is the usual outcome), six only in `deep`. The numbers people quote for "optimal" are narrow: ChatEval peaked at 3-4 roles on one evaluation benchmark with ChatGPT (60.0 → 62.5%); averaging three human analysts captured most of the gain of averaging fifty; Delphi panels of 3, 7 and 11 showed no accuracy difference. None of that says five is right. Searches per seat is the quality knob; add a seat only when its territory is one no other seat touches.
+Run the diversity test after the three moves. Headcount is what survives: three to five in `standard` (four is the usual outcome), six only in `deep`. The numbers people quote for "optimal" are narrow: ChatEval peaked at 3-4 roles on one evaluation benchmark with ChatGPT (60.0 → 62.5%); averaging three human analysts captured most of the gain of averaging fifty; Delphi panels of 3, 7 and 11 showed no accuracy difference. None of that says five is right, and an eval of twenty questions cannot tell four seats from five. Searches per seat is the quality knob; add a seat only when its territory is one no other seat touches, and do not tune headcount from single runs.
 
 ## The five default archetypes
 
@@ -95,6 +95,8 @@ The skeptic is never dropped.
 
 For each proposed seat write its first three planned queries and the source types it will open. If two seats would run the same first queries, they are one seat: merge them and fill the gap from the bench. If every seat's sources are web articles, you have five bloggers; push at least two seats toward primary material (papers, filings, repos, data). The "trusts / asks first / paid by" lines are the means of generating different queries, not the test.
 
-## Feedback round (deep tier only; after verification)
+## Gap round (optional in standard, default in deep; one round, after fieldwork, before verification)
 
-Debate between agents adds little beyond voting and invites conformity, so this is not a debate. After `verification.md` exists, write `cruxes.md` with each crux as "Side A claims X (sources, verdicts) / Side B claims Y (sources, verdicts)", with no seat names (anonymised reasons-feedback is the Delphi condition that improved accuracy; named discussion over-weights the eloquent). Spawn one `family-member` per seat that is party to a crux, with its own note, `cruxes.md`, and a budget of 5 searches. Each writes `rebuttals/<seat>.md`: for each crux, *hold with new evidence* (URL required), *concede* (naming which verified claim changed its mind), or *reframe* (the disagreement is definitional). A reply with no new source is recorded as "hold, no new evidence". One pass; no re-rebuttal. The synthesizer uses rebuttals to shorten the crux list, never to settle a crux by majority.
+Co-STORM's moderator raised questions from material that had been retrieved but not cited, and its ablation says the moderator mattered more than the number of experts (small differences on an LLM-judge scale, no significance test, and third-party re-runs found Co-STORM's source diversity below STORM's; so borrow the mechanism, not the architecture). Here the mechanism runs once, after every seat has finished, from the seats' own "Read but not cited" and "Deliberately not examined" sections.
+
+Rule, written in the brief before fieldwork: fire only if a sub-question has no direct evidence from any seat, or a named gap would change the bottom line if filled. Write at most two questions. Each names the territory and a budget of 4 searches and carries no finding from any seat and no lean of the orchestrator's. Resume the one or two seats whose territory fits (the message template is in seat-protocol.md). Record trigger, questions and seats in `amendments.md`. Resumed seats append "## Post-gap" to their notes; the claims go through the verifier like all others. No second round, no debate, no messages to seats that are still working.

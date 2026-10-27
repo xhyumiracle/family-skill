@@ -1,11 +1,20 @@
 {
   "name": "family",
   "displayName": "family",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Assemble a crew of independent research seats on one question, then send a fact-checker to open every load-bearing source. STORM-style multi-perspective research for Claude Code.",
-  "author": { "name": "Xinhao Yu", "url": "https://xhyumiracle.com" },
+  "author": {
+    "name": "Xinhao Yu",
+    "url": "https://xhyumiracle.com"
+  },
   "homepage": "https://github.com/xhyumiracle/family-skill",
   "repository": "https://github.com/xhyumiracle/family-skill",
   "license": "MIT",
-  "keywords": ["research", "storm", "multi-agent", "fact-checking", "subagents"]
+  "keywords": [
+    "research",
+    "storm",
+    "multi-agent",
+    "fact-checking",
+    "subagents"
+  ]
 }

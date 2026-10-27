@@ -35,14 +35,14 @@ Write it to the path on your card. Keep these headings exactly; the synthesizer 
 <at most 120 words: what this seat concludes about the question, and how confident>
 
 ## Estimates
-<one line per sub-question in the brief: lean (yes / no / unsure, or a number) and a one-clause reason. The synthesizer aggregates these across seats.>
+<one line per sub-question in the brief, against the "yes" the brief defined: a lean on the seven-level scale with its range (almost no chance 1-5% · very unlikely 5-20% · unlikely 20-45% · roughly even 45-55% · likely 55-80% · very likely 80-95% · almost certain 95-99%), then a separate clause for how confident you are and why. No medians, no averages.>
 
 ## Claims and evidence
-| # | Claim | Evidence (quote or number) | Source URL | Evidence date | Type (primary/secondary/opinion) | Confidence (H/M/L) | Novel? |
-|---|---|---|---|---|---|---|---|
-| 1 | ... | "..." | https://... | 2026-03 | primary | H | yes |
+| # | Claim | Evidence (quote or number) | Source URL | Evidence date | Type (primary/secondary/opinion) | Novel? |
+|---|---|---|---|---|---|---|
+| 1 | ... | "..." | https://... | 2026-03 | primary | yes |
 
-("Novel?" = you expect no other seat to have found this. The synthesizer uses it to estimate what each seat added.)
+("Novel?" = you expect no other seat to have found this. There is no confidence column: the verifier's verdict is the confidence.)
 
 ## My edge
 <what this seat saw that a generalist or the other seats would not; 2-5 bullets>
@@ -55,6 +55,9 @@ Write it to the path on your card. Keep these headings exactly; the synthesizer 
 
 ## Positions I hold without evidence
 <beliefs that shaped the position but have no source; may be empty>
+
+## Read but not cited
+<at most five URLs you opened that bear on the question but did not make the claims table, each with one line on why; the orchestrator's gap round draws its questions from here>
 
 ## Deliberately not examined
 <what you skipped, by choice, budget or boundary; the synthesizer uses this to find blind spots>
@@ -110,3 +113,11 @@ You cannot spawn subagents; do not use the Agent tool."
 ```
 
 Long spawn prompts (the full card inline) have stalled the harness's permission classifier; the card on disk avoids that and doubles as the record of what the seat was told.
+
+## Gap-round message (orchestrator resumes a finished seat; at most two seats, one round)
+
+```
+SendMessage(to=<seat agent>, message="Gap round for the seat '<seat>'. One question, in your territory: <question>. Budget: 4 searches, at most 2 fetches each. Append a section '## Post-gap' to your note at <abs path>/seats/<seat>.md with any new claims in the claims-table format, then reply in at most 100 words.")
+```
+
+The message carries no finding from any seat and no lean of the orchestrator's. It is sent only to a seat that has already finished.

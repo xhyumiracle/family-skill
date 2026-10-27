@@ -1,6 +1,24 @@
 # Report template
 
-Write `report.md` in the user's language. Headings below are the contract; the content under each is guidance. Keep the whole thing readable in ten minutes; the seat notes and the verification table are on disk for anyone who wants the long version.
+`report.md` has two layers. The first screen is for a reader who has ten minutes and a decision to make; everything below the rule is for audit and for the maintainer. Write in the user's language. Headings are the contract; the text under each is guidance.
+
+## The likelihood scale
+
+Likelihood and confidence are different things and never share a sentence. Likelihood uses this seven-level scale with its range (ICD 203; readers pull bare words toward 50%, the range stops that). Confidence (high / medium / low) is about the evidence base and gets its own sentence with the reason.
+
+| English | 中文 | Range |
+|---|---|---|
+| almost no chance | 几乎不可能 | 1-5% |
+| very unlikely | 很不可能 | 5-20% |
+| unlikely | 不太可能 | 20-45% |
+| roughly even chance | 大致五五开 | 45-55% |
+| likely | 可能 | 55-80% |
+| very likely | 很可能 | 80-95% |
+| almost certain | 几乎确定 | 95-99% |
+
+Confidence below high must carry one of these reasons: indirect evidence (other models, tasks, populations or years), single origin, seats disagree, fidelity problems in the sources, or not verified.
+
+## Template
 
 ```markdown
 # <Question>
@@ -8,46 +26,63 @@ Write `report.md` in the user's language. Headings below are the contract; the c
 <one line: tier, seats, date, path to this run's folder>
 
 ## Bottom line
-<three to five sentences. What the crew concluded, how confident, and the single biggest caveat. Every sentence maps to a claim number whose verdict passed, or carries [UNVERIFIED]. Agreement among seats is not evidence; a verified source is.>
+① <one sentence: what to do or what to believe, written against the decision in the brief>
+② <one sentence: the likelihood on the scale with its range> <one sentence: confidence high/medium/low and the reason>
+③ <one sentence: the linchpin assumption, and the indicator that would overturn it>
+(claims: C03, C07, C12)
+
+At most 150 words. Numbers and quoted phrases here must appear verbatim in verification.md.
+
+## Key judgments
+| # | Judgment | Likelihood (range) / confidence | Strongest confirmed source | What would change it | Claims |
+|---|---|---|---|---|---|
+At most seven rows. A judgment no seat disputed but nobody verified carries [UNVERIFIED]. Agreement among seats is not evidence; a verified source is.
 
 ## Belief vs. finding
-<one or two lines: what the user believed going in (from the skeptic's card), and whether the verified evidence supports, weakens or leaves it open. Omit if the user stated no belief.>
+<one or two lines: what the user believed going in (from the skeptic's card), and whether the verified evidence supports, weakens or leaves it open. If an earlier report on this topic exists, say which judgments changed and which new evidence changed them. Omit only if no belief was stated and no earlier report exists.>
 
-## What every seat agreed on
-<bullets. Each with the strongest verified evidence and its verdict label. If agreement rests on overlapping sources, say so; if sources are independent, say that too, because that is the strong signal.>
-
-## Seat estimates
-<one small table: each sub-question of the brief as a row, each seat's lean (yes / no / unsure, or a number) as a column, plus a median or spread. This is the aggregation step; it sits beside the narrative, it does not replace it. Disagreement is shown as spread, never settled by majority.>
-
-## Where they disagree (the cruxes)
+## Cruxes
 <one subsection per crux; a crux counts only when each side rests on different sources:>
 ### Crux N: <the tension in one sentence>
-- **Side A** (<seats>): <claim> — <evidence, verdict label>
-- **Side B** (<seats>): <claim> — <evidence, verdict label>
+- **Side A** (<seat codes>): <claim> — <evidence, verdict>
+- **Side B** (<seat codes>): <claim> — <evidence, verdict>
 - **What would settle it:** <a concrete observation, dataset or event>
-- **Current lean:** <which side the verified evidence favours, or "open">
+- **Current lean:** <scale word (range)>, or "open" plus the indicator to watch
 
 ## Blind spots
-<what no seat examined. Sources: the seats' "deliberately not examined" sections, topics no source touched, the orchestrator's own read. At least one. Say which, if any, would change the bottom line.>
+<at most three; first the one that would change the bottom line. Sources: the seats' "Deliberately not examined" and "Read but not cited" sections, topics no source touched, the orchestrator's own read.>
 
-## Evidence ledger
-<the verification table, condensed: # · claim · fidelity verdict · credibility verdict · weight · primary URL. Include UNCHECKED rows so the reader knows what was not verified.>
+## Source summary
+<three to five lines: what the source base is made of, where it is weak (indirect, vendor, single origin), which sources carry the key judgments.>
+<then only the rows that touch a key judgment and are PARTIAL, MISQUOTED, CONTRADICTED, NOT-VERIFIED or indirect: ID · short claim · verdict · the verifier's note>
+Full table: verification.md
 
-## The seats, one line each
-<seat — how cast — core position — its edge — what the verifier downgraded>
+## Next step
+<two to four bullets: the first thing to read, the one person to ask, the experiment to run, the fact only the reader can supply>
 
-## Open questions and next step
-<two to four bullets. The first thing to read, the one person to ask, the experiment to run.>
+---
 
-## Cost
-seats: N · searches: N (sum of seat budgets used) · claims checked: N / N listed · agents spawned: N · tokens: <per seat and verifier, if reported> · wall time: <if known>
-Seat metrics: <per seat: unique URLs · URLs shared with another seat · verified claims only this seat produced>
-Not verified: <claim numbers left UNCHECKED or UNREACHABLE>
+## Appendix (for the maintainer)
+Seats: <code · name · how cast · core position · what the verifier downgraded, one line each>
+Gap round: <none, or the trigger, the questions, the seats resumed, what came back>
+Cost: seats N · searches N (seats) + N (verifier) · fetches N · claims checked N / N listed · agents spawned N · tokens <per seat and verifier> · wall time
+Seat metrics (scripts/metrics.py): <per seat code: claims contributed · CONFIRMED only this seat · PARTIAL · MISQUOTED>
+Lint: <score>/6
+Not verified: <claim IDs left NOT-VERIFIED>
 ```
 
-Rules the template enforces:
+## Lint (six binary checks, score recorded in the appendix)
 
-- The bottom line is downstream of the ledger. A MISQUOTED or single-origin CIRCULAR claim cannot appear in it even if all seats liked it; a claim no seat disputed but nobody verified carries [UNVERIFIED].
+1. The bottom line has exactly the three slots and is at most 150 words.
+2. Every key judgment carries claim IDs or [UNVERIFIED].
+3. No key judgment rests on a MISQUOTED claim or a CIRCULAR claim without a second origin.
+4. Every crux has both sides sourced with different sources.
+5. Every crux has a "What would settle it" line.
+6. Blind spots is non-empty.
+
+## Rules the template enforces
+
+- The bottom line is downstream of the verification table, and the orchestrator is the most likely place for a final-report error. Hence the verbatim check: if a number or phrase is not in `verification.md`, it does not go in the first screen.
 - A crux is not resolved by majority. Three seats against two is still a crux unless the verified evidence favours one side.
-- Blind spots is never empty. If you truly found none, that is itself a casting-failure note.
-- Cost and seat metrics come from counting the notes and the ledger, not from estimates. The seat metrics are the only running evidence of whether a seat (especially the outsider) earns its budget; append them to `family/runs.log`.
+- Seat leans are not aggregated into medians in the report; five seats on one model are not five independent estimators. Where seats gave ranges, a key-judgment row may show the span (min to max).
+- Length is a cost to the reader. Above the rule, cut rather than compress.
