@@ -33,8 +33,8 @@ Claude Code with subagents and web search. Start a new session after installing.
 
 ```
 /family <question>          3-5 seats + verifier · ~25 min · ~700K tokens
-/family quick <question>    one pass + small verifier
-/family deep <question>     6 seats · bigger verifier · gap round on
+/family quick <question>    no crew: the orchestrator searches alone, a small verifier checks it
+/family deep <question>     6 seats · bigger verifier · evidence rounds until the cruxes stop moving (max 3)
 ```
 
 Or just ask: "what am I missing about X", "从0到1了解 X". Output lands in `family/<slug>/report.md`.
@@ -63,7 +63,8 @@ First screen for a ten-minute reader, appendix for audit.
 | The bottom line is checked word by word | most final-report errors start at the orchestrator | [11] |
 | ≤7 judgments, likelihood scale, audit below the fold | what intelligence and systematic-review standards converged on | [12] [13] [14] |
 | Searches per seat before more seats | token budget explains 80% of the variance | [15] |
-| Outsider seat and gap round: on, marked experimental | no controlled study yet | |
+| Outsider seat and gap rounds: on, marked experimental | no controlled study yet | |
+| Seats never argue with each other | agreement among seats of one model is conformity, not evidence | [1] [2] |
 
 Sources and the full argument: [docs/DESIGN.md](docs/DESIGN.md).
 
@@ -73,6 +74,6 @@ Sources and the full argument: [docs/DESIGN.md](docs/DESIGN.md).
 
 ## Not for
 
-A-vs-B decisions · single facts · long articles · cheap research.
+Picking A or B for you (it lays out the evidence; the choice is yours) · single facts · long articles · cheap research.
 
 MIT · STORM is Shao et al., NAACL 2024 · prior art read first: claude-storm, storm-research, panel-skill, perspectives-skill, dotclaude · stills from *Fast Five*, Universal Pictures

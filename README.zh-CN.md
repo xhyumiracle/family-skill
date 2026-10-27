@@ -33,8 +33,8 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 
 ```
 /family <问题>          3-5 席 + 核查员 · 约 25 分钟 · 约 70 万 token
-/family quick <问题>    一次调研 + 小核查
-/family deep <问题>     6 席 · 更大的核查预算 · 默认开 gap round
+/family quick <问题>    不派席位：编排者自己搜一遍，小核查员核一遍
+/family deep <问题>     6 席 · 更大的核查预算 · 证据轮次直到分歧不再移动（最多 3 轮）
 ```
 
 或者直接说「从0到1了解 X」「我对 X 还有什么没看到」。产物在 `family/<slug>/report.md`。
@@ -64,6 +64,7 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 | 关键判断 ≤7 条、可能性刻度、审计放折叠线下 | 情报产品和系统综述面对同一类读者收敛出的形状 | [12] [13] [14] |
 | 先加每席搜索次数，再加席位 | token 预算解释 80% 的方差 | [15] |
 | 跨行业席和 gap round：默认开，标注实验 | 还没有对照研究 | |
+| 席位之间从不互相辩论 | 同一个模型的席位达成一致是从众，不是证据 | [1] [2] |
 
 出处和完整论证：[docs/DESIGN.md](docs/DESIGN.md)。
 
@@ -73,6 +74,6 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 
 ## 不适合
 
-A 还是 B 的决策 · 查单个事实 · 写长文 · 想省钱的调研。
+替你选 A 还是 B（它把证据摆出来，选是你的事）· 查单个事实 · 写长文 · 想省钱的调研。
 
 MIT · STORM：Shao et al., NAACL 2024 · 动手前读过：claude-storm、storm-research、panel-skill、perspectives-skill、dotclaude · 剧照来自《速度与激情5》，Universal Pictures

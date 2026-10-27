@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1 — 2026-10-28
+
+- Gap rounds can repeat in `deep` (max 3) with an evidence-based stop rule: another round only if the last one moved a crux. Never a convergence-of-opinion rule.
+- "Pick A or B" requests are reframed as a comparison on the decision's dimensions and researched; the pick stays with the user. The README's "not for" line says so instead of refusing.
+- README: `quick` described plainly (no crew; the orchestrator searches alone).
+
 ## 0.3.0 — 2026-10-28
 
 Rewritten after a second self-review run (5 seats on the v0.2.0 files, 20 claims checked; see `examples/family-skill-v03/`). The theme: v0.2.0 added structure that no run had validated, and the orchestrator was the least-checked part of the pipeline.

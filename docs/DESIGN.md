@@ -44,7 +44,7 @@ The skill has audited itself twice. Round 1 (on v0.1.0) produced v0.2.0: seats a
 
 **Evidence.** Co-STORM's moderator raises questions from sources retrieved but not yet cited; its ablation reports that removing the moderator hurt more than cutting experts, but the differences are small on a 1-5 LLM-judge scale with no significance test; third-party runs found Co-STORM's source diversity at or below STORM's on most backbones (Co-STORM's own table shows a small advantage), and none of them ablated the moderator, so the result has not been replicated [21]. Anthropic's lead agent adjusts between waves, not during them [15]. Round 1's verifier listed Co-STORM under "found but not cited" and nobody followed up until a whole new run.
 
-**What we did.** One rule-triggered round after fieldwork and before verification: at most two questions from the seats' "read but not cited" and "deliberately not examined" sections, sent to one or two finished seats, questions only, logged in `amendments.md`. It replaces the never-run feedback round.
+**What we did.** Rule-triggered rounds after fieldwork and before verification: at most two questions from the seats' "read but not cited" and "deliberately not examined" sections, sent to one or two finished seats, questions only, logged in `amendments.md`. At most one round in `standard`; in `deep`, up to three, and another round runs only if the last one moved a crux. There is deliberately no "loop until the seats agree": debate adds little beyond voting [1], peers flip right answers [2], and five seats on one model converging is conformity, not evidence [22]. It replaces the never-run feedback round.
 
 ## 8. Budget and model
 

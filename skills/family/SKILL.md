@@ -34,7 +34,7 @@ Write `brief.md`:
 - Known facts, and the starting sources from the casting step so no seat rediscovers them.
 - The output language.
 
-If the request is really "pick between A and B", stop and use decision-council instead. Record the user's current belief, if any, in `cards/skeptic.md` only (step 1), and keep a private copy for the report's "belief vs. finding" line. Only ask the user a question if the answer changes who you would cast.
+If the request is "pick A or B", reframe it as "how do A and B behave on the dimensions the decision turns on", research that, and leave the pick to the user; the report's key judgments are the input to their choice, not the choice. Record the user's current belief, if any, in `cards/skeptic.md` only (step 1), and keep a private copy for the report's "belief vs. finding" line. Only ask the user a question if the answer changes who you would cast.
 
 ### 1. Cast (inline, at most two searches)
 
@@ -50,9 +50,11 @@ Run the diversity test (first three planned queries and source types must differ
 
 Write one card per seat to `cards/<seat>.md` (template in `references/seat-protocol.md`), then spawn one `family-member` per seat, all in a single turn, each with the two-line spawn prompt that names only the card path. Long spawn prompts have stalled the harness's permission classifier, and the card on disk is the audit trail. Members return a short summary; read their files, not their transcripts. A seat that stops at its turn cap is resumed with "stop searching, write the note now", never re-run. Nobody messages a seat before it has finished.
 
-### 2.5 Gap round (optional in `standard`, default in `deep`; one round)
+### 2.5 Gap rounds (at most 1 in `standard`, at most 3 in `deep`)
 
-After every seat has finished and before verification, read each note's "Read but not cited" and "Deliberately not examined" sections. The round fires only on a rule written in the brief: a sub-question with no direct evidence from any seat, or a gap that would change the bottom line if filled. Write at most two gap questions, each naming the territory and the budget (4 searches), with no seat's findings and no lean of your own, and resume the one or two seats whose territory fits, by message. Record the trigger, the questions and the seats in `amendments.md`. Resumed seats append a "## Post-gap" section to their notes; those claims enter `claims.md` like any other. This is Co-STORM's moderator move (questions from retrieved-but-uncited material) applied after fieldwork instead of during it, and it replaces any feedback or debate round.
+After every seat has finished and before verification, read each note's "Read but not cited" and "Deliberately not examined" sections. A round fires only on a rule written in the brief: a sub-question with no direct evidence from any seat, a crux with one side unsourced, or a gap that would change the bottom line if filled. Write at most two gap questions, each naming the territory and the budget (4 searches), with no seat's findings and no lean of your own, and resume the one or two seats whose territory fits, by message. Record the trigger, the questions and the seats in `amendments.md`. Resumed seats append a "## Post-gap" section to their notes; those claims enter `claims.md` like any other.
+
+In `deep`, repeat while the evidence is still moving: after each round, if the new claims would change a crux's lean or fill an empty side, run another; if a round brings back nothing that touches a crux, or three rounds have run, stop. The stopping rule is about evidence, never about agreement: seats are not asked to respond to each other, and convergence between seats of one model is what conformity produces, not what truth produces. This is Co-STORM's moderator move (questions from retrieved-but-uncited material) applied after fieldwork instead of during it, and it replaces any feedback or debate round.
 
 ### 3. Verify (one agent)
 
@@ -74,9 +76,9 @@ Reply with the three bottom-line slots copied from the report, at most three cru
 
 | Tier | Seats | Searches / seat | Gap round | Verifier claims | Agents spawned | Rough cost |
 |---|---|---|---|---|---|---|
-| `quick` | 1 research pass by the orchestrator inline, 8 searches | n/a | no | 6-8 | 1 (the verifier) | ~80K tokens |
-| `standard` (default) | 3-5, typically 4 | 12 | optional, rule-triggered | 20 | seats + 1 | ~600-750K tokens, ~25 min wall (measured: 5 seats × 120-185K, verifier 120K) |
-| `deep` | 5-6 | 18 | default | 30 | seats + 1 | ~1M+ tokens; confirm with the user first |
+| `quick` | none: the orchestrator searches alone, 8 searches | n/a | no | 6-8 | 1 (the verifier) | ~80K tokens |
+| `standard` (default) | 3-5, typically 4 | 12 | at most 1, rule-triggered | 20 | seats + 1 | ~600-750K tokens, ~25 min wall (measured: 5 seats × 120-185K, verifier 120K) |
+| `deep` | 5-6 | 18 | up to 3, until the cruxes stop moving | 30 | seats + 1 | ~1M+ tokens; confirm with the user first |
 
 Pick `standard` unless the user names a tier or the question is clearly small. When a run needs more, raise searches per seat before adding seats.
 
