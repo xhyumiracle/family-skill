@@ -42,9 +42,9 @@ Read `references/casting.md`. Three moves, in order:
 
 1. **Discover the territories.** One or two searches for overview or "state of" pieces on the topic or a sibling topic. From how they are sectioned and whom they quote, write down the evidence territories that exist and the two or three canonical primary pages you found. The pages go into `brief.md` as "Starting sources". One or two territories that a generic template would never name become seats.
 2. **Pull one outsider from an unrelated trade.** State the problem's structure with the nouns removed, name a trade that has lived with that structure for decades, and cast a seat from it, defined by the analogy. Cast it only if the analogy points at a searchable corpus of that trade's rules and post-mortems. On by default and marked "experimental" in the roster: no controlled study has tested it, and single-run seat counts cannot (they depend on which claims the orchestrator chose to verify).
-3. **Add the three fixed seats, named as real jobs.** On every question: someone who does this for a living, someone who pays for it or bets on it (a buyer or an industry VC, whichever the question turns on), and the skeptic. Jobs someone actually holds, two to five words, no invented colour: persona detail beyond the job title does not change what a seat finds. The skeptic's job is to find the strongest *published* opposing case, not to invent objections: in Nemeth, Brown and Rogers (2001) authentic dissent beat every form of assigned devil's advocate.
+3. **Add the four fixed seats, named as real jobs.** On every question: someone who uses it, someone who builds or runs it, someone who bets on it (an industry VC, a buyer, or the manager with the budget, whichever the question turns on), and the skeptic. Four territories whose material does not overlap and that no discovery search will surface. Jobs someone actually holds, two to five words, no invented colour: persona detail beyond the job title does not change what a seat finds. The skeptic's job is to find the strongest *published* opposing case, not to invent objections: in Nemeth, Brown and Rogers (2001) authentic dissent beat every form of assigned devil's advocate.
 
-Three fixed plus two dynamic is the crew: five. It drops to four when a move yields nothing credible, and `deep` adds a sixth from the bench. Run the diversity test (first three planned queries and source types must differ). Print the roster as one table (seat code S1..Sn, job title plus at most one clause, how cast), the tier, and the agent count, then continue; the territory lines belong on the cards, not in the table. Wait for approval only if the user asked to approve casts, or if the tier is `deep`.
+Four fixed, plus the outsider, plus the discovered seat when Move 1 found a territory not already covered: five or six. Run the diversity test (first three planned queries and source types must differ). Print the roster as one table (seat code S1..Sn, job title plus at most one clause, how cast), the tier, and the agent count, then continue; the territory lines belong on the cards, not in the table. Wait for approval only if the user asked to approve casts, or if the tier is `deep`.
 
 ### 2. Fieldwork (parallel agents)
 
@@ -77,8 +77,8 @@ Reply with the three bottom-line slots copied from the report, at most three cru
 | Tier | Seats | Searches / seat | Gap round | Verifier claims | Agents spawned | Rough cost |
 |---|---|---|---|---|---|---|
 | `quick` | none: the orchestrator searches alone, 8 searches | n/a | no | 6-8 | 1 (the verifier) | ~80K tokens |
-| `standard` (default) | 5 (3 fixed + 2 dynamic), 4 if a move yields nothing | 12 | at most 1, rule-triggered | 20 | seats + 1 | ~550-700K tokens, ~30 min wall (measured: 5 seats × 65-110K with the stop rule, verifier 135K, one gap round 26K) |
-| `deep` | 5-6 | 18 | up to 3, until the cruxes stop moving | 30 | seats + 1 | ~1M+ tokens; confirm with the user first |
+| `standard` (default) | 5-6 (4 fixed + outsider + discovered when found) | 12 | at most 1, rule-triggered | 20 | seats + 1 | ~600-800K tokens, ~30 min wall (measured: seats 65-110K each with the stop rule, verifier 135K, one gap round 26K) |
+| `deep` | 6 | 18 | up to 3, until the cruxes stop moving | 30 | seats + 1 | ~1M+ tokens; confirm with the user first |
 
 Pick `standard` unless the user names a tier or the question is clearly small. When a run needs more, raise searches per seat before adding seats.
 
