@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.2 — 2026-10-28
+
+- Seats are named after real jobs ("an industry VC", "a procurement security officer who writes the RFPs"), not archetype categories with qualifiers; the archetypes are an incentive checklist. The bench is a list of jobs. Invented colour beyond the job title is banned: persona detail does not change what a seat finds, the territory does.
+- The roster table shows job title plus one clause; territory lines stay on the cards.
+
 ## 0.3.1 — 2026-10-28
 
 - Gap rounds can repeat in `deep` (max 3) with an evidence-based stop rule: another round only if the last one moved a crux. Never a convergence-of-opinion rule.

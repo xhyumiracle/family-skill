@@ -23,13 +23,15 @@ Cast the seat only if the analogy points at a **searchable corpus** of that trad
 
 Mark it "experimental" in the roster. No controlled study has tested cross-trade seats in LLM research; human design studies find far analogies raise novelty and near ones raise quality. Single-run seat counts cannot judge it either (they depend on which claims the orchestrator chose to verify); the leave-one-seat-out arm in `references/eval.md` can. If no analogy is credible, write "no credible outsider" and fill from the archetypes.
 
-### Move 3 — Fill from the archetypes
+### Move 3 — Fill with real jobs
 
-Use the five cards below, each renamed to the topic. The skeptic is always cast. Among the other four, pick by what the question is about: a technology or practice question leans practitioner + researcher; a market, hype or adoption question leans market + historian; a policy question leans historian + regulator (bench).
+Every seat is named after a job someone actually holds, in two to five words: "an industry VC", "a procurement security officer who writes the RFPs", "a trader who has followed this for years", "a historian of the field". A real job carries its territory and its incentive in the name. A category with qualifiers bolted on ("an analyst who reads pricing pages like filings") is the same seat said badly, and invented colour ("woken at 3am by a failed signature") adds nothing: persona detail beyond a name does not change what a seat finds (SPP), the territory does.
+
+The five archetype cards below are a checklist of incentives to cover, not names to use. The skeptic is always cast. For the rest, pick the jobs that sit farthest from the seats already chosen in moves 1 and 2: a technology question usually wants someone who runs it and someone who studies it; a market question wants someone who bets on it and someone who buys it; a policy question wants someone who enforces it. The bench lists more jobs.
 
 ### Headcount
 
-Run the diversity test after the three moves. Headcount is what survives: three to five in `standard` (four is the usual outcome), six only in `deep`. The numbers people quote for "optimal" are narrow: ChatEval peaked at 3-4 roles on one evaluation benchmark with ChatGPT (60.0 → 62.5%); averaging three human analysts captured most of the gain of averaging fifty; Delphi panels of 3, 7 and 11 showed no accuracy difference. None of that says five is right, and an eval of twenty questions cannot tell four seats from five. Searches per seat is the quality knob; add a seat only when its territory is one no other seat touches, and do not tune headcount from single runs.
+Run the diversity test after the three moves. Headcount is what survives: three to five in `standard` (four is the usual outcome), six only in `deep`. In the roster, each seat is its job title plus at most one clause; the territory lines live on the card, not in the table. The numbers people quote for "optimal" are narrow: ChatEval peaked at 3-4 roles on one evaluation benchmark with ChatGPT (60.0 → 62.5%); averaging three human analysts captured most of the gain of averaging fifty; Delphi panels of 3, 7 and 11 showed no accuracy difference. None of that says five is right, and an eval of twenty questions cannot tell four seats from five. Searches per seat is the quality knob; add a seat only when its territory is one no other seat touches, and do not tune headcount from single runs.
 
 ## The five default archetypes
 
@@ -73,17 +75,19 @@ Each card names where the seat looks. Rename it to the topic before spawning.
 
 The skeptic is never dropped.
 
-## The bench (swap in when a default seat does not fit)
+## The bench (jobs to pull from when an archetype does not fit)
 
-- **Regulator / lawyer** — trusts statutes, enforcement actions, court filings. Asks: what is actually allowed, and who has been punished?
-- **End user / customer** — trusts their own time and money. Asks: would I keep paying for this in month four?
-- **Builder / engineer** — trusts what they could build themselves. Asks: what is the simplest thing that does 80% of this, and why did they not do that?
-- **Investor (long horizon)** — trusts moats, distribution, unit economics at scale. Asks: what does this look like in five years if it works?
-- **Journalist** — trusts documents and on-record sources, distrusts press releases. Asks: who benefits from me believing this?
-- **Insider who left** — trusts what they saw from inside. Asks: what does everyone inside know and nobody say?
-- **Localiser** — the China / EU / specific-jurisdiction version of the question.
-- **Future self** — the user five years on. Asks: which of today's concerns will have mattered?
-- **Safety / ethics** — trusts harm reports and incident databases. Asks: who gets hurt when this goes wrong at scale?
+- **An industry VC** — trusts rounds, exits, who got bought and why. Asks: what does this look like in five years if it works, and who gets to own it?
+- **A procurement security officer who writes the RFPs** — trusts what buyers put in a requirements list and what they sign. Asks: would this get past my checklist, and would anyone pay for it?
+- **A regulator or a lawyer in the field** — trusts statutes, enforcement actions, court filings. Asks: what is actually allowed, and who has been punished?
+- **A paying customer in month four** — trusts their own time and money. Asks: would I keep paying for this?
+- **An engineer who would build it themselves** — trusts what they could ship. Asks: what is the simplest thing that does 80% of this, and why did they not do that?
+- **A journalist on this beat** — trusts documents and on-record sources, distrusts press releases. Asks: who benefits from me believing this?
+- **Someone who worked inside and left** — trusts what they saw. Asks: what does everyone inside know and nobody say?
+- **A headhunter in the field** — trusts who is hiring for what. Asks: which roles are being staffed and which are disappearing?
+- **The local version** — the China / EU / specific-jurisdiction practitioner.
+- **The user five years on** — asks which of today's concerns will have mattered.
+- **An incident investigator** — trusts harm reports and post-mortems. Asks: who got hurt when this went wrong at scale?
 
 ## Fitting the cast to the topic (hypothetical rosters, not runs)
 
