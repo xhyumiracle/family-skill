@@ -57,7 +57,7 @@ Write it to the path on your card. Keep these headings exactly; the synthesizer 
 <beliefs that shaped the position but have no source; may be empty>
 
 ## Read but not cited
-<at most five URLs you opened that bear on the question but did not make the claims table, each with one line on why; the orchestrator's gap round draws its questions from here>
+<at most five URLs you opened that bear on the question but did not make the claims table, each with one line on why; the orchestrator's evidence round draws its gap questions from here>
 
 ## Deliberately not examined
 <what you skipped, by choice, budget or boundary; the synthesizer uses this to find blind spots>

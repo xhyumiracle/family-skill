@@ -44,7 +44,7 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 ```
 /family <问题>          5-6 个家人 + 核查员 · 约 30 分钟 · 约 70 万 token
 /family quick <问题>    不组队，编排者自己查一遍，小核查员再核一遍
-/family deep <问题>     6 个家人 · 核查预算更大 · 一轮轮补证据，直到分歧不再动（最多 3 轮）
+/family deep <问题>     同一批家人 · 更大的核查预算 · 证据轮直到分歧不再移动（最多 3 轮）
 ```
 
 或者直接说人话：「从0到1了解一下 X」「X 的 hype 是真的吗」「我对 X 还漏了什么」。东西都在 `family/<slug>/report.md`。

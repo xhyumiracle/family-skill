@@ -72,7 +72,7 @@ Read all seat files and `verification.md`. Write `report.md` per `references/rep
 
 ### 5. Deliver
 
-Reply with the three bottom-line slots copied from the report, at most three cruxes, one blind spot, the path to `report.md`, and the cost line. Append one line to `family/runs.log` (date, slug, tier, seats, tokens, claims checked, downgraded, lint score, gap round used or not). The log is a cost and health record; it is not an eval. How to evaluate the skill is in `references/eval.md`.
+Reply with the three bottom-line slots copied from the report, at most three cruxes, one blind spot, the path to `report.md`, and the cost line. Append one line to `family/runs.log` (date, slug, tier, seats, tokens, claims checked, downgraded, lint score, evidence rounds run). The log is a cost and health record; it is not an eval. How to evaluate the skill is in `references/eval.md`.
 
 ## Depth tiers
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0 — 2026-10-28
+
+- `deep` is the same family taken through evidence rounds, not a bigger family. A round is a Delphi round over verified evidence: anonymised cruxes with each side's verified claims, plus gap questions; a seat may hold with a new source, concede by naming the claim that changed its mind, or reframe; the verifier is resumed for new claims; another round only if the last one moved a crux, three at most. Replaces the separate gap round and the sixth seat.
+
 ## 0.3.6 — 2026-10-28
 
 - The skeptic is named after the field's real dissenting group (the critic in print, the investigating journalist, the analyst who is short), not as a generic "skeptic": an assigned objector is theatre, a real minority is what the evidence rewards.
