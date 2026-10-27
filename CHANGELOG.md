@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.6 — 2026-10-28
+
+- The skeptic is named after the field's real dissenting group (the critic in print, the investigating journalist, the analyst who is short), not as a generic "skeptic": an assigned objector is theatre, a real minority is what the evidence rewards.
+
 ## 0.3.5 — 2026-10-28
 
 - Four fixed seats instead of three: uses it, builds it, bets on it, picks it apart. Users and builders read different material, so they are two territories, not one. Plus the outsider, plus a discovered seat when Move 1 finds one: five or six.
