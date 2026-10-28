@@ -4,7 +4,7 @@ A seat is a search territory with a point of view attached: **what evidence it t
 
 ## How the crew gets cast: two moves, in order
 
-### Move 1 — Discover the territories (one or two searches)
+### Move 1: Discover the territories (one or two searches)
 
 Search for how the field already carves itself up: an overview, a survey, a "state of X" piece, a conference programme, a well-sectioned Wikipedia article on the topic or a sibling topic. Write down two things:
 
@@ -13,7 +13,7 @@ Search for how the field already carves itself up: an overview, a survey, a "sta
 
 If the topic is too new or too private for overviews to exist, say so and skip. Do not invent a discovered seat from imagination.
 
-### Move 2 — Fill the five perspectives
+### Move 2: Fill the five perspectives
 
 Each perspective is one kind of evidence, taken from a published method, so the set applies to any question: a product, a policy, a historical event, a scientific claim, a personal decision. Together they triangulate in the sense of qualitative research methods: different data sources, different lenses, independent investigators (Denzin 1978; Patton 1999).
 
@@ -85,17 +85,17 @@ The dissent seat is never dropped.
 
 ## The bench (jobs to pull from when a card does not fit)
 
-- **An industry VC** (stakes) — trusts rounds, exits, who got bought and why. Asks: what does this look like in five years if it works, and who gets to own it?
-- **A procurement security officer who writes the RFPs** (stakes) — trusts what buyers put in a requirements list and what they sign. Asks: would this get past my checklist, and would anyone pay for it?
-- **A regulator or a lawyer in the field** (stakes) — trusts statutes, enforcement actions, court filings. Asks: what is actually allowed, and who has been punished?
-- **A paying customer in month four** (first-hand) — trusts their own time and money. Asks: would I keep paying for this?
-- **An engineer who would build it themselves** (expert) — trusts what they could ship. Asks: what is the simplest thing that does 80% of this, and why did they not do that?
-- **A journalist on this beat** (dissent or first-hand) — trusts documents and on-record sources, distrusts press releases. Asks: who benefits from me believing this?
-- **Someone who worked inside and left** (first-hand) — trusts what they saw. Asks: what does everyone inside know and nobody say?
-- **A headhunter in the field** (stakes) — trusts who is hiring for what. Asks: which roles are being staffed and which are disappearing?
-- **A historian of the field** (outside view) — trusts archives and previous waves. Asks: when did this happen before, and how did it end?
-- **The local version** — the China / EU / specific-jurisdiction holder of any perspective.
-- **An incident investigator** (first-hand or dissent) — trusts harm reports and post-mortems. Asks: who got hurt when this went wrong at scale?
+- **An industry VC** (stakes): trusts rounds, exits, who got bought and why. Asks: what does this look like in five years if it works, and who gets to own it?
+- **A procurement security officer who writes the RFPs** (stakes): trusts what buyers put in a requirements list and what they sign. Asks: would this get past my checklist, and would anyone pay for it?
+- **A regulator or a lawyer in the field** (stakes): trusts statutes, enforcement actions, court filings. Asks: what is actually allowed, and who has been punished?
+- **A paying customer in month four** (first-hand): trusts their own time and money. Asks: would I keep paying for this?
+- **An engineer who would build it themselves** (expert): trusts what they could ship. Asks: what is the simplest thing that does 80% of this, and why did they not do that?
+- **A journalist on this beat** (dissent or first-hand): trusts documents and on-record sources, distrusts press releases. Asks: who benefits from me believing this?
+- **Someone who worked inside and left** (first-hand): trusts what they saw. Asks: what does everyone inside know and nobody say?
+- **A headhunter in the field** (stakes): trusts who is hiring for what. Asks: which roles are being staffed and which are disappearing?
+- **A historian of the field** (outside view): trusts archives and previous waves. Asks: when did this happen before, and how did it end?
+- **The local version**: the China / EU / specific-jurisdiction holder of any perspective.
+- **An incident investigator** (first-hand or dissent): trusts harm reports and post-mortems. Asks: who got hurt when this went wrong at scale?
 
 ## Fitting the cast to the topic (hypothetical rosters, not runs)
 

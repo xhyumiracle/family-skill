@@ -56,9 +56,9 @@ npx skills add xhyumiracle/family-skill -g
 git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.sh
 ```
 
-完整安装会多装两个 agent 定义，它们没有开子代理的权限，调研的始终是你看到的那几个人。装完重开一个会话。
+完整安装会多装两个 agent 定义：成员和核查员，权限里去掉了开子代理，人数固定。装完重开一个会话。
 
-需要能开子代理、能联网搜索的 agent。目前在 Claude Code 上测过；Codex、Cursor、Gemini CLI、OpenCode 也支持子代理，按理都能用。
+需要 agent 能开子代理、能联网搜索。在 Claude Code 上测过；Codex、Cursor、Gemini CLI、OpenCode 也支持子代理，还没测。
 
 <!-- Agents installing this for someone: on Claude Code use the full install (install.sh); on any other runtime use the npx line. -->
 
@@ -66,13 +66,13 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 
 ```
 /family <问题>          五个成员 + 核查员 · 约 30 分钟 · 约 65 万 token
-/family quick <问题>    一个人快速查一遍，同样过核查 · 约 8 万 token
+/family quick <问题>    不组队，主 agent 自己查一遍，再核查 · 约 8 万 token
 /family deep <问题>     还是这五个人，多核几条，有分歧就再查一轮，最多 3 轮
 ```
 
 也可以直接说：「帮我从 0 到 1 了解一下 X」「X 这波热度靠谱吗」「关于 X 我还漏了什么」。
 
-跑完得到 `family/<问题简称>/report.md`。开头三句话：建议怎么做、把握有多大、哪个前提一变结论就跟着变。往下是关键判断、成员之间的分歧、没人查到的盲区，每一条都附来源。
+跑完得到 `family/<问题简称>/report.md`。开头三句话：建议怎么做、把握有多大、哪个前提一变结论就跟着变。往下是关键判断、成员之间的分歧和没人查过的地方，附来源。
 
 ## 怎么运作
 
@@ -88,19 +88,19 @@ flowchart LR
     S5["外部视角"]
   end
   B --> S1 & S2 & S3 & S4 & S5
-  S1 & S2 & S3 & S4 & S5 --> V["核对每条引用的原文"]
+  S1 & S2 & S3 & S4 & S5 --> V["核对引用的原文"]
   V --> E{"有分歧？<br/>再查一轮"}
-  E --> R["报告<br/>附全部来源"]
+  E --> R["报告<br/>附来源"]
 ```
 
-五个成员按「证据从哪来」分工，所以什么问题都能用，产品、政策、历史、科学、个人选择都行：
+五个成员按证据从哪来分工，产品、政策、历史、科学、个人选择类的问题都适用：
 
 | 视角 | 是谁 | 依据 |
 |---|---|---|
 | 亲历者 | 离证据最近的人：用户、当事人、做实验的人；历史问题就读同时代的原始记载 | 论证理论里的「亲历证言」（Walton et al., 2008） |
 | 内行 | 能讲清原理和机制的人 | 论证理论里的「专家意见」；批判系统启发法的「专家」角色（Ulrich, 1983） |
 | 利益相关方 | 做决定、出钱、受益或承担后果的人。问题里没有利益方时，换成另一种研究方法 | 批判系统启发法的受益者、决策者、受影响者角色（Ulrich, 1983） |
-| 异见 | 针对领域里的主流说法，找已经发表的最强反对意见；问题没有立场也适用 | 少数派异见让群体想得更宽（Nemeth, 1986）；真实的异见比指派的「唱反调」更能纠偏（Nemeth et al., 2001）；一个不同答案就能减少大模型随大流（Zhu et al., ACL 2025） |
+| 异见 | 针对领域里的主流说法，找已经发表的最强反对意见；问题没有立场也适用 | 少数派异见让群体想得更宽（Nemeth, 1986）；真实的异见比指派的「唱反调」更能纠偏（Nemeth et al., 2001）；加入一个不同答案，大模型随大流的情况会减少（Zhu et al., ACL 2025） |
 | 外部视角 | 其他领域里处理过同类问题的人，带来同类案例通常的结局 | 外部视角和参考类预测（Kahneman & Lovallo, 1993；Flyvbjerg, 2006）。用在 AI 调研上还没有对照实验，标为实验性 |
 
 - **视角互补。** 五个视角合起来，就是质性研究里的「三角验证」：不同的数据来源、不同的解释框架、彼此独立的调研者（Denzin, 1978）。STORM 的实验里，多视角提问让找到的独立来源接近翻倍（99.83 对 54.36）。
@@ -108,11 +108,11 @@ flowchart LR
 - **按问题现场挑人。** 每个视角先按你的问题写一两个候选，再挑和问题最相关、彼此差别最大的那个。按问题生成、同时看相关性和差异度挑出来的团队，比预设角色效果好，只看其中一项都会变差（AgentInit, EMNLP 2025）。
 - **各自独立，一人汇总。** 多个 AI 互相讨论带来的提升，几乎都能用投票解释（Choi et al., NeurIPS 2025）；各写各的还能避免从众。
 - **你的看法只告诉异见成员。** 其他成员只拿到事实，免得顺着你说（Sharma et al., ICLR 2024）。
-- **引用保真。** deep research 产品的引用，准确率只有 40% 到 80%（DeepTRACE, ICLR 2026）。核查员打开每条关键来源，原文对不上就降级；结论里的数字和引语再逐字对一遍核查表，因为 2026 年的一项研究发现，84.7% 的报告错误出在负责汇总的主控 agent 身上。
+- **引用保真。** deep research 产品的引用，准确率只有 40% 到 80%（DeepTRACE, ICLR 2026）。核查员打开结论依赖的来源（标准档最多 20 条），原文对不上就降级；结论里的数字和引语再逐字对一遍核查表，因为 2026 年的一项研究发现，84.7% 的报告错误出在负责汇总的主控 agent 身上。
 - **分歧再查一轮。** 双方匿名看到对方已核实的证据，可以拿新来源坚持、认可对方，或者指出双方定义不同。证据不再变化就停（Delphi 法）。
 - **成本和质量一起算。** 多花钱却没有更好的步骤都删掉了，比如多轮辩论和第六个人（成本与准确率的 Pareto 前沿，Kapoor et al., 2024）。
 
-完整例子在 [`examples/family-skill-design/`](examples/family-skill-design/)：family 审查自己设计的那次运行，所有中间文件都在。每条设计的完整依据见 [docs/DESIGN.md](docs/DESIGN.md)。
+完整例子在 [`examples/family-skill-design/`](examples/family-skill-design/)：family.skill 审查自己设计的那次运行，所有中间文件都在。每条设计的完整依据见 [docs/DESIGN.md](docs/DESIGN.md)。
 
 ## 参考文献
 

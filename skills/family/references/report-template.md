@@ -44,8 +44,8 @@ At most seven rows. A judgment no seat disputed but nobody verified carries [UNV
 ## Cruxes
 <one subsection per crux; a crux counts only when each side rests on different sources:>
 ### Crux N: <the tension in one sentence>
-- **Side A** (<seat codes>): <claim> — <evidence, verdict>
-- **Side B** (<seat codes>): <claim> — <evidence, verdict>
+- **Side A** (<seat codes>): <claim>; <evidence, verdict>
+- **Side B** (<seat codes>): <claim>; <evidence, verdict>
 - **What would settle it:** <a concrete observation, dataset or event>
 - **Current lean:** <scale word (range)>, or "open" plus the indicator to watch
 

@@ -68,7 +68,7 @@ You cannot spawn subagents and do not need to."
 `claims.md` format, written by the orchestrator (seat codes, never seat names):
 
 ```markdown
-# Claims for verification — <question>
+# Claims for verification: <question>
 
 | ID | Claim | Cited URL | Quoted evidence | Seats | Why it matters (sub-question / crux N side A|B / diagnostic / single-source / quantitative) |
 ```

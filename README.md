@@ -56,9 +56,9 @@ npx skills add xhyumiracle/family-skill -g
 git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.sh
 ```
 
-The full install adds two agent definitions that cannot spawn subagents, so the family stays the size you see. Start a new session afterwards.
+The full install adds two agent definitions, member and fact-checker, with subagent spawning removed, so the headcount stays fixed. Start a new session afterwards.
 
-Needs an agent with subagents and web search. Tested on Claude Code; Codex, Cursor, Gemini CLI and OpenCode support subagents too and should work.
+Needs an agent with subagents and web search. Tested on Claude Code; Codex, Cursor, Gemini CLI and OpenCode support subagents too, untested so far.
 
 <!-- Agents installing this for someone: on Claude Code use the full install (install.sh); on any other runtime use the npx line. -->
 
@@ -72,7 +72,7 @@ Needs an agent with subagents and web search. Tested on Claude Code; Codex, Curs
 
 Or just say it: "help me understand X from scratch", "is the hype about X real", "what am I missing about X".
 
-You get `family/<short-name>/report.md`. It opens with three lines: what to do, how confident to be, and which assumption would change the answer. Below that: key findings, where the members disagree, and what nobody looked into, each with its source.
+You get `family/<short-name>/report.md`. It opens with three lines: what to do, how confident to be, and which assumption would change the answer. Below that: key findings, where the members disagree, and what nobody looked into, with sources.
 
 ## How it works
 
@@ -88,12 +88,12 @@ flowchart LR
     S5["outside view"]
   end
   B --> S1 & S2 & S3 & S4 & S5
-  S1 & S2 & S3 & S4 & S5 --> V["check every cited source"]
+  S1 & S2 & S3 & S4 & S5 --> V["check cited sources"]
   V --> E{"disagreement?<br/>one more round"}
-  E --> R["report<br/>with all sources"]
+  E --> R["report<br/>with sources"]
 ```
 
-The five members split the work by where the evidence comes from, so the set fits any question: a product, a policy, history, science, a personal decision.
+The five members split the work by where the evidence comes from, which suits questions about products, policy, history, science or personal decisions.
 
 | Perspective | Who | Basis |
 |---|---|---|
@@ -104,15 +104,15 @@ The five members split the work by where the evidence comes from, so the set fit
 | Outside view | someone from another field that has handled the same kind of problem, bringing how comparable cases usually turned out | the outside view and reference-class forecasting (Kahneman & Lovallo, 1993; Flyvbjerg, 2006); untested in AI research, so marked experimental |
 
 - **Complementary views.** Together the five triangulate in the qualitative-research sense: different data sources, different lenses, independent investigators (Denzin, 1978). In STORM's experiments, asking from several perspectives nearly doubled the distinct sources found (99.83 vs 54.36).
-- **Five is enough.** Averaging three analysts' independent judgments already captures most of the gain of averaging fifty (Mandel et al., 2018), and Delphi panels of 3 to 11 show no difference in accuracy (Rowe & Wright, 2001). Multi-agent research shows the same: identical agents saturate quickly, and two diverse agents matched sixteen identical ones (Yang et al., 2026). Each extra person only adds cost, about 70–110K tokens.
+- **Five is enough.** Averaging three analysts' independent judgments already captures most of the gain of averaging fifty (Mandel et al., 2018), and Delphi panels of 3 to 11 show no difference in accuracy (Rowe & Wright, 2001). Multi-agent research shows the same: identical agents saturate quickly, and two diverse agents matched sixteen identical ones (Yang et al., 2026). Each extra person only adds cost, about 70K to 110K tokens.
 - **Members are picked per question.** Each perspective gets one or two candidates written for your question, and the one most relevant and least like the others is kept. Teams generated from the query and chosen for relevance and diversity together beat predefined roles, and either criterion alone did worse (AgentInit, EMNLP 2025).
 - **Independent work, one merge.** The gains from AI agents debating are almost entirely explained by voting (Choi et al., NeurIPS 2025), and working alone avoids conformity.
 - **Your view goes only to the dissent member.** Everyone else gets facts only, so nobody bends toward you (Sharma et al., ICLR 2024).
-- **Faithful citations.** Deep-research tools cite correctly 40–80% of the time (DeepTRACE, ICLR 2026). The fact-checker opens every key source and downgrades claims the source doesn't support. Numbers and quotes in the conclusion are then matched word for word against the fact-checker's table, since a 2026 study traced 84.7% of report errors to the orchestrating agent that writes the final report.
+- **Faithful citations.** Deep-research tools cite correctly 40% to 80% of the time (DeepTRACE, ICLR 2026). The fact-checker opens the sources the conclusion rests on (up to 20 in the standard tier) and downgrades claims they don't support. Numbers and quotes in the conclusion are then matched word for word against the fact-checker's table, since a 2026 study traced 84.7% of report errors to the orchestrating agent that writes the final report.
 - **One more round on disagreements.** Each side sees the other's checked evidence anonymously and can hold with a new source, concede, or show the two define a term differently. It stops when the evidence stops changing (the Delphi method).
-- **Cost counts alongside quality.** Steps that cost more without doing better were cut, such as multi-round debate and a sixth member (the cost–accuracy Pareto view of Kapoor et al., 2024).
+- **Cost counts alongside quality.** Steps that cost more without doing better were cut, such as multi-round debate and a sixth member (the Pareto view of cost and accuracy, Kapoor et al., 2024).
 
-A full run, every intermediate file included: [`examples/family-skill-design/`](examples/family-skill-design/), family reviewing its own design. The evidence behind each choice: [docs/DESIGN.md](docs/DESIGN.md).
+A full run, every intermediate file included: [`examples/family-skill-design/`](examples/family-skill-design/), family.skill reviewing its own design. The evidence behind each choice: [docs/DESIGN.md](docs/DESIGN.md).
 
 ## References
 

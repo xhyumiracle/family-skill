@@ -2,7 +2,7 @@
   "name": "family",
   "displayName": "family",
   "version": "0.6.2",
-  "description": "Five members research one question from five kinds of evidence, each on their own; then a fact-checker opens every source they cite. STORM-style multi-perspective research.",
+  "description": "Multiple perspectives to help you brainstorm and research, based on Stanford's STORM.",
   "author": {
     "name": "Xinhao Yu",
     "url": "https://xhyumiracle.com"
