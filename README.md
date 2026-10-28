@@ -19,7 +19,7 @@ https://github.com/user-attachments/assets/2ae67414-e157-4779-aa61-f5096d8a164b
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
-[![Version](https://img.shields.io/badge/version-0.7.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.7.1-blue)](CHANGELOG.md)
 [![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#install)
 
 [Install](#install) · [Usage](#usage) · [How it works](#how-it-works)
@@ -65,18 +65,12 @@ Needs an agent with subagents and web search. Tested on Claude Code; Codex, Curs
 ## Usage
 
 ```
-/family <question>
-/family mini <question>
-/family deep <question>
+/family <question>          standard: 5 members, one extra round on disagreements when needed
+/family mini <question>     3 members, otherwise the same as standard
+/family deep <question>     5 members, rounds on disagreements until the evidence stops changing, at most 3
 ```
 
-| Mode | Members | Extra rounds on disagreements | Rough cost |
-|---|---|---|---|
-| standard (default) | 5 | 1 when needed | 650K tokens, about 30 min |
-| mini | 3: dissent plus the two perspectives most relevant to the question | none | 350K to 450K tokens |
-| deep | 5 | until the evidence stops changing, at most 3 | about 1M tokens |
-
-Each member searches at most 12 times and stops earlier when two searches in a row find no new primary source.
+Cost depends on the question: standard measured 480K to 900K tokens over four runs; mini and deep are not measured yet, estimated at 300K to 500K and 600K to 1.1M. Each member searches at most 15 times and stops earlier when two searches in a row find no new primary source.
 
 Or just say it: "help me understand X from scratch", "is the hype about X real", "what am I missing about X".
 

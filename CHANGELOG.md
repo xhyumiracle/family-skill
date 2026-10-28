@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.1 — 2026-10-28
+
+- Each mode changes one thing: `mini` has three members and otherwise runs like `standard` (including the rule-triggered extra round); `deep` adds evidence rounds.
+- Search cap per member is 15, the top of Anthropic's 10 to 15 tool calls per subagent.
+- Costs are ranges: standard 480K to 900K tokens measured over four runs; mini and deep marked as estimates. Wall-clock time removed (it depends on the model and its speed).
+
 ## 0.7.0 — 2026-10-28
 
 - `quick` (one agent searching alone) is gone: it had no perspectives, so it was a plain search. `mini` replaces it: three members, dissent plus the two perspectives most relevant to the question, no extra round (three independent inputs capture most of the aggregation gain; AgentInit's teams averaged two to three agents).

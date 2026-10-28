@@ -19,7 +19,7 @@ https://github.com/user-attachments/assets/dca214b8-d669-4a9d-9949-4906055a712e
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
-[![Version](https://img.shields.io/badge/version-0.7.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.7.1-blue)](CHANGELOG.md)
 [![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#安装)
 
 [安装](#安装) · [用法](#用法) · [怎么运作](#怎么运作)
@@ -65,18 +65,12 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 ## 用法
 
 ```
-/family <问题>
-/family mini <问题>
-/family deep <问题>
+/family <问题>          标准：5 个成员，需要时补查一轮
+/family mini <问题>     只有 3 个成员，其余和标准一样
+/family deep <问题>     5 个成员，分歧补查到证据不再变化，最多 3 轮
 ```
 
-| 模式 | 成员 | 分歧补查 | 大约花费 |
-|---|---|---|---|
-| 标准（默认） | 5 个 | 需要时补 1 轮 | 65 万 token，约 30 分钟 |
-| mini | 3 个：异见，加上和问题最相关的两个视角 | 不补查 | 35 到 45 万 token |
-| deep | 5 个 | 证据不再变化就停，最多 3 轮 | 约 100 万 token |
-
-每个成员最多搜 12 次，连续两次搜不到新的一手来源就提前停。
+花费随问题变化：标准模式实测四次，在 48 万到 90 万 token 之间；mini 和 deep 还没实测，估计分别在 30 万到 50 万、60 万到 110 万。每个成员最多搜 15 次，连续两次搜不到新的一手来源就提前停。
 
 也可以直接说：「帮我从 0 到 1 了解一下 X」「X 这波热度靠谱吗」「关于 X 我还漏了什么」。
 

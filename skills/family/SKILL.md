@@ -79,16 +79,16 @@ Reply with the three bottom-line slots copied from the report, at most three cru
 
 | Tier | Seats | Searches / seat | Evidence rounds | Agents spawned | Rough cost |
 |---|---|---|---|---|---|
-| `mini` | 3: dissent plus the two perspectives most relevant to the question | 12 | no | seats + 1 | ~350-450K tokens |
-| `standard` (default) | 5 (four perspectives + outside view; a discovered territory replaces an overlapping one) | 12 | at most 1, rule-triggered | seats + 1 | ~600-800K tokens, ~30 min wall (measured: seats 65-110K each with the stop rule, verifier about 7K per claim, one round 26K + re-verification) |
-| `deep` | the same five | 12 | up to 3, until the evidence stops moving | seats + 1 | ~1M tokens; confirm with the user first |
+| `mini` | 3: dissent plus the two perspectives most relevant to the question | 15 | at most 1, rule-triggered | seats + 1 | estimated 300-500K tokens |
+| `standard` (default) | 5 (four perspectives + outside view; a discovered territory replaces an overlapping one) | 15 | at most 1, rule-triggered | seats + 1 | 480-900K tokens over four runs (seats 65-110K each with the stop rule, verifier about 7K per claim, one round 26K plus re-verification) |
+| `deep` | the same five | 15 | up to 3, until the evidence stops moving | seats + 1 | estimated 600K-1.1M tokens; confirm with the user first |
 
-Pick `standard` unless the user names a tier. `deep` is the same family taken through evidence rounds until the cruxes stop moving; it never adds seats.
+Pick `standard` unless the user names a tier. `mini` differs from `standard` only in having three seats; `deep` differs only in its evidence rounds. `deep` is the same family taken through evidence rounds until the cruxes stop moving; it never adds seats.
 
 ## Keeping the bill honest
 
 - The agent count for the tier is the agent count. No helper agents, no "let me spawn an Explore to find sources", no re-running the whole crew because one seat was weak.
-- Seats stop at their search budget, or earlier when two searches in a row find no new primary source, and say what they did not cover. The budget of 12 sits inside the 10 to 15 tool calls per subagent Anthropic writes into its prompts for comparison-type research, because agents judge their own effort poorly; the stop rule does the real work.
+- Seats stop at their search budget, or earlier when two searches in a row find no new primary source, and say what they did not cover. The budget of 15 is the top of the 10 to 15 tool calls per subagent Anthropic writes into its prompts for comparison-type research, because agents judge their own effort poorly; it guards against runaway cost, and the stop rule does the real work.
 - The verifier gets `claims.md`, never the seat notes.
 - Member summaries are capped (250 words).
 - Print the cost line from real numbers.
