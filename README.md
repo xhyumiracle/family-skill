@@ -6,7 +6,7 @@
 
 **Got a question? Get the family first.**
 
-A multi-perspective research skill based on Stanford's STORM. Five members research your question<br>independently from five perspectives, every claim is checked against its source, and you get a sourced report.
+Multiple perspectives to help you brainstorm and research. Based on Stanford's STORM.
 
 <img src="assets/hero-en.gif" alt="family demo: ask one question, five members research it, every source is checked, you get a conclusion" width="100%">
 
