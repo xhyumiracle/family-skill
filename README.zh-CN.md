@@ -8,9 +8,14 @@
 
 多个视角帮你头脑风暴、做调研。方法来自斯坦福 STORM。
 
-<img src="assets/hero-zh.gif" alt="family 演示：提一个问题，五个成员各自调研，核对出处，输出结论" width="100%">
+</div>
 
-<sub>示意动画。实际运行时，agent 里只有文字输出，没有人物形象。</sub>
+https://github.com/user-attachments/assets/dca214b8-d669-4a9d-9949-4906055a712e
+
+<p align="center"><sub>示意动画。实际运行时，agent 里只有文字输出，没有人物形象。</sub></p>
+
+<div align="center">
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)

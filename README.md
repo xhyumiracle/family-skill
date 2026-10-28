@@ -8,9 +8,14 @@
 
 Multiple perspectives to help you brainstorm and research. Based on Stanford's STORM.
 
-<img src="assets/hero-en.gif" alt="family demo: ask one question, five members research it, every source is checked, you get a conclusion" width="100%">
+</div>
 
-<sub>Illustration. In your agent the run is plain text, with no characters on screen.</sub>
+https://github.com/user-attachments/assets/2ae67414-e157-4779-aa61-f5096d8a164b
+
+<p align="center"><sub>Illustration. In your agent the run is plain text, with no characters on screen.</sub></p>
+
+<div align="center">
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
