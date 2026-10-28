@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# family
+# family.skill
 
 **有问题？先叫上 family。**
 
@@ -12,7 +12,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
-[![Version](https://img.shields.io/badge/version-0.6.1-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.6.2-blue)](CHANGELOG.md)
 [![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#安装)
 
 [安装](#安装) · [用法](#用法) · [怎么运作](#怎么运作)

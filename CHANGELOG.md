@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.2 — 2026-10-28
+
+- Demo rebuilt as an agent session in a terminal: the question typed and sent, five members assembled (silhouettes), each researching and reporting a view, the fact-check line, the report. Narration on the left, one line per step. End card: the five as silhouettes by the car, "family.skill" and the tagline. MP4s in `assets/demo-*.mp4`, GIFs in `assets/hero-*.gif`.
+- README title is now family.skill.
+
 ## 0.6.1 — 2026-10-28
 
 - Members are picked per question: one or two candidates per perspective, keeping the one most relevant to the question and least like the others, following AgentInit (EMNLP 2025 Findings: query-generated teams chosen for relevance and diversity together beat predefined roles). A crew may have fewer than five when a perspective has no relevant candidate.
