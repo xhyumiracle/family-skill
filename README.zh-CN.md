@@ -6,13 +6,13 @@
 
 **一个问题，五个视角，每条来源都核实。**
 
-基于斯坦福 STORM 的多视角调研 skill：五个背景不同的「家人」各自独立调研同一个问题，<br>核查员再逐条核对他们引用的原文，最后给你一份带来源的结论。
+基于斯坦福 STORM 的多视角调研 skill：五个成员从五个视角各自独立调研同一个问题，<br>每条结论都核对过出处，最后给你一份带来源的报告。
 
-<img src="assets/hero-zh.gif" alt="family 演示：提一个问题，五个「家人」各自调研，核查员核对原文，输出结论" width="100%">
+<img src="assets/hero-zh.gif" alt="family 演示：提一个问题，五个成员各自调研，核对出处，输出结论" width="100%">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
-[![Version](https://img.shields.io/badge/version-0.5.1-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.6.0-blue)](CHANGELOG.md)
 [![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#安装)
 
 [安装](#安装) · [用法](#用法) · [怎么运作](#怎么运作)
@@ -58,42 +58,51 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 ## 用法
 
 ```
-/family <问题>          五个「家人」+ 核查员 · 约 30 分钟 · 约 65 万 token
+/family <问题>          五个成员 + 核查员 · 约 30 分钟 · 约 65 万 token
 /family quick <问题>    一个人快速查一遍，同样过核查 · 约 8 万 token
 /family deep <问题>     还是这五个人，多核几条，有分歧就再查一轮，最多 3 轮
 ```
 
 也可以直接说：「帮我从 0 到 1 了解一下 X」「X 这波热度靠谱吗」「关于 X 我还漏了什么」。
 
-跑完得到 `family/<问题简称>/report.md`。开头三句话：建议怎么做、把握有多大、哪个前提一变结论就跟着变。往下是关键判断、「家人」之间的分歧、没人查到的盲区，每一条都附来源。
+跑完得到 `family/<问题简称>/report.md`。开头三句话：建议怎么做、把握有多大、哪个前提一变结论就跟着变。往下是关键判断、成员之间的分歧、没人查到的盲区，每一条都附来源。
 
 ## 怎么运作
 
 ```mermaid
 flowchart LR
   Q([你的问题]) --> B["背景材料<br/>只有事实和约束"]
-  subgraph crew ["五个「家人」，各查各的"]
+  subgraph crew ["五个成员，各查各的"]
     direction TB
-    S1["用它的人"]
-    S2["做它的人"]
-    S3["在它身上押了钱的人"]
-    S4["公开批评过它的人<br/>（唯一知道你看法的人）"]
-    O["另一个行业里<br/>解决过同类问题的人"]:::far
+    S1["亲历者"]
+    S2["内行"]
+    S3["利益相关方"]
+    S4["反方<br/>（唯一知道你看法的人）"]
+    S5["外部视角"]
   end
-  B --> S1 & S2 & S3 & S4 & O
-  S1 & S2 & S3 & S4 & O --> V["核查员<br/>逐条核对原文"]
+  B --> S1 & S2 & S3 & S4 & S5
+  S1 & S2 & S3 & S4 & S5 --> V["核对每条引用的原文"]
   V --> E{"有分歧？<br/>再查一轮"}
-  E --> R["结论<br/>附全部来源"]
-  classDef far fill:#fff3cd,stroke:#d4a017,stroke-width:2px
+  E --> R["报告<br/>附全部来源"]
 ```
 
-- **视角够分散。** 五个人从五个行当出发，读的材料基本不重叠。STORM 的实验里，多视角提问让找到的独立来源接近翻倍（99.83 对 54.36）。
-- **五个人刚好。** 三个人的独立判断取平均，已经能拿到五十人平均的大部分收益（Mandel et al., 2018）；Delphi 小组从 3 人到 11 人，准确率没有差别（Rowe & Wright, 2001）。五个人覆盖四类固定视角加一个跨行业视角，再加人只是多花钱，每人约 7 到 11 万 token。
-- **四类固定角色，一个跨行业。** 角色决定每个人去哪儿找材料：光给模型安排人设，准确率并不会提高（Zheng et al., 2024），读到不同的东西才有用。用它的、做它的、在它身上押了钱的、公开批评过它的，这四类人读的东西天然不同。第五个从解决过同类问题的其他行业请来，比如问「多个 AI 的判断怎么汇总」，请来的是情报分析方法论专家。这一位还没有对照实验，标为实验性。
+五个成员按「证据从哪来」分工，所以什么问题都能用，产品、政策、历史、科学、个人选择都行：
+
+| 视角 | 是谁 | 依据 |
+|---|---|---|
+| 亲历者 | 离证据最近的人：用户、当事人、做实验的人；历史问题就读同时代的原始记载 | 论证理论里的「亲历证言」（Walton et al., 2008） |
+| 内行 | 能讲清原理和机制的人 | 论证理论里的「专家意见」；批判系统启发法的「专家」角色（Ulrich, 1983） |
+| 利益相关方 | 做决定、出钱、受益或承担后果的人。问题里没有利益方时，换成另一种研究方法 | 批判系统启发法的受益者、决策者、受影响者角色（Ulrich, 1983） |
+| 反方 | 公开发表过相反观点的人 | 真实的异见比指派的「唱反调」更能纠偏（Nemeth et al., 2001；Schwenk, 1990） |
+| 外部视角 | 其他领域里处理过同类问题的人，带来同类案例通常的结局 | 外部视角和参考类预测（Kahneman & Lovallo, 1993；Flyvbjerg, 2006）。用在 AI 调研上还没有对照实验，标为实验性 |
+
+- **视角互补。** 五个视角合起来，就是质性研究里的「三角验证」：不同的数据来源、不同的解释框架、彼此独立的调研者（Denzin, 1978）。STORM 的实验里，多视角提问让找到的独立来源接近翻倍（99.83 对 54.36）。
+- **五个人刚好。** 三个人的独立判断取平均，已经能拿到五十人平均的大部分收益（Mandel et al., 2018）；Delphi 小组从 3 人到 11 人，准确率没有差别（Rowe & Wright, 2001）。再加人只是多花钱，每人约 7 到 11 万 token。
 - **各自独立，一人汇总。** 多个 AI 互相讨论带来的提升，几乎都能用投票解释（Choi et al., NeurIPS 2025）；各写各的还能避免从众。
-- **有真实的异见。** 只有批评者知道你的看法，其他人只拿到事实，免得顺着你说（Sharma et al., ICLR 2024）。批评者专找已经发表的反对意见，真实异见比指派的「唱反调」更能纠偏（Nemeth et al., 2001）。
+- **你的看法只告诉反方。** 其他成员只拿到事实，免得顺着你说（Sharma et al., ICLR 2024）。
 - **引用保真。** deep research 产品的引用，准确率只有 40% 到 80%（DeepTRACE, ICLR 2026）。核查员打开每条关键来源，原文对不上就降级；结论里的数字和引语再逐字对一遍核查表，因为 2026 年的一项研究发现，84.7% 的报告错误出在负责汇总的主控 agent 身上。
 - **分歧再查一轮。** 双方匿名看到对方已核实的证据，可以拿新来源坚持、认可对方，或者指出双方定义不同。证据不再变化就停（Delphi 法）。
+- **成本和质量一起算。** 多花钱却没有更好的步骤都删掉了，比如多轮辩论和第六个人（成本与准确率的 Pareto 前沿，Kapoor et al., 2024）。
 
 完整例子在 [`examples/family-skill-design/`](examples/family-skill-design/)：family 审查自己设计的那次运行，所有中间文件都在。每条设计的完整依据见 [docs/DESIGN.md](docs/DESIGN.md)。
 
@@ -108,6 +117,13 @@ flowchart LR
 - *Who is the Agent to Blame? Localizing Faithfulness and Citation Mistakes in Agentic Deep Research.* 2026. [arxiv.org/abs/2608.24306](https://arxiv.org/abs/2608.24306)
 - Sharma et al. *Towards Understanding Sycophancy in Language Models.* ICLR 2024. [arxiv.org/abs/2310.13548](https://arxiv.org/abs/2310.13548)
 - Nemeth, Brown, Rogers. *Devil's advocate versus authentic dissent.* Eur. J. Soc. Psychol. 2001.
+- Walton, Reed, Macagno. *Argumentation Schemes.* Cambridge University Press 2008.
+- Ulrich. *Critical Heuristics of Social Planning.* 1983. [作者本人的简介](https://i2insights.org/2022/05/24/critical-systems-heuristics/)
+- Kahneman, Lovallo. *Timid choices and bold forecasts.* Management Science 1993.
+- Flyvbjerg. *From Nobel Prize to project management: getting risks right.* Project Management Journal 2006.
+- Schwenk. *Effects of devil's advocacy and dialectical inquiry on decision making: a meta-analysis.* OBHDP 1990.
+- Denzin. *The Research Act.* 1978.
+- Kapoor et al. *AI Agents That Matter.* TMLR 2025. [arxiv.org/abs/2407.01502](https://arxiv.org/abs/2407.01502)
 - Lee et al. *"Fact-checking" fact checkers.* HKS Misinformation Review 2023.
 - Rowe, Wright. *Expert opinions in forecasting: the role of the Delphi technique.* 2001.
 - Mandel, Karvetski, Dhami. *Boosting intelligence analysts' judgment accuracy.* Judgment and Decision Making 2018.

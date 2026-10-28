@@ -16,13 +16,15 @@ The skill has audited itself twice. Round 1 (on v0.1.0) produced v0.2.0: seats a
 
 **What we did.** The card's weight is on where to search, what evidence to trust, what to leave to other seats, and a stop rule. The biography is one line. The diversity test compares planned queries and source types, not labels.
 
-## 3. The user's belief, the skeptic, and the outsider
+## 3. The five perspectives, the user's belief, and headcount
 
-**Evidence.** A stated belief pulls answers toward it: up to 27% on 2023 models [6], and a 2026 frontier model still changed right answers to wrong ones in 23.8% of objective scenarios to please the user [6]. Authentic dissent beat every form of assigned devil's advocate [7]. Delphi panels of 3 to 11 showed no accuracy difference, and averaging three independent analysts captured most of the gain of averaging fifty [17] [18]. No controlled study has tested a cross-trade "outsider" seat on LLM research; single-run seat counts cannot judge it because they depend on which claims the orchestrator verified (round 2, evaluator and skeptic seats).
+**Evidence.** A stated belief pulls answers toward it: up to 27% on 2023 models [6], and a 2026 frontier model still changed right answers to wrong ones in 23.8% of objective scenarios to please the user [6]. Authentic dissent beat every form of assigned devil's advocate [7]. Delphi panels of 3 to 11 showed no accuracy difference, and averaging three independent analysts captured most of the gain of averaging fifty [17] [18]. No controlled study has tested a cross-field outside-view seat on LLM research; single-run seat counts cannot judge it because they depend on which claims the orchestrator verified (round 2, evaluator and skeptic seats).
 
-**What we did.** The belief goes only to the skeptic's card. The skeptic's job is to find published dissent. The outsider is on by default, marked experimental, and judged by the eval design in `references/eval.md`, not by run counts. Headcount is five by construction (four fixed plus the outsider; a discovered territory replaces an overlapping fixed seat, never adds a sixth); an eval of twenty questions detects only large effects [19], so headcount is not tuned from runs.
+**What we did.** The belief goes only to the dissent seat's card. That seat's job is to find published dissent. The outside view is on by default, marked experimental, and judged by the eval design in `references/eval.md`, not by run counts. Headcount is five by construction (four perspectives plus the outside view; a discovered territory replaces an overlapping one, never adds a sixth); an eval of twenty questions detects only large effects [19], so headcount is not tuned from runs.
 
-**Which seats are fixed, and why those.** The fixed four are defined by evidence territory, not by job: uses it, builds it, bets on it, picks it apart. The split between users and builders is there because they read different material (reviews and support tickets versus code and post-mortems); bets covers both the buyer and the investor because both are read off money. The grounding is the evidence that seat value comes from reading different material [5] [4] and, more loosely, the diversity-prediction argument that a collective's error falls with the diversity of its independent inputs [31]. Study, rules and precedent are common territories too, but a discovery search finds them when they matter, so they take the dynamic seat. No particular fixed list has experimental support, including this one; `family/runs.log` records per-seat unique confirmed claims across runs so that fixed-set variants can be compared offline with leave-one-seat-out (§9) instead of argued. Early readings over four runs (selection-biased, direction only): discovered and practice seats produced the most unique confirmed claims; money seats and the skeptic the fewest, though the skeptic's job is to attack, not to add.
+**Which perspectives, and why those.** No published study gives a perspective set for LLM research, so the five are combined from methods that each have their own literature, chosen so that the set applies to any question rather than only to products. First-hand, expert and stakes follow the kinds of evidence in argumentation theory (argument from position to know, from expert opinion, from consequences [32]) and the roles of Critical Systems Heuristics (beneficiary, decision-maker, expert, witness for those affected but not involved [33]); dissent follows the authentic-dissent and structured-dissent experiments [7] [34]; the outside view follows reference-class forecasting [35]. Together they are a form of triangulation across data sources, lenses and independent investigators [36]. When a question has no stakeholders, that seat becomes a second method (method triangulation). The combination itself is untested; `family/runs.log` records per-seat unique confirmed claims so that variants can be compared offline with leave-one-seat-out (§9) instead of argued. Earlier versions used four fixed seats tied to a product (uses it, builds it, bets on it, picks it apart); they are the special case of first-hand, expert, stakes and dissent when the question is about a thing.
+
+**Cost and the Pareto view.** Configurations are judged on cost and quality together: an agent that costs more without scoring higher is dominated and should go [26] [37]. Each tier is meant to be a non-dominated point; the eval in `references/eval.md` reports tokens next to quality for that reason, and includes a single-agent baseline at equal budget [30].
 
 ## 4. The verifier
 
@@ -69,7 +71,7 @@ The skill has audited itself twice. Round 1 (on v0.1.0) produced v0.2.0: seats a
 
 ## Not yet tested
 
-The outsider seat, the discovered seat, the evidence round, the default headcount, strongest-model-per-seat, and the verifier's re-run agreement. The eval design exists; nobody has run it.
+The outside-view seat, the five-perspective combination, the discovered seat, the evidence round, the default headcount, strongest-model-per-seat, and the verifier's re-run agreement. The eval design exists; nobody has run it.
 
 ## References
 
@@ -104,3 +106,9 @@ The outsider seat, the discovered seat, the evidence round, the default headcoun
 28. Kelly, Budescu, Dhami, Mandel. Source reliability and information credibility in intelligence analysis. Judgment and Decision Making 2025.
 29. Dhuliawala et al. Chain-of-Verification. 2023. arxiv.org/abs/2309.11495
 30. Tran, Kiela. 2026. arxiv.org/abs/2604.02460 (single vs multi-agent at equal token budgets)
+32. Walton, Reed, Macagno. Argumentation Schemes. Cambridge University Press 2008.
+33. Ulrich. Critical Heuristics of Social Planning. Haupt 1983; Wiley 1994. Summary by the author: i2insights.org/2022/05/24/critical-systems-heuristics
+34. Schweiger, Sandberg, Ragan. Group approaches for improving strategic decision making: dialectical inquiry, devil's advocacy, and consensus. Academy of Management Journal 1986; Schwenk. Effects of devil's advocacy and dialectical inquiry on decision making: a meta-analysis. OBHDP 1990.
+35. Kahneman, Lovallo. Timid choices and bold forecasts. Management Science 1993; Lovallo, Kahneman. Delusions of success. HBR 2003; Flyvbjerg. From Nobel Prize to project management: getting risks right. Project Management Journal 2006.
+36. Denzin. The Research Act. 1978; Patton. Enhancing the quality and credibility of qualitative analysis. Health Services Research 1999.
+37. Kapoor, Stroebl, Siegel, Nadgir, Narayanan. AI Agents That Matter. TMLR 2025. arxiv.org/abs/2407.01502

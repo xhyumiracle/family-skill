@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0 — 2026-10-28
+
+- The five members are now five kinds of evidence, so the cast fits any question (history, science, policy, a personal decision) and no longer assumes the question is about a product: first-hand (argument from position to know), expert (argument from expert opinion), stakes (the beneficiary, decision-maker and affected roles of Critical Systems Heuristics), dissent (Nemeth 2001; Schwenk 1990), and the outside view (reference-class forecasting). The old four (uses it, builds it, bets on it, picks it apart) are the product-shaped special case. With no stakeholders, the stakes seat becomes a second research method. The skeptic seat is now the dissent seat; the outsider is the outside view.
+- DESIGN.md: where each perspective comes from, and the cost–quality Pareto view used to cut dominated steps (Kapoor et al. 2024).
+- README and demo: "members" replaces "family members"; the demo is three screens (question, five members, a sourced conclusion) plus the end card; MP4 versions in `assets/`.
+
 ## 0.5.1 — 2026-10-28
 
 - README rewritten for users (EN and zh-CN): what it does in one line, when to use it, install, usage, then how it works, with each design point stated as its benefit and the paper behind it. The headcount line now carries its evidence (Mandel et al. 2018; Rowe & Wright 2001).

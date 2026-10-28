@@ -97,7 +97,7 @@ You cannot spawn subagents and do not need to; do not use the Agent tool.
 - What you are paid by: <...>
 - Your edge: <...>
 - What you tend to miss: <...>
-<skeptic only:> The owner's current belief, which you attack by finding the strongest published dissent, with sources: <...>
+<dissent seat only:> The owner's current belief, which you attack by finding the strongest published dissent, with sources: <...>
 ```
 
 ## Spawn prompt (one per seat; all seats in one turn; keep it this short)

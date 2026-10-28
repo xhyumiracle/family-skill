@@ -39,7 +39,7 @@ At most 150 words. Numbers and quoted phrases here must appear verbatim in verif
 At most seven rows. A judgment no seat disputed but nobody verified carries [UNVERIFIED]. Agreement among seats is not evidence; a verified source is.
 
 ## Belief vs. finding
-<one or two lines: what the user believed going in (from the skeptic's card), and whether the verified evidence supports, weakens or leaves it open. If an earlier report on this topic exists, say which judgments changed and which new evidence changed them. Omit only if no belief was stated and no earlier report exists.>
+<one or two lines: what the user believed going in (from the dissent seat's card), and whether the verified evidence supports, weakens or leaves it open. If an earlier report on this topic exists, say which judgments changed and which new evidence changed them. Omit only if no belief was stated and no earlier report exists.>
 
 ## Cruxes
 <one subsection per crux; a crux counts only when each side rests on different sources:>

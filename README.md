@@ -6,13 +6,13 @@
 
 **One question. Five points of view. Every source checked.**
 
-A multi-perspective research skill based on Stanford's STORM. Five family members with different backgrounds<br>research your question independently, a fact-checker verifies every source they cite, and you get a sourced conclusion.
+A multi-perspective research skill based on Stanford's STORM. Five members research your question<br>independently from five perspectives, every claim is checked against its source, and you get a sourced report.
 
-<img src="assets/hero-en.gif" alt="family demo: ask one question, five family members research it, a fact-checker reads the sources, you get a conclusion" width="100%">
+<img src="assets/hero-en.gif" alt="family demo: ask one question, five members research it, every source is checked, you get a conclusion" width="100%">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
-[![Version](https://img.shields.io/badge/version-0.5.1-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.6.0-blue)](CHANGELOG.md)
 [![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#install)
 
 [Install](#install) · [Usage](#usage) · [How it works](#how-it-works)
@@ -58,42 +58,51 @@ Needs an agent with subagents and web search. Tested on Claude Code; Codex, Curs
 ## Usage
 
 ```
-/family <question>          five family members + a fact-checker · ~30 min · ~650K tokens
+/family <question>          five members + a fact-checker · ~30 min · ~650K tokens
 /family quick <question>    one fast pass, still fact-checked · ~80K tokens
 /family deep <question>     the same five, more claims checked, extra rounds on disagreements (up to 3)
 ```
 
 Or just say it: "help me understand X from scratch", "is the hype about X real", "what am I missing about X".
 
-You get `family/<short-name>/report.md`. It opens with three lines: what to do, how confident to be, and which assumption would change the answer. Below that: key findings, where the family members disagree, and what nobody looked into, each with its source.
+You get `family/<short-name>/report.md`. It opens with three lines: what to do, how confident to be, and which assumption would change the answer. Below that: key findings, where the members disagree, and what nobody looked into, each with its source.
 
 ## How it works
 
 ```mermaid
 flowchart LR
   Q([your question]) --> B["background brief<br/>facts and constraints only"]
-  subgraph crew ["five family members, each searching alone"]
+  subgraph crew ["five members, each searching alone"]
     direction TB
-    S1["someone who uses it"]
-    S2["someone who builds it"]
-    S3["someone with money on it"]
-    S4["someone who has criticized it in public<br/>(the only one told your view)"]
-    O["someone from another field<br/>who solved the same kind of problem"]:::far
+    S1["first-hand"]
+    S2["expert"]
+    S3["stakes"]
+    S4["dissent<br/>(the only one told your view)"]
+    S5["outside view"]
   end
-  B --> S1 & S2 & S3 & S4 & O
-  S1 & S2 & S3 & S4 & O --> V["fact-checker<br/>reads every cited source"]
+  B --> S1 & S2 & S3 & S4 & S5
+  S1 & S2 & S3 & S4 & S5 --> V["check every cited source"]
   V --> E{"disagreement?<br/>one more round"}
-  E --> R["conclusion<br/>with all sources"]
-  classDef far fill:#fff3cd,stroke:#d4a017,stroke-width:2px
+  E --> R["report<br/>with all sources"]
 ```
 
-- **Spread-out perspectives.** Five people from five trades read largely different material. In STORM's experiments, asking from several perspectives nearly doubled the distinct sources found (99.83 vs 54.36).
-- **Five is enough.** Averaging three analysts' independent judgments already captures most of the gain of averaging fifty (Mandel et al., 2018), and Delphi panels of 3 to 11 show no difference in accuracy (Rowe & Wright, 2001). Five covers four fixed perspectives plus one from another field; each extra person only adds cost, about 70–110K tokens.
-- **Four fixed roles, one from another field.** A role decides where each person looks: giving a model a persona alone leaves its accuracy unchanged (Zheng et al., 2024), while reading different material helps. Someone who uses it, someone who builds it, someone with money on it, and someone who has criticized it in public read different things by nature. The fifth comes from a field that has solved the same kind of problem: asked how several AI agents should combine their findings, family called an intelligence-analysis methodologist. That seat is experimental, with no controlled study yet.
+The five members split the work by where the evidence comes from, so the set fits any question: a product, a policy, history, science, a personal decision.
+
+| Perspective | Who | Basis |
+|---|---|---|
+| First-hand | the people closest to the evidence: users, participants, the team that ran the experiment; for history, the contemporary sources | argument from position to know (Walton et al., 2008) |
+| Expert | people who can explain how and why | argument from expert opinion; the "expert" role in Critical Systems Heuristics (Ulrich, 1983) |
+| Stakes | people who decide, pay, benefit, or bear the consequences; when a question has no stakeholders, a second research method takes this seat | the beneficiary, decision-maker and affected roles in Critical Systems Heuristics (Ulrich, 1983) |
+| Dissent | people who have published the opposing case | real dissent corrects a group better than an assigned devil's advocate (Nemeth et al., 2001; Schwenk, 1990) |
+| Outside view | someone from another field that has handled the same kind of problem, bringing how comparable cases usually turned out | the outside view and reference-class forecasting (Kahneman & Lovallo, 1993; Flyvbjerg, 2006); untested in AI research, so marked experimental |
+
+- **Complementary views.** Together the five triangulate in the qualitative-research sense: different data sources, different lenses, independent investigators (Denzin, 1978). In STORM's experiments, asking from several perspectives nearly doubled the distinct sources found (99.83 vs 54.36).
+- **Five is enough.** Averaging three analysts' independent judgments already captures most of the gain of averaging fifty (Mandel et al., 2018), and Delphi panels of 3 to 11 show no difference in accuracy (Rowe & Wright, 2001). Each extra person only adds cost, about 70–110K tokens.
 - **Independent work, one merge.** The gains from AI agents debating are almost entirely explained by voting (Choi et al., NeurIPS 2025), and working alone avoids conformity.
-- **Real dissent.** Only the critic hears your view; everyone else gets facts only, so nobody bends toward you (Sharma et al., ICLR 2024). The critic looks for published dissent, which corrects a group better than an assigned devil's advocate (Nemeth et al., 2001).
+- **Your view goes only to the dissent member.** Everyone else gets facts only, so nobody bends toward you (Sharma et al., ICLR 2024).
 - **Faithful citations.** Deep-research tools cite correctly 40–80% of the time (DeepTRACE, ICLR 2026). The fact-checker opens every key source and downgrades claims the source doesn't support. Numbers and quotes in the conclusion are then matched word for word against the fact-checker's table, since a 2026 study traced 84.7% of report errors to the orchestrating agent that writes the final report.
 - **One more round on disagreements.** Each side sees the other's checked evidence anonymously and can hold with a new source, concede, or show the two define a term differently. It stops when the evidence stops changing (the Delphi method).
+- **Cost counts alongside quality.** Steps that cost more without doing better were cut, such as multi-round debate and a sixth member (the cost–accuracy Pareto view of Kapoor et al., 2024).
 
 A full run, every intermediate file included: [`examples/family-skill-design/`](examples/family-skill-design/), family reviewing its own design. The evidence behind each choice: [docs/DESIGN.md](docs/DESIGN.md).
 
@@ -108,6 +117,13 @@ A full run, every intermediate file included: [`examples/family-skill-design/`](
 - *Who is the Agent to Blame? Localizing Faithfulness and Citation Mistakes in Agentic Deep Research.* 2026. [arxiv.org/abs/2608.24306](https://arxiv.org/abs/2608.24306)
 - Sharma et al. *Towards Understanding Sycophancy in Language Models.* ICLR 2024. [arxiv.org/abs/2310.13548](https://arxiv.org/abs/2310.13548)
 - Nemeth, Brown, Rogers. *Devil's advocate versus authentic dissent.* Eur. J. Soc. Psychol. 2001.
+- Walton, Reed, Macagno. *Argumentation Schemes.* Cambridge University Press 2008.
+- Ulrich. *Critical Heuristics of Social Planning.* 1983. [summary by the author](https://i2insights.org/2022/05/24/critical-systems-heuristics/)
+- Kahneman, Lovallo. *Timid choices and bold forecasts.* Management Science 1993.
+- Flyvbjerg. *From Nobel Prize to project management: getting risks right.* Project Management Journal 2006.
+- Schwenk. *Effects of devil's advocacy and dialectical inquiry on decision making: a meta-analysis.* OBHDP 1990.
+- Denzin. *The Research Act.* 1978.
+- Kapoor et al. *AI Agents That Matter.* TMLR 2025. [arxiv.org/abs/2407.01502](https://arxiv.org/abs/2407.01502)
 - Lee et al. *"Fact-checking" fact checkers.* HKS Misinformation Review 2023.
 - Rowe, Wright. *Expert opinions in forecasting: the role of the Delphi technique.* 2001.
 - Mandel, Karvetski, Dhami. *Boosting intelligence analysts' judgment accuracy.* Judgment and Decision Making 2018.
