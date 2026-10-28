@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1 — 2026-10-28
+
+- README rewritten for users (EN and zh-CN): what it does in one line, when to use it, install, usage, then how it works, with each design point stated as its benefit and the paper behind it. The headcount line now carries its evidence (Mandel et al. 2018; Rowe & Wright 2001).
+- New animated walkthrough, one message per screen, built only from the run where family reviewed its own design: the question, the five people it called, one downgraded citation, the conclusion, and the citation error it found in the skill itself.
+
 ## 0.5.0 — 2026-10-28
 
 - Runs outside Claude Code. The skill follows the Agent Skills spec: description trimmed to 1,024 characters, `license` and `compatibility` added, and `metrics.py` moved into the skill (`skills/family/scripts/`) so installers that copy only the skill directory still ship it. Fallbacks cover runtimes without the two agent definitions (general subagent plus a prompt guard), runtimes that cannot message a finished subagent (fresh subagent on the same card, pointed at its note) and runtimes without subagents (`quick` only). Tested on Claude Code only.

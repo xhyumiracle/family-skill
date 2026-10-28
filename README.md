@@ -4,58 +4,34 @@
 
 # family
 
-<sub>"I don't have friends. I got family." · Dominic Toretto</sub>
+**One question. Five points of view. Every source checked.**
 
-<img src="assets/hero-en.gif" alt="family: five researchers from five trades search alone, then a fact-checker opens every link they cite" width="100%">
+A multi-perspective research skill based on Stanford's STORM. Five family members with different backgrounds<br>research your question independently, a fact-checker verifies every source they cite, and you get a sourced conclusion.
 
-**Five people from five trades research your question, each on their own.<br>Then a fact-checker opens every link they cite.**
+<img src="assets/hero-en.gif" alt="family demo: ask one question, five family members research it, a fact-checker reads the sources, you get a conclusion" width="100%">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
-[![Version](https://img.shields.io/badge/version-0.5.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.5.1-blue)](CHANGELOG.md)
 [![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#install)
 
-[See it work](#see-it-work) · [Install](#install) · [How it works](#how-it-works) · [Why it's built this way](docs/DESIGN.md)
+[Install](#install) · [Usage](#usage) · [How it works](#how-it-works)
+
+<sub><i>"I don't have friends. I got family."</i><br>Dominic Toretto</sub>
 
 </div>
 
-## Why bother
+## When to use it
 
-- **One point of view finds about half the sources.** In STORM's ablation, research guided by several perspectives found 99.83 distinct sources per topic; without them, 54.36.
-- **AI research citations hold up 40–80% of the time.** That is what DeepTRACE (ICLR 2026) measured across deep-research agents.
-- **family keeps its own score.** Across four real runs the fact-checker opened 78 cited claims. 17 of them did not fully say what the agent claimed, and were downgraded before they reached the report.
+- You're new to a field and want the full picture fast.
+- You want to know whether a claim, or a wave of hype, holds up.
+- You're about to make a call and want to know what you've missed.
 
-## See it work
-
-### Who it calls
-
-The casting step's actual output for *"Is a CGM worth wearing if you're not diabetic?"*:
-
-| | Family member | Why this one |
-|---|---|---|
-| Uses it | A healthy user, three months on a Stelo or Lingo | fixed seat |
-| Builds it | An endocrinologist who runs a metabolic-health clinic | fixed seat |
-| Bets on it | A VC in consumer medical devices | fixed seat |
-| Picks it apart | An evidence-based-medicine researcher of the kind who wrote [JAMA Internal Medicine's "no evidence" review](https://doi.org/10.1001/jamainternmed.2026.2772) | fixed seat, cast from real published dissent |
-| Outsider | An epidemiologist who studies overdiagnosis | same shape as PSA screening: a medical sensor sold to healthy people, noisy readings taken as diagnoses |
-
-### What the fact-checker catches
-
-From a real run ([verification.md](examples/family-skill-design/verification.md), row 14):
-
-> **A family member wrote:** "When two models are both wrong, they give the same wrong answer about 60% of the time."
->
-> **The source** ([arxiv.org/abs/2506.07962](https://arxiv.org/abs/2506.07962)): "*on one leaderboard dataset*, models agree 60% of the time when both models err."
->
-> **PARTIAL ↓** One dataset, not a general rate. Downgraded before it reached the report.
-
-### It audited itself
-
-[`examples/family-skill-v03/`](examples/family-skill-v03/) is the skill run on its own design. The verifier opened 20 sources and found three things: structure that had never actually run, per-member counts with a selection bias, and a number in the orchestrator's own bottom line stitched together from two different tests. v0.3 is what came out of it.
+For single facts, long-form writing, or picking between A and B for you, other tools fit better.
 
 ## Install
 
-**Tell your agent**, in any runtime:
+**Tell your agent:**
 
 ```text
 Install this skill: https://github.com/xhyumiracle/family-skill
@@ -73,69 +49,55 @@ npx skills add xhyumiracle/family-skill -g
 git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.sh
 ```
 
-The full install also adds two agent definitions, `family-member` and `family-verifier`, which have no tool for spawning helpers, so the headcount you approve is the headcount you pay for. Start a new session afterwards. (Agents installing this for someone: use the full install on Claude Code, the `npx` line anywhere else.)
+The full install adds two agent definitions that cannot spawn subagents, so the family stays the size you see. Start a new session afterwards.
 
-It needs subagents and web search. Tested on Claude Code. Codex, Cursor, Gemini CLI and OpenCode all have subagents and should run it; that is untested. Without subagents only `quick` runs. No model is named anywhere: every family member runs on your default.
+Needs an agent with subagents and web search. Tested on Claude Code; Codex, Cursor, Gemini CLI and OpenCode support subagents too and should work.
 
-## Use
+<!-- Agents installing this for someone: on Claude Code use the full install (install.sh); on any other runtime use the npx line. -->
+
+## Usage
 
 ```
-/family <question>          5 family members + fact-checker · ~30 min · ~650K tokens
-/family quick <question>    no family: one search pass, a small fact-checker checks it
-/family deep <question>     same five · more claims checked · evidence rounds until the cruxes stop moving (max 3)
+/family <question>          five family members + a fact-checker · ~30 min · ~650K tokens
+/family quick <question>    one fast pass, still fact-checked · ~80K tokens
+/family deep <question>     the same five, more claims checked, extra rounds on disagreements (up to 3)
 ```
 
-Or just ask: "what am I missing about X", "is the hype about X real", "help me understand X from zero". The report lands in `family/<slug>/report.md`.
+Or just say it: "help me understand X from scratch", "is the hype about X real", "what am I missing about X".
+
+You get `family/<short-name>/report.md`. It opens with three lines: what to do, how confident to be, and which assumption would change the answer. Below that: key findings, where the family members disagree, and what nobody looked into, each with its source.
 
 ## How it works
 
 ```mermaid
 flowchart LR
-  Q([your question]) --> B["brief<br/>facts and constraints,<br/>none of your opinions"]
-  B --> C["get the family together"]
-  subgraph crew ["the family: each researches alone, blind to the others"]
+  Q([your question]) --> B["background brief<br/>facts and constraints only"]
+  subgraph crew ["five family members, each searching alone"]
     direction TB
     S1["someone who uses it"]
     S2["someone who builds it"]
-    S3["someone who bets on it"]
-    S4["the one who picks it apart<br/>(the only one told your opinion)"]
+    S3["someone with money on it"]
+    S4["someone who has criticized it in public<br/>(the only one told your view)"]
+    O["someone from another field<br/>who solved the same kind of problem"]:::far
   end
-  O["one specialist pulled<br/>from an unrelated trade"]:::far
-  C --> S1 & S2 & S3 & S4
-  C -. "who has solved the same shape of problem?" .-> O
-  S1 & S2 & S3 & S4 & O --> V["fact-checker<br/>opens every cited source"]
-  V --> E{"evidence rounds<br/>until the cruxes stop moving"}
-  E --> R["report<br/>bottom line · key judgments<br/>cruxes · blind spots"]
+  B --> S1 & S2 & S3 & S4 & O
+  S1 & S2 & S3 & S4 & O --> V["fact-checker<br/>reads every cited source"]
+  V --> E{"disagreement?<br/>one more round"}
+  E --> R["conclusion<br/>with all sources"]
   classDef far fill:#fff3cd,stroke:#d4a017,stroke-width:2px
 ```
 
-- **Nobody talks during fieldwork.** Agreement between several copies of one model is conformity, not evidence, so each family member works blind.
-- **The skeptic is the only one told what you believe**, and goes looking for published dissent instead of inventing objections.
-- **The outsider is cast by the shape of the problem**: bots and humans committing to one repo gets a CI engineer; many estimates to combine gets an intelligence analyst. Marked experimental.
-- **"Discuss it further" means evidence rounds, not debate.** Each side of a disagreement gets the other's verified evidence anonymously; a member can hold with a new source, concede, or reframe. It stops when the evidence stops moving, not when they agree.
-- **The orchestrator's own bottom line is checked word by word** against the fact-checker's table before you see it.
+- **Spread-out perspectives.** Five people from five trades read largely different material. In STORM's experiments, asking from several perspectives nearly doubled the distinct sources found (99.83 vs 54.36).
+- **Five is enough.** Averaging three analysts' independent judgments already captures most of the gain of averaging fifty (Mandel et al., 2018), and Delphi panels of 3 to 11 show no difference in accuracy (Rowe & Wright, 2001). Five covers four fixed perspectives plus one from another field; each extra person only adds cost, about 70–110K tokens.
+- **Four fixed roles, one from another field.** A role decides where each person looks: giving a model a persona alone leaves its accuracy unchanged (Zheng et al., 2024), while reading different material helps. Someone who uses it, someone who builds it, someone with money on it, and someone who has criticized it in public read different things by nature. The fifth comes from a field that has solved the same kind of problem: asked how several AI agents should combine their findings, family called an intelligence-analysis methodologist. That seat is experimental, with no controlled study yet.
+- **Independent work, one merge.** The gains from AI agents debating are almost entirely explained by voting (Choi et al., NeurIPS 2025), and working alone avoids conformity.
+- **Real dissent.** Only the critic hears your view; everyone else gets facts only, so nobody bends toward you (Sharma et al., ICLR 2024). The critic looks for published dissent, which corrects a group better than an assigned devil's advocate (Nemeth et al., 2001).
+- **Faithful citations.** Deep-research tools cite correctly 40–80% of the time (DeepTRACE, ICLR 2026). The fact-checker opens every key source and downgrades claims the source doesn't support. Numbers and quotes in the conclusion are then matched word for word against the fact-checker's table, since a 2026 study traced 84.7% of report errors to the orchestrating agent that writes the final report.
+- **One more round on disagreements.** Each side sees the other's checked evidence anonymously and can hold with a new source, concede, or show the two define a term differently. It stops when the evidence stops changing (the Delphi method).
 
-Every choice, with the paper behind it: [docs/DESIGN.md](docs/DESIGN.md).
-
-## What you get
-
-The first screen is for a reader with ten minutes; the audit trail sits below it.
-
-| | |
-|---|---|
-| Bottom line | what to do · how likely, on a seven-level scale with a range · the assumption that would break it |
-| Key judgments | at most seven, each with its strongest confirmed source and what would change it |
-| Cruxes | where family members disagree, both sides sourced, what would settle it |
-| Blind spots | what nobody looked at |
-| Source summary | what the evidence is made of, and which claims the fact-checker downgraded |
-
-## Not for
-
-Picking A or B for you (it lays out the evidence; the choice is yours) · single facts · long articles · cheap research.
+A full run, every intermediate file included: [`examples/family-skill-design/`](examples/family-skill-design/), family reviewing its own design. The evidence behind each choice: [docs/DESIGN.md](docs/DESIGN.md).
 
 ## References
-
-The ones the design leans on most; the full list with page-level notes is in [docs/DESIGN.md](docs/DESIGN.md).
 
 - Shao et al. *Assisting in Writing Wikipedia-like Articles From Scratch with LLMs* (STORM). NAACL 2024. [arxiv.org/abs/2402.14207](https://arxiv.org/abs/2402.14207)
 - Jiang et al. *Into the Unknown Unknowns* (Co-STORM). EMNLP 2024. [arxiv.org/abs/2408.15232](https://arxiv.org/abs/2408.15232)
@@ -147,10 +109,11 @@ The ones the design leans on most; the full list with page-level notes is in [do
 - Sharma et al. *Towards Understanding Sycophancy in Language Models.* ICLR 2024. [arxiv.org/abs/2310.13548](https://arxiv.org/abs/2310.13548)
 - Nemeth, Brown, Rogers. *Devil's advocate versus authentic dissent.* Eur. J. Soc. Psychol. 2001.
 - Lee et al. *"Fact-checking" fact checkers.* HKS Misinformation Review 2023.
+- Rowe, Wright. *Expert opinions in forecasting: the role of the Delphi technique.* 2001.
 - Mandel, Karvetski, Dhami. *Boosting intelligence analysts' judgment accuracy.* Judgment and Decision Making 2018.
 - Intelligence Community Directive 203, *Analytic Standards.* 2015, rev. 2023.
 - Rosenbaum, Glenton, Oxman. *Summary-of-findings tables in Cochrane reviews improved understanding and rapid retrieval of key information.* J Clin Epidemiol 2010.
 - Miller. *Adding Error Bars to Evals.* 2024. [arxiv.org/abs/2411.00640](https://arxiv.org/abs/2411.00640)
 - Anthropic. *How we built our multi-agent research system.* 2025. [anthropic.com/engineering/multi-agent-research-system](https://www.anthropic.com/engineering/multi-agent-research-system)
 
-<sub>MIT · prior art read first: claude-storm, storm-research, panel-skill, perspectives-skill, dotclaude · stills from *Fast Five*, Universal Pictures</sub>
+<sub>MIT · similar projects read first: claude-storm, storm-research, panel-skill, perspectives-skill, dotclaude · stills from *Fast Five*, Universal Pictures</sub>
