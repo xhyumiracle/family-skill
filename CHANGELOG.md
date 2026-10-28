@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0 — 2026-10-28
+
+- `quick` (one agent searching alone) is gone: it had no perspectives, so it was a plain search. `mini` replaces it: three members, dissent plus the two perspectives most relevant to the question, no extra round (three independent inputs capture most of the aggregation gain; AgentInit's teams averaged two to three agents).
+- The verifier checks every load-bearing claim; the fixed 20 and 30 claim caps are removed.
+- The search cap (12 per member) and the round cap (3) stay as runaway guards, now with their sources: Anthropic's 10 to 15 tool calls per subagent, LangChain Open Deep Research defaults, Delphi's two or three rounds. Stop rules decide when to stop.
+- Without subagents or web search the family says it cannot run.
+- README: a mode table.
+
 ## 0.6.2 — 2026-10-28
 
 - Demo rebuilt as an agent session in a terminal: the question typed and sent, five members assembled (silhouettes), each researching and reporting a view, the fact-check line, the report. Narration on the left, one line per step. End card: the five as silhouettes by the car, "family.skill" and the tagline. MP4s in `assets/demo-*.mp4`, GIFs in `assets/hero-*.gif`.

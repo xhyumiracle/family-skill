@@ -19,7 +19,7 @@ https://github.com/user-attachments/assets/2ae67414-e157-4779-aa61-f5096d8a164b
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
-[![Version](https://img.shields.io/badge/version-0.6.2-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.7.0-blue)](CHANGELOG.md)
 [![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#install)
 
 [Install](#install) · [Usage](#usage) · [How it works](#how-it-works)
@@ -65,10 +65,18 @@ Needs an agent with subagents and web search. Tested on Claude Code; Codex, Curs
 ## Usage
 
 ```
-/family <question>          five members + a fact-checker · ~30 min · ~650K tokens
-/family quick <question>    one fast pass, still fact-checked · ~80K tokens
-/family deep <question>     the same five, more claims checked, extra rounds on disagreements (up to 3)
+/family <question>
+/family mini <question>
+/family deep <question>
 ```
+
+| Mode | Members | Extra rounds on disagreements | Rough cost |
+|---|---|---|---|
+| standard (default) | 5 | 1 when needed | 650K tokens, about 30 min |
+| mini | 3: dissent plus the two perspectives most relevant to the question | none | 350K to 450K tokens |
+| deep | 5 | until the evidence stops changing, at most 3 | about 1M tokens |
+
+Each member searches at most 12 times and stops earlier when two searches in a row find no new primary source.
 
 Or just say it: "help me understand X from scratch", "is the hype about X real", "what am I missing about X".
 
@@ -110,7 +118,7 @@ The five members split the work by where the evidence comes from, which suits qu
 - **Your view goes only to the dissent member.** Everyone else gets facts only, so nobody bends toward you (Sharma et al., ICLR 2024).
 - **Faithful citations.** Deep-research tools cite correctly 40% to 80% of the time (DeepTRACE, ICLR 2026). The fact-checker opens the sources the conclusion rests on and downgrades claims they don't support. Numbers and quotes in the conclusion are then matched word for word against the fact-checker's table, since a 2026 study traced 84.7% of report errors to the orchestrating agent that writes the final report.
 - **One more round on disagreements.** Each side sees the other's checked evidence anonymously and can hold with a new source, concede, or show the two define a term differently. It stops when the evidence stops changing (the Delphi method).
-- **Cost counts alongside quality.** Steps that cost more without doing better were cut, such as multi-round debate and a sixth member (the Pareto view of cost and accuracy, Kapoor et al., 2024).
+- **Cost counts alongside quality.** Steps that cost more without doing better were cut, such as multi-round debate and a sixth member (the Pareto view of cost and accuracy, Kapoor et al., 2024). Searches and rounds have caps: agents judge their own effort poorly, so Anthropic writes it into the prompt, 10 to 15 tool calls per subagent for comparison-type research; Delphi usually runs two or three rounds (Rowe & Wright, 2001).
 
 A full run, every intermediate file included: [`examples/family-skill-design/`](examples/family-skill-design/), family.skill reviewing its own design. The evidence behind each choice: [docs/DESIGN.md](docs/DESIGN.md).
 

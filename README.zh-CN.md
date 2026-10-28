@@ -19,7 +19,7 @@ https://github.com/user-attachments/assets/dca214b8-d669-4a9d-9949-4906055a712e
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
-[![Version](https://img.shields.io/badge/version-0.6.2-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.7.0-blue)](CHANGELOG.md)
 [![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#安装)
 
 [安装](#安装) · [用法](#用法) · [怎么运作](#怎么运作)
@@ -65,10 +65,18 @@ git clone https://github.com/xhyumiracle/family-skill && ./family-skill/install.
 ## 用法
 
 ```
-/family <问题>          五个成员 + 核查员 · 约 30 分钟 · 约 65 万 token
-/family quick <问题>    不组队，主 agent 自己查一遍，再核查 · 约 8 万 token
-/family deep <问题>     还是这五个人，多核几条，有分歧就再查一轮，最多 3 轮
+/family <问题>
+/family mini <问题>
+/family deep <问题>
 ```
+
+| 模式 | 成员 | 分歧补查 | 大约花费 |
+|---|---|---|---|
+| 标准（默认） | 5 个 | 需要时补 1 轮 | 65 万 token，约 30 分钟 |
+| mini | 3 个：异见，加上和问题最相关的两个视角 | 不补查 | 35 到 45 万 token |
+| deep | 5 个 | 证据不再变化就停，最多 3 轮 | 约 100 万 token |
+
+每个成员最多搜 12 次，连续两次搜不到新的一手来源就提前停。
 
 也可以直接说：「帮我从 0 到 1 了解一下 X」「X 这波热度靠谱吗」「关于 X 我还漏了什么」。
 
@@ -110,7 +118,7 @@ flowchart LR
 - **你的看法只告诉异见成员。** 其他成员只拿到事实，免得顺着你说（Sharma et al., ICLR 2024）。
 - **引用保真。** deep research 产品的引用，准确率只有 40% 到 80%（DeepTRACE, ICLR 2026）。核查员打开结论依赖的来源，原文对不上就降级；结论里的数字和引语再逐字对一遍核查表，因为 2026 年的一项研究发现，84.7% 的报告错误出在负责汇总的主控 agent 身上。
 - **分歧再查一轮。** 双方匿名看到对方已核实的证据，可以拿新来源坚持、认可对方，或者指出双方定义不同。证据不再变化就停（Delphi 法）。
-- **成本和质量一起算。** 多花钱却没有更好的步骤都删掉了，比如多轮辩论和第六个人（成本与准确率的 Pareto 前沿，Kapoor et al., 2024）。
+- **成本和质量一起算。** 多花钱却没有更好的步骤都删掉了，比如多轮辩论和第六个人（成本与准确率的 Pareto 前沿，Kapoor et al., 2024）。搜索次数和补查轮数设了上限：agent 自己判断不好该花多少力气，Anthropic 的做法是在提示里写明，对比类调研每个子 agent 调用工具 10 到 15 次；Delphi 一般跑两到三轮（Rowe & Wright, 2001）。
 
 完整例子在 [`examples/family-skill-design/`](examples/family-skill-design/)：family.skill 审查自己设计的那次运行，所有中间文件都在。每条设计的完整依据见 [docs/DESIGN.md](docs/DESIGN.md)。
 

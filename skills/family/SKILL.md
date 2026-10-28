@@ -2,7 +2,7 @@
 name: family
 description: "Assemble five independent researchers on one question, one per kind of evidence: first-hand experience, expert knowledge of how and why, the people with stakes in the answer, the strongest published dissent, and the outside view from a field that has handled the same kind of problem. Each searches its own territory in its own context and writes a sourced note; then map consensus, cruxes and blind spots, and send a fact-checker to check the load-bearing sources. STORM-style multi-perspective research for going from 0 to 1 on an unfamiliar or contested question. Use when the user wants to 'understand X properly', '从0到1了解', '全面调研', '多角度看看', '帮我研究一下这个领域', 'what am I missing about X', 'is the hype about X real', mentions STORM, a crew, a panel, '组个队', 'family' or '/family', even if they only say 'research X' and X is contested or unfamiliar. Not for: picking between named options, single fact lookups, uncontested topic overviews, code questions, long articles."
 license: MIT
-compatibility: "Needs parallel subagents, web search and file writes. Built and tested on Claude Code; other runtimes with subagents follow the Fallbacks section. Without subagents only the quick tier runs."
+compatibility: "Needs parallel subagents, web search and file writes. Built and tested on Claude Code; other runtimes with subagents follow the Fallbacks section. Without subagents or web search it cannot run."
 ---
 
 # family.skill: assemble the crew before the job
@@ -45,7 +45,7 @@ Read `references/casting.md`. Two moves, in order:
 1. **Discover the territories.** One or two searches for overview or "state of" pieces on the topic or a sibling topic. From how they are sectioned and whom they quote, write down the evidence territories that exist and the two or three canonical primary pages you found. The pages go into `brief.md` as "Starting sources". A territory none of the five perspectives would reach becomes a seat by replacing the perspective whose material overlaps most.
 2. **Fill the five perspectives, named as real jobs or sources for this question.** Each is one kind of evidence from a published method, so the set fits any question: **first-hand** (the people closest to the evidence; argument from position to know), **expert** (the people who explain how and why), **stakes** (who decides, pays, benefits or bears the consequences; the roles of Critical Systems Heuristics), **dissent** (the strongest published case against the prevailing answer, named after the real dissenting group, so it works on questions with no stance; Nemeth, Brown and Rogers 2001: authentic dissent beat every form of assigned devil's advocate), and the **outside view** (a field that has handled the same structure, bringing how comparable cases turned out; reference-class forecasting). Write one or two candidates per perspective from the question and keep, per perspective, the one most relevant to the question and least like the others (AgentInit: query-generated teams chosen for relevance and diversity together beat predefined roles). When nobody real holds stakes (a pure science or history question), fill that seat with a second method that reads different evidence; a perspective with no relevant candidate is dropped, so a crew may have fewer than five. Cast the outside view only if that field has a searchable corpus, and mark it "experimental". Never invent a holder. Jobs someone actually holds, two to five words, no invented colour: persona detail beyond the job title does not change what a seat finds.
 
-Five seats, the cap in every tier (three independent inputs capture most of the aggregation gain, Delphi panels of 3 to 11 show no accuracy difference, and each seat costs 70-110K tokens); never a sixth. Run the diversity test (first three planned queries and source types must differ). Print the roster as one table (seat code S1..Sn, job title plus at most one clause, perspective), the tier, and the agent count, then continue; the territory lines belong on the cards. Wait for approval only if the user asked to approve casts, or if the tier is `deep`.
+Five seats in `standard` and `deep`, three in `mini` (dissent plus the two perspectives most relevant to the question); never a sixth. Three independent inputs capture most of the aggregation gain, Delphi panels of 3 to 11 show no accuracy difference, and each seat costs 70-110K tokens. Run the diversity test (first three planned queries and source types must differ). Print the roster as one table (seat code S1..Sn, job title plus at most one clause, perspective), the tier, and the agent count, then continue; the territory lines belong on the cards. Wait for approval only if the user asked to approve casts, or if the tier is `deep`.
 
 ### 2. Fieldwork (parallel agents)
 
@@ -57,7 +57,7 @@ This is the only form of "discuss it further" the evidence supports, and it is n
 
 After verification, write `cruxes.md`: each crux as "Side A claims X (verified evidence, verdicts) / Side B claims Y (verified evidence, verdicts)", with no seat names, plus at most two gap questions drawn from the seats' "Read but not cited" and "Deliberately not examined" sections and the verifier's "Found but not cited". Resume the seats that are party to a crux or own a gap's territory (budget 4 searches each, message template in `references/seat-protocol.md`). Each may do three things only: hold with a new source (URL required), concede by naming the verified claim that changed its mind, or reframe (the disagreement is definitional). A reply with no new source is recorded as "hold, no new evidence". Resumed seats append "## Post-round N" to their notes; the new claims are added to `claims.md` and the verifier is resumed for them. Record the trigger, the cruxes sent and the seats in `amendments.md`.
 
-In `standard` the round fires only on the rule in the brief: a sub-question with no direct evidence, a crux with one side unsourced, or a gap that would change the bottom line. In `deep` it runs by default and repeats while the evidence is still moving: another round only if the last one changed a crux's lean, filled an empty side, or produced a concession; stop when a round changes nothing, or after three. The stopping rule is about evidence, never agreement: convergence between seats of one model is what conformity produces.
+In `standard` the round fires only on the rule in the brief: a sub-question with no direct evidence, a crux with one side unsourced, or a gap that would change the bottom line. In `deep` it runs by default and repeats while the evidence is still moving: another round only if the last one changed a crux's lean, filled an empty side, or produced a concession; stop when a round changes nothing, or after three (Delphi practice is two or three rounds, Rowe and Wright 2001). The stopping rule is about evidence, never agreement: convergence between seats of one model is what conformity produces.
 
 ### 3. Verify (one agent)
 
@@ -79,16 +79,16 @@ Reply with the three bottom-line slots copied from the report, at most three cru
 
 | Tier | Seats | Searches / seat | Evidence rounds | Agents spawned | Rough cost |
 |---|---|---|---|---|---|
-| `quick` | none: the orchestrator searches alone, 8 searches | n/a | no | 1 (the verifier) | ~80K tokens |
+| `mini` | 3: dissent plus the two perspectives most relevant to the question | 12 | no | seats + 1 | ~350-450K tokens |
 | `standard` (default) | 5 (four perspectives + outside view; a discovered territory replaces an overlapping one) | 12 | at most 1, rule-triggered | seats + 1 | ~600-800K tokens, ~30 min wall (measured: seats 65-110K each with the stop rule, verifier about 7K per claim, one round 26K + re-verification) |
 | `deep` | the same five | 12 | up to 3, until the evidence stops moving | seats + 1 | ~1M tokens; confirm with the user first |
 
-Pick `standard` unless the user names a tier or the question is clearly small. `deep` is the same family taken through evidence rounds until the cruxes stop moving; it never adds seats.
+Pick `standard` unless the user names a tier. `deep` is the same family taken through evidence rounds until the cruxes stop moving; it never adds seats.
 
 ## Keeping the bill honest
 
 - The agent count for the tier is the agent count. No helper agents, no "let me spawn an Explore to find sources", no re-running the whole crew because one seat was weak.
-- Seats stop at their search budget, or when two searches in a row find no new primary source, and say what they did not cover.
+- Seats stop at their search budget, or earlier when two searches in a row find no new primary source, and say what they did not cover. The budget of 12 sits inside the 10 to 15 tool calls per subagent Anthropic writes into its prompts for comparison-type research, because agents judge their own effort poorly; the stop rule does the real work.
 - The verifier gets `claims.md`, never the seat notes.
 - Member summaries are capped (250 words).
 - Print the cost line from real numbers.
@@ -98,8 +98,7 @@ Pick `standard` unless the user names a tier or the question is clearly small. `
 
 - No `family-member` or `family-verifier` agent (a runtime other than Claude Code, or the skill installed without `agents/`): spawn the runtime's general-purpose subagent with the same two-line prompt, prefixed with "You have no permission to spawn subagents; do the work in this context." This guard is only a prompt, so say so in the cost line.
 - The runtime cannot message a finished subagent: wherever this skill says "resume" (turn cap, evidence rounds, re-verification), spawn a fresh subagent on the same card and add one line pointing at its existing note. Everything it needs is on disk.
-- No subagents at all: run `quick` only, and say the family did not run.
-- No web search: run `quick` only, and mark every claim UNGROUNDED. Do not pretend.
+- No subagents or no web search: the family cannot run. Say so and stop.
 
 ## Files this skill reads
 

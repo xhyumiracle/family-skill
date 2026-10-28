@@ -40,7 +40,7 @@ Persona detail beyond the job title adds nothing (SPP; Zheng et al.): what a sea
 
 ### Headcount
 
-Five in every tier: four perspectives plus the outside view. Averaging three independent analysts captured most of the gain of averaging fifty (Mandel et al. 2018) and Delphi panels of 3, 7 and 11 showed no accuracy difference (Rowe, Wright 2001), while every seat costs 70-110K tokens; nothing shows six beats five. Never six. `deep` adds rounds, not seats. Searches per seat is the quality knob. The specific combination of five has no controlled study behind it; `family/runs.log` records each seat's unique confirmed claims and `references/eval.md` holds the leave-one-seat-out design that can test it.
+Five in `standard` and `deep` (four perspectives plus the outside view), three in `mini` (dissent plus the two perspectives most relevant to the question). Averaging three independent analysts captured most of the gain of averaging fifty (Mandel et al. 2018) and Delphi panels of 3, 7 and 11 showed no accuracy difference (Rowe, Wright 2001), while every seat costs 70-110K tokens; nothing shows six beats five. Never six. `deep` adds rounds, not seats. Searches per seat is the quality knob. The specific combination of five has no controlled study behind it; `family/runs.log` records each seat's unique confirmed claims and `references/eval.md` holds the leave-one-seat-out design that can test it.
 
 ## The five perspective cards
 
