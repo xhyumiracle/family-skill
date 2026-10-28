@@ -116,6 +116,10 @@ flowchart LR
 
 完整例子在 [`examples/family-skill-design/`](examples/family-skill-design/)：family.skill 审查自己设计的那次运行，所有中间文件都在。每条设计的完整依据见 [docs/DESIGN.md](docs/DESIGN.md)。
 
+## 致谢
+
+让 agent 干活前先像《速度与激情》那样组好队，这个思路来自小红书用户「还没想好」的一篇笔记，谢谢 TA。
+
 ## 参考文献
 
 - Shao et al. *Assisting in Writing Wikipedia-like Articles From Scratch with LLMs*（STORM）. NAACL 2024. [arxiv.org/abs/2402.14207](https://arxiv.org/abs/2402.14207)

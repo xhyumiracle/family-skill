@@ -116,6 +116,10 @@ The five members split the work by where the evidence comes from, which suits qu
 
 A full run, every intermediate file included: [`examples/family-skill-design/`](examples/family-skill-design/), family.skill reviewing its own design. The evidence behind each choice: [docs/DESIGN.md](docs/DESIGN.md).
 
+## Acknowledgements
+
+The idea of assembling a crew, Fast & Furious style, before an agent starts work comes from a post by 还没想好 on Xiaohongshu (RedNote). Thank you.
+
 ## References
 
 - Shao et al. *Assisting in Writing Wikipedia-like Articles From Scratch with LLMs* (STORM). NAACL 2024. [arxiv.org/abs/2402.14207](https://arxiv.org/abs/2402.14207)
