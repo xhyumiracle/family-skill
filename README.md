@@ -4,7 +4,7 @@
 
 # family
 
-**One question. Five points of view. Every source checked.**
+**Got a question? Get the family first.**
 
 A multi-perspective research skill based on Stanford's STORM. Five members research your question<br>independently from five perspectives, every claim is checked against its source, and you get a sourced report.
 
@@ -12,7 +12,7 @@ A multi-perspective research skill based on Stanford's STORM. Five members resea
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
-[![Version](https://img.shields.io/badge/version-0.6.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.6.1-blue)](CHANGELOG.md)
 [![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#install)
 
 [Install](#install) · [Usage](#usage) · [How it works](#how-it-works)
@@ -93,11 +93,12 @@ The five members split the work by where the evidence comes from, so the set fit
 | First-hand | the people closest to the evidence: users, participants, the team that ran the experiment; for history, the contemporary sources | argument from position to know (Walton et al., 2008) |
 | Expert | people who can explain how and why | argument from expert opinion; the "expert" role in Critical Systems Heuristics (Ulrich, 1983) |
 | Stakes | people who decide, pay, benefit, or bear the consequences; when a question has no stakeholders, a second research method takes this seat | the beneficiary, decision-maker and affected roles in Critical Systems Heuristics (Ulrich, 1983) |
-| Dissent | people who have published the opposing case | real dissent corrects a group better than an assigned devil's advocate (Nemeth et al., 2001; Schwenk, 1990) |
+| Dissent | the strongest published case against the prevailing answer in the field; works on questions with no stance | minority dissent widens a group's thinking (Nemeth, 1986); real dissent corrects better than an assigned devil's advocate (Nemeth et al., 2001); one dissenting answer reduces LLM conformity to a majority (Zhu et al., ACL 2025) |
 | Outside view | someone from another field that has handled the same kind of problem, bringing how comparable cases usually turned out | the outside view and reference-class forecasting (Kahneman & Lovallo, 1993; Flyvbjerg, 2006); untested in AI research, so marked experimental |
 
 - **Complementary views.** Together the five triangulate in the qualitative-research sense: different data sources, different lenses, independent investigators (Denzin, 1978). In STORM's experiments, asking from several perspectives nearly doubled the distinct sources found (99.83 vs 54.36).
-- **Five is enough.** Averaging three analysts' independent judgments already captures most of the gain of averaging fifty (Mandel et al., 2018), and Delphi panels of 3 to 11 show no difference in accuracy (Rowe & Wright, 2001). Each extra person only adds cost, about 70–110K tokens.
+- **Five is enough.** Averaging three analysts' independent judgments already captures most of the gain of averaging fifty (Mandel et al., 2018), and Delphi panels of 3 to 11 show no difference in accuracy (Rowe & Wright, 2001). Multi-agent research shows the same: identical agents saturate quickly, and two diverse agents matched sixteen identical ones (Yang et al., 2026). Each extra person only adds cost, about 70–110K tokens.
+- **Members are picked per question.** Each perspective gets one or two candidates written for your question, and the one most relevant and least like the others is kept. Teams generated from the query and chosen for relevance and diversity together beat predefined roles, and either criterion alone did worse (AgentInit, EMNLP 2025).
 - **Independent work, one merge.** The gains from AI agents debating are almost entirely explained by voting (Choi et al., NeurIPS 2025), and working alone avoids conformity.
 - **Your view goes only to the dissent member.** Everyone else gets facts only, so nobody bends toward you (Sharma et al., ICLR 2024).
 - **Faithful citations.** Deep-research tools cite correctly 40–80% of the time (DeepTRACE, ICLR 2026). The fact-checker opens every key source and downgrades claims the source doesn't support. Numbers and quotes in the conclusion are then matched word for word against the fact-checker's table, since a 2026 study traced 84.7% of report errors to the orchestrating agent that writes the final report.
@@ -117,6 +118,10 @@ A full run, every intermediate file included: [`examples/family-skill-design/`](
 - *Who is the Agent to Blame? Localizing Faithfulness and Citation Mistakes in Agentic Deep Research.* 2026. [arxiv.org/abs/2608.24306](https://arxiv.org/abs/2608.24306)
 - Sharma et al. *Towards Understanding Sycophancy in Language Models.* ICLR 2024. [arxiv.org/abs/2310.13548](https://arxiv.org/abs/2310.13548)
 - Nemeth, Brown, Rogers. *Devil's advocate versus authentic dissent.* Eur. J. Soc. Psychol. 2001.
+- Tian et al. *AgentInit: Initializing LLM-based Multi-Agent Systems via Diversity and Expertise Orchestration.* EMNLP 2025 Findings. [arxiv.org/abs/2509.19236](https://arxiv.org/abs/2509.19236)
+- Yang et al. *Understanding Agent Scaling in LLM-Based Multi-Agent Systems via Diversity.* 2026. [arxiv.org/abs/2602.03794](https://arxiv.org/abs/2602.03794)
+- Zhu et al. *Conformity in Large Language Models.* ACL 2025. [aclanthology.org/2025.acl-long.195](https://aclanthology.org/2025.acl-long.195)
+- Nemeth. *Differential contributions of majority and minority influence.* Psychological Review 1986.
 - Walton, Reed, Macagno. *Argumentation Schemes.* Cambridge University Press 2008.
 - Ulrich. *Critical Heuristics of Social Planning.* 1983. [summary by the author](https://i2insights.org/2022/05/24/critical-systems-heuristics/)
 - Kahneman, Lovallo. *Timid choices and bold forecasts.* Management Science 1993.

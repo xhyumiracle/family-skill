@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.1 — 2026-10-28
+
+- Members are picked per question: one or two candidates per perspective, keeping the one most relevant to the question and least like the others, following AgentInit (EMNLP 2025 Findings: query-generated teams chosen for relevance and diversity together beat predefined roles). A crew may have fewer than five when a perspective has no relevant candidate.
+- The dissent seat targets the prevailing answer in the field, so it works on questions with no stance (Nemeth 1986; Zhu et al., ACL 2025 on LLM conformity). Chinese label 异见.
+- DESIGN.md and README cite the recent multi-agent results on team size and diversity (AgentInit; Yang et al. 2026; MacNet; Li et al. 2026) with pointers to their figures.
+- Tagline: "Got a question? Get the family first." / 「有问题？先叫上 family。」
+
 ## 0.6.0 — 2026-10-28
 
 - The five members are now five kinds of evidence, so the cast fits any question (history, science, policy, a personal decision) and no longer assumes the question is about a product: first-hand (argument from position to know), expert (argument from expert opinion), stakes (the beneficiary, decision-maker and affected roles of Critical Systems Heuristics), dissent (Nemeth 2001; Schwenk 1990), and the outside view (reference-class forecasting). The old four (uses it, builds it, bets on it, picks it apart) are the product-shaped special case. With no stakeholders, the stakes seat becomes a second research method. The skeptic seat is now the dissent seat; the outsider is the outside view.

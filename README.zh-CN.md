@@ -4,7 +4,7 @@
 
 # family
 
-**一个问题，五个视角，每条来源都核实。**
+**有问题？先叫上 family。**
 
 基于斯坦福 STORM 的多视角调研 skill：五个成员从五个视角各自独立调研同一个问题，<br>每条结论都核对过出处，最后给你一份带来源的报告。
 
@@ -12,7 +12,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
-[![Version](https://img.shields.io/badge/version-0.6.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.6.1-blue)](CHANGELOG.md)
 [![Tested on](https://img.shields.io/badge/tested%20on-Claude%20Code-f97316)](#安装)
 
 [安装](#安装) · [用法](#用法) · [怎么运作](#怎么运作)
@@ -77,7 +77,7 @@ flowchart LR
     S1["亲历者"]
     S2["内行"]
     S3["利益相关方"]
-    S4["反方<br/>（唯一知道你看法的人）"]
+    S4["异见<br/>（唯一知道你看法的人）"]
     S5["外部视角"]
   end
   B --> S1 & S2 & S3 & S4 & S5
@@ -93,13 +93,14 @@ flowchart LR
 | 亲历者 | 离证据最近的人：用户、当事人、做实验的人；历史问题就读同时代的原始记载 | 论证理论里的「亲历证言」（Walton et al., 2008） |
 | 内行 | 能讲清原理和机制的人 | 论证理论里的「专家意见」；批判系统启发法的「专家」角色（Ulrich, 1983） |
 | 利益相关方 | 做决定、出钱、受益或承担后果的人。问题里没有利益方时，换成另一种研究方法 | 批判系统启发法的受益者、决策者、受影响者角色（Ulrich, 1983） |
-| 反方 | 公开发表过相反观点的人 | 真实的异见比指派的「唱反调」更能纠偏（Nemeth et al., 2001；Schwenk, 1990） |
+| 异见 | 针对领域里的主流说法，找已经发表的最强反对意见；问题没有立场也适用 | 少数派异见让群体想得更宽（Nemeth, 1986）；真实的异见比指派的「唱反调」更能纠偏（Nemeth et al., 2001）；一个不同答案就能减少大模型随大流（Zhu et al., ACL 2025） |
 | 外部视角 | 其他领域里处理过同类问题的人，带来同类案例通常的结局 | 外部视角和参考类预测（Kahneman & Lovallo, 1993；Flyvbjerg, 2006）。用在 AI 调研上还没有对照实验，标为实验性 |
 
 - **视角互补。** 五个视角合起来，就是质性研究里的「三角验证」：不同的数据来源、不同的解释框架、彼此独立的调研者（Denzin, 1978）。STORM 的实验里，多视角提问让找到的独立来源接近翻倍（99.83 对 54.36）。
-- **五个人刚好。** 三个人的独立判断取平均，已经能拿到五十人平均的大部分收益（Mandel et al., 2018）；Delphi 小组从 3 人到 11 人，准确率没有差别（Rowe & Wright, 2001）。再加人只是多花钱，每人约 7 到 11 万 token。
+- **五个人刚好。** 三个人的独立判断取平均，已经能拿到五十人平均的大部分收益（Mandel et al., 2018）；Delphi 小组从 3 人到 11 人，准确率没有差别（Rowe & Wright, 2001）。多智能体研究里也是这样：同质的 agent 加到一定数量就饱和，两个不同的 agent 能追上十六个同质的（Yang et al., 2026）。再加人只是多花钱，每人约 7 到 11 万 token。
+- **按问题现场挑人。** 每个视角先按你的问题写一两个候选，再挑和问题最相关、彼此差别最大的那个。按问题生成、同时看相关性和差异度挑出来的团队，比预设角色效果好，只看其中一项都会变差（AgentInit, EMNLP 2025）。
 - **各自独立，一人汇总。** 多个 AI 互相讨论带来的提升，几乎都能用投票解释（Choi et al., NeurIPS 2025）；各写各的还能避免从众。
-- **你的看法只告诉反方。** 其他成员只拿到事实，免得顺着你说（Sharma et al., ICLR 2024）。
+- **你的看法只告诉异见成员。** 其他成员只拿到事实，免得顺着你说（Sharma et al., ICLR 2024）。
 - **引用保真。** deep research 产品的引用，准确率只有 40% 到 80%（DeepTRACE, ICLR 2026）。核查员打开每条关键来源，原文对不上就降级；结论里的数字和引语再逐字对一遍核查表，因为 2026 年的一项研究发现，84.7% 的报告错误出在负责汇总的主控 agent 身上。
 - **分歧再查一轮。** 双方匿名看到对方已核实的证据，可以拿新来源坚持、认可对方，或者指出双方定义不同。证据不再变化就停（Delphi 法）。
 - **成本和质量一起算。** 多花钱却没有更好的步骤都删掉了，比如多轮辩论和第六个人（成本与准确率的 Pareto 前沿，Kapoor et al., 2024）。
@@ -117,6 +118,10 @@ flowchart LR
 - *Who is the Agent to Blame? Localizing Faithfulness and Citation Mistakes in Agentic Deep Research.* 2026. [arxiv.org/abs/2608.24306](https://arxiv.org/abs/2608.24306)
 - Sharma et al. *Towards Understanding Sycophancy in Language Models.* ICLR 2024. [arxiv.org/abs/2310.13548](https://arxiv.org/abs/2310.13548)
 - Nemeth, Brown, Rogers. *Devil's advocate versus authentic dissent.* Eur. J. Soc. Psychol. 2001.
+- Tian et al. *AgentInit: Initializing LLM-based Multi-Agent Systems via Diversity and Expertise Orchestration.* EMNLP 2025 Findings. [arxiv.org/abs/2509.19236](https://arxiv.org/abs/2509.19236)
+- Yang et al. *Understanding Agent Scaling in LLM-Based Multi-Agent Systems via Diversity.* 2026. [arxiv.org/abs/2602.03794](https://arxiv.org/abs/2602.03794)
+- Zhu et al. *Conformity in Large Language Models.* ACL 2025. [aclanthology.org/2025.acl-long.195](https://aclanthology.org/2025.acl-long.195)
+- Nemeth. *Differential contributions of majority and minority influence.* Psychological Review 1986.
 - Walton, Reed, Macagno. *Argumentation Schemes.* Cambridge University Press 2008.
 - Ulrich. *Critical Heuristics of Social Planning.* 1983. [作者本人的简介](https://i2insights.org/2022/05/24/critical-systems-heuristics/)
 - Kahneman, Lovallo. *Timid choices and bold forecasts.* Management Science 1993.
