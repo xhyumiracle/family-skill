@@ -118,7 +118,7 @@ A full run, every intermediate file included: [`examples/family-skill-design/`](
 
 ## Acknowledgements
 
-The idea of assembling a crew, Fast & Furious style, before an agent starts work comes from a post by 还没想好 on Xiaohongshu (RedNote). Thank you.
+The core idea and the Fast & Furious metaphor come from @还没想好's post on Xiaohongshu. Thanks for sharing.
 
 ## References
 
