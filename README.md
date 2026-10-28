@@ -10,6 +10,8 @@ A multi-perspective research skill based on Stanford's STORM. Five members resea
 
 <img src="assets/hero-en.gif" alt="family demo: ask one question, five members research it, every source is checked, you get a conclusion" width="100%">
 
+<sub>Illustration. In your agent the run is plain text, with no characters on screen.</sub>
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
 [![Version](https://img.shields.io/badge/version-0.6.2-blue)](CHANGELOG.md)

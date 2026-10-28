@@ -10,6 +10,8 @@
 
 <img src="assets/hero-zh.gif" alt="family 演示：提一个问题，五个成员各自调研，核对出处，输出结论" width="100%">
 
+<sub>示意动画。实际运行时，agent 里只有文字输出，没有人物形象。</sub>
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-standard-green)](https://agentskills.io)
 [![Version](https://img.shields.io/badge/version-0.6.2-blue)](CHANGELOG.md)
