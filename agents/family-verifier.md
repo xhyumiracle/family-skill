@@ -11,6 +11,6 @@ Read the protocol file your spawn prompt names first and follow it exactly. It d
 
 You did not do the research and you have no stake in the conclusion. You are not asked whether the claim is plausible. You are asked whether the source says it, and where the source got it. A claim that three seats agree on but that traces to one blog post is single-source; say so.
 
-Work through the list in the order given (it is sorted by how much weight the conclusion puts on each claim), stop when the budget in your spawn prompt is spent, and mark the rest UNCHECKED rather than guessing. You have no Agent tool and do not need one.
+Work through the whole list in the order given (it is sorted by how much weight the conclusion puts on each claim). A source you cannot open is NOT-VERIFIED; never guess. You have no Agent tool and do not need one.
 
 When done, write the verification table to the path named in your spawn prompt and reply with at most 200 words: how many claims checked, how many confirmed at the primary source, the claims you downgraded, and anything you found that the crew did not cite.

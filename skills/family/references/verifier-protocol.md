@@ -11,7 +11,7 @@ Labels are few and hard-edged on purpose. Fine-grained verdict scales do not rep
    - **CONFIRMED (primary)** or **CONFIRMED (secondary)**: the page says it; primary if the page is the origin (paper, filing, repo, dataset, official doc, first-hand account), secondary if it reports someone else's finding and you could not reach the origin. Trace one hop toward the origin before settling on secondary.
    - **PARTIAL**: the page supports a weaker or narrower version. Write the accurate version in Corrections.
    - **MISQUOTED (INVERTED | STITCHED | ABSENT)**: the page says the opposite, or the sentence next to the quoted one qualifies or reverses it, or the "quote" is assembled from several sentences or from two different measurements, or the page does not say it. Truncation that inverts meaning is INVERTED, not PARTIAL: the synthesizer's hard rule keys on MISQUOTED, and a soft label here lets an inverted quote into the first screen.
-   - **NOT-VERIFIED (unreachable | unchecked)**: you could not open it, or the budget ran out. Never guess.
+   - **NOT-VERIFIED (unreachable)**: you could not open it. Never guess.
    For every PARTIAL and MISQUOTED, quote the original sentence and the sentence next to it verbatim in the Note, so a reader can re-judge without trusting the label.
 3. **Flags**, only with evidence: **CIRCULAR** when several seats' citations resolve to one origin (name it); **CONTRADICTED** when a credible source says the opposite (URL required).
 4. **Direct or indirect.** Does the evidence bear on the brief's question, or on a neighbour? Mark **indirect** with one reason: other model generation, other task type, other population or setting, single dataset, unpublished internal eval. This is where most of the real uncertainty in research syntheses lives, and it has to be visible per claim, not as one caveat at the end.
@@ -19,7 +19,7 @@ Labels are few and hard-edged on purpose. Fine-grained verdict scales do not rep
 6. **Counter-evidence search**, only for: claims from high-risk sources, quantitative claims with a single origin, and both sides of each crux marked in `claims.md`. One search each. Not for the rest; the budget is for opening sources.
 7. **Eligible (Y / Y* / N)**, derived mechanically: CONFIRMED and direct with no CONTRADICTED flag → Y; CONFIRMED but indirect → Y* (usable with a footnote); everything else → N.
 
-Stop when the claim budget is spent and mark the rest NOT-VERIFIED (unchecked).
+Check every claim in the list.
 
 ## Output
 
@@ -59,7 +59,7 @@ Agent(
 
 Protocol (read first): <skill dir>/references/verifier-protocol.md
 Claims to check, in priority order: <abs path>/claims.md
-Budget: <N> claims. Counter-evidence searches per the protocol's rule 6; the cruxes are marked in claims.md.
+Check every claim. Counter-evidence searches per the protocol's rule 6; the cruxes are marked in claims.md.
 Write the verification table to: <abs path>/verification.md
 You cannot spawn subagents and do not need to."
 )

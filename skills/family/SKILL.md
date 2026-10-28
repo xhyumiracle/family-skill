@@ -61,7 +61,7 @@ In `standard` the round fires only on the rule in the brief: a sub-question with
 
 ### 3. Verify (one agent)
 
-From the seat notes write `claims.md` with stable IDs (C01, C02, ...) and seat codes in the "Seats" column (S1, S3), never seat names, so the verifier cannot tell a seat's role. Selection floors first: at least two claims per sub-question, at least one per side of each crux, at least two per seat; then fill the budget by diagnosticity (a claim that, if false, flips a crux), then contested, single-source, surprising, quantitative. Mark each crux's two sides so the verifier searches both. Keep to the tier's claim budget and list what was left out. Spawn one `family-verifier` with `references/verifier-protocol.md`, `claims.md`, and the output path `verification.md`.
+From the seat notes write `claims.md` with stable IDs (C01, C02, ...) and seat codes in the "Seats" column (S1, S3), never seat names, so the verifier cannot tell a seat's role. Include every load-bearing claim: each claim a key judgment or the bottom line could rest on, both sides of every crux, and at least two per sub-question and two per seat. There is no fixed count; order the list by diagnosticity (a claim that, if false, flips a crux), then contested, single-source, surprising, quantitative. Mark each crux's two sides so the verifier searches both. If the synthesis later needs a claim that was not verified, resume the verifier for it before using it. Spawn one `family-verifier` with `references/verifier-protocol.md`, `claims.md`, and the output path `verification.md`.
 
 ### 4. Synthesize (inline)
 
@@ -77,11 +77,11 @@ Reply with the three bottom-line slots copied from the report, at most three cru
 
 ## Depth tiers
 
-| Tier | Seats | Searches / seat | Evidence rounds | Verifier claims | Agents spawned | Rough cost |
-|---|---|---|---|---|---|---|
-| `quick` | none: the orchestrator searches alone, 8 searches | n/a | no | 6-8 | 1 (the verifier) | ~80K tokens |
-| `standard` (default) | 5 (four perspectives + outside view; a discovered territory replaces an overlapping one) | 12 | at most 1, rule-triggered | 20 | seats + 1 | ~600-800K tokens, ~30 min wall (measured: seats 65-110K each with the stop rule, verifier 135K, one round 26K + re-verification) |
-| `deep` | the same five | 12 | up to 3, until the evidence stops moving | 30 | seats + 1 | ~1M tokens; confirm with the user first |
+| Tier | Seats | Searches / seat | Evidence rounds | Agents spawned | Rough cost |
+|---|---|---|---|---|---|
+| `quick` | none: the orchestrator searches alone, 8 searches | n/a | no | 1 (the verifier) | ~80K tokens |
+| `standard` (default) | 5 (four perspectives + outside view; a discovered territory replaces an overlapping one) | 12 | at most 1, rule-triggered | seats + 1 | ~600-800K tokens, ~30 min wall (measured: seats 65-110K each with the stop rule, verifier about 7K per claim, one round 26K + re-verification) |
+| `deep` | the same five | 12 | up to 3, until the evidence stops moving | seats + 1 | ~1M tokens; confirm with the user first |
 
 Pick `standard` unless the user names a tier or the question is clearly small. `deep` is the same family taken through evidence rounds until the cruxes stop moving; it never adds seats.
 
